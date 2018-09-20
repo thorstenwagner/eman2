@@ -699,7 +699,7 @@ class EraseTool(EMBoxingTool):
 		self.panel_object.set_erase_radius(v)
 
 	def mouse_wheel(self,event):
-		from PyQt4.QtCore import Qt
+		from .PyQt import Qt
 		if event.modifiers()&Qt.ShiftModifier:
 			from .emshape import EMShape
 			self.adjust_erase_rad(event.delta())
@@ -786,7 +786,7 @@ class ManualBoxingTool(object):
 	def mouse_down(self,event) :
 		m = self.get_2d_window().scr_to_img((event.x(),event.y()))
 		box_num = self.target().detect_box_collision(m)
-		from PyQt4.QtCore import Qt
+		from .PyQt import Qt
 		if box_num == -1:
 			if event.modifiers()&Qt.ShiftModifier : return # the user tried to delete nothing
 			if self.get_2d_window().list_data!=None:
@@ -812,7 +812,7 @@ class ManualBoxingTool(object):
 
 	def mouse_drag(self,event) :
 		m=self.get_2d_window().scr_to_img((event.x(),event.y()))
-		from PyQt4.QtCore import Qt
+		from .PyQt import Qt
 		if event.modifiers()&Qt.ShiftModifier:
 			box_num = self.target().detect_box_collision(m)
 			if ( box_num != -1):

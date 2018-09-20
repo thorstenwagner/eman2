@@ -37,8 +37,8 @@ from __future__ import division
 from builtins import range
 from builtins import object
 from PyQt4 import QtCore, QtGui, QtOpenGL
-from PyQt4.QtCore import Qt
-from PyQt4.QtGui import QAction, QAbstractButton, QListWidgetItem
+from .PyQt import Qt
+from .PyQt import QAction, QAbstractButton, QListWidgetItem
 from OpenGL import GL,GLU,GLUT
 from OpenGL.GL import *
 from OpenGL.GLU import *
@@ -56,8 +56,8 @@ from .emimageutil import ImgHistogram, EMParentWin
 from weakref import WeakKeyDictionary
 from pickle import dumps,loads
 from PyQt4 import QtGui
-from PyQt4.QtGui import QImage
-from PyQt4.QtCore import QTimer
+from .PyQt import QImage
+from .PyQt import QTimer
 from libpyGLUtils2 import *
 
 from .emglobjects import EMOpenGLFlagsAndTools,EMGLProjectionViewMatrices,EMBasicOpenGLObjects,init_glut

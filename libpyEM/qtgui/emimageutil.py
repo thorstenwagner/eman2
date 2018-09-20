@@ -37,7 +37,7 @@ from past.utils import old_div
 from builtins import range
 from builtins import object
 from PyQt4 import QtGui,QtCore
-from PyQt4.QtCore import Qt
+from .PyQt import Qt
 from math import *
 import numpy
 from EMAN2 import *

@@ -55,8 +55,8 @@ import weakref
 from OpenGL import GLU
 from OpenGL.GL import *
 from PyQt4 import QtCore, QtGui, QtOpenGL
-from PyQt4.QtCore import Qt
-from PyQt4.QtGui import QTreeWidgetItem, QColor
+from .PyQt import Qt
+from .PyQt import QTreeWidgetItem, QColor
 
 
 #from emdataitem3d import EMDataItem3D, EMIsosurface, EMSliceItem3D, EMVolumeItem3D

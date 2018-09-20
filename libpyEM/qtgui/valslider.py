@@ -37,8 +37,8 @@ import sys, math, weakref
 from OpenGL.GL import *
 from OpenGL import GLU
 from PyQt4 import QtCore, QtGui, QtOpenGL
-from PyQt4.QtCore import Qt
-from PyQt4.QtGui import QColor
+from .PyQt import Qt
+from .PyQt import QColor
 
 leftarrow = [
     '12 10 2 1',

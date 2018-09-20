@@ -39,7 +39,7 @@ from builtins import range
 from builtins import object
 from .emdatastorage import ParamDef
 from PyQt4 import QtGui,QtCore
-from PyQt4.QtCore import Qt
+from .PyQt import Qt
 import os
 from .emselector import EMSelectorDialog
 from .emapplication import get_application
