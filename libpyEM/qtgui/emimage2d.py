@@ -36,7 +36,6 @@ from __future__ import division
 
 from past.utils import old_div
 from builtins import range
-import PyQt4
 from .PyQt import QtCore, QtGui, QtOpenGL
 from .PyQt import Qt
 from OpenGL import GL,GLU,GLUT

@@ -58,7 +58,6 @@ ploticon = [
     'ccccccccccccccc'
 ]
 
-import PyQt4
 from .PyQt import QtCore, QtGui, QtOpenGL
 from .PyQt import QGLWidget
 from .PyQt import Qt
