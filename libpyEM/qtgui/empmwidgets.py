@@ -42,7 +42,7 @@ from past.utils import old_div
 from builtins import range
 from EMAN2db import db_check_dict
 import sys, math, weakref
-from PyQt4 import QtCore, QtGui
+from .PyQt import QtCore, QtGui
 from .PyQt import Qt
 from .emselector import EMSelectorDialog	# This will be replaced by something more sensible in the future
 import re, os, glob

@@ -38,7 +38,7 @@ from builtins import range
 from builtins import object
 from .emform import EMFormWidget,EMParamTable,EMTableFormWidget
 from .emdatastorage import ParamDef
-from PyQt4 import QtGui,QtCore
+from .PyQt import QtGui,QtCore
 from .PyQt import Qt
 from EMAN2db import db_check_dict, db_open_dict,db_remove_dict,db_list_dicts,db_close_dict, e2getcwd
 from EMAN2 import *

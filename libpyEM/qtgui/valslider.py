@@ -36,7 +36,7 @@ from past.utils import old_div
 import sys, math, weakref
 from OpenGL.GL import *
 from OpenGL import GLU
-from PyQt4 import QtCore, QtGui, QtOpenGL
+from .PyQt import QtCore, QtGui, QtOpenGL
 from .PyQt import Qt
 from .PyQt import QColor
 

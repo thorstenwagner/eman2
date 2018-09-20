@@ -38,7 +38,7 @@ from builtins import range
 from builtins import object
 from EMAN2 import *
 from EMAN2jsondb import js_open_dict
-from PyQt4 import QtCore, QtGui
+from .PyQt import QtCore, QtGui
 from .PyQt import Qt
 from .PyQt import QAction,QTreeWidgetItem
 from .emapplication import EMApp

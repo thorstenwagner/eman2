@@ -45,7 +45,7 @@ import sys
 
 from OpenGL.GL import *
 from OpenGL.GLU import *
-from PyQt4 import QtCore, QtGui
+from .PyQt import QtCore, QtGui
 
 import numpy as np
 

@@ -59,7 +59,7 @@ ploticon = [
 ]
 
 import PyQt4
-from PyQt4 import QtCore, QtGui, QtOpenGL
+from .PyQt import QtCore, QtGui, QtOpenGL
 from .PyQt import QGLWidget
 from .PyQt import Qt
 from OpenGL import GL,GLU
@@ -185,7 +185,7 @@ class EMHistogramWidget(EMGLWidget):
 		if event.key() == Qt.Key_C:
 			self.show_inspector(1)
 		elif event.key() == Qt.Key_F1:
-			try: from PyQt4 import QtWebKit
+			try: from .PyQt import QtWebKit
 			except: return
 			try:
 				try: test = self.browser

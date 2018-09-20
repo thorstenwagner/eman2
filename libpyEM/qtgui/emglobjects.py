@@ -40,7 +40,7 @@ from EMAN2 import *
 from OpenGL import GL, GLU, GLUT
 from OpenGL.GL import *
 from OpenGL.GLU import *
-from PyQt4 import QtCore, QtGui, QtOpenGL
+from .PyQt import QtCore, QtGui, QtOpenGL
 from .PyQt import Qt
 from .emapplication import EMGLWidget, get_application
 from libpyGLUtils2 import GLUtil

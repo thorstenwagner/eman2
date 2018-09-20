@@ -54,7 +54,7 @@ import weakref
 
 from OpenGL import GLU
 from OpenGL.GL import *
-from PyQt4 import QtCore, QtGui, QtOpenGL
+from .PyQt import QtCore, QtGui, QtOpenGL
 from .PyQt import Qt
 from .PyQt import QTreeWidgetItem, QColor
 

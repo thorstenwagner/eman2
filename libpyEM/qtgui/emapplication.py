@@ -35,7 +35,7 @@ from __future__ import absolute_import
 #
 
 from builtins import object
-from PyQt4 import QtGui, QtCore, QtOpenGL
+from .PyQt import QtGui, QtCore, QtOpenGL
 from .PyQt import Qt
 import sys
 from .emimageutil import EMParentWin
@@ -44,7 +44,7 @@ import EMAN2db
 import weakref
 from libpyGLUtils2 import *
 
-try: from PyQt4 import QtWebKit
+try: from .PyQt import QtWebKit
 except: pass
 
 class ModuleEventsManager(object): 

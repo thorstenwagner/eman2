@@ -59,7 +59,7 @@ from EMAN2jsondb import *
 from EMAN2 import *
 
 import os,sys,weakref,math, json
-from PyQt4 import QtCore
+from .PyQt import QtCore
 
 
 TEMPLATE_MIN = 30
@@ -181,7 +181,7 @@ class ThumbsEventHandler(object):
 		'''
 		connects the signals of the main 2D window to the slots of this object
 		'''
-		from PyQt4 import QtCore
+		from .PyQt import QtCore
 		self.thumbs_window().mx_mouseup.connect(self.thumb_image_selected)
 		self.thumbs_window().module_closed.connect(self.on_module_closed)
 
@@ -577,7 +577,7 @@ class ErasingPanel(object):
 
 	def get_widget(self):
 		if self.widget == None:
-			from PyQt4 import QtCore, QtGui, Qt
+			from .PyQt import QtCore, QtGui, Qt
 			self.widget = QtGui.QWidget()
 			vbl = QtGui.QVBoxLayout(self.widget)
 			vbl.setMargin(0)
@@ -618,7 +618,7 @@ class ManualBoxingPanel(object):
 
 	def get_widget(self):
 		if self.widget == None:
-			from PyQt4 import QtCore, QtGui, Qt
+			from .PyQt import QtCore, QtGui, Qt
 			self.widget = QtGui.QWidget()
 			vbl = QtGui.QGridLayout(self.widget)
 			vbl.setMargin(0)
@@ -661,7 +661,7 @@ class EraseTool(EMBoxingTool):
 	def unique_name(self): return "Erase"
 
 	def icon(self):
-		from PyQt4 import QtGui
+		from .PyQt import QtGui
 		return QtGui.QIcon(get_image_directory() + "boxer_erase.png")
 
 	def get_widget(self):
@@ -768,7 +768,7 @@ class ManualBoxingTool(object):
 
 
 	def icon(self):
-		from PyQt4 import QtGui
+		from .PyQt import QtGui
 		return QtGui.QIcon(get_image_directory() + "white_box.png")
 
 
@@ -965,7 +965,7 @@ class Main2DWindowEventHandler(BoxEventsHandler):
 		'''
 		connects the signals of the main 2D window to the slots of this object
 		'''
-		from PyQt4 import QtCore
+		from .PyQt import QtCore
 		self.main_2d_window.mousedown.connect(self.mouse_down)
 		self.main_2d_window.mousedrag.connect(self.mouse_drag)
 		self.main_2d_window.mouseup.connect(self.mouse_up)
@@ -1085,7 +1085,7 @@ class ParticlesWindowEventHandler(BoxEventsHandler):
 		'''
 		connects the signals of the main 2D window to the slots of this object
 		'''
-		from PyQt4 import QtCore
+		from .PyQt import QtCore
 		self.particle_window.mx_image_selected.connect(self.box_selected)
 		self.particle_window.mx_mousedrag.connect(self.box_moved)
 		self.particle_window.mx_mouseup.connect(self.box_released)
@@ -1946,7 +1946,7 @@ class EMBoxerModule(EMBoxerModuleVitals, PyQt4.QtCore.QObject):
 			return
 		from .emsprworkflow import E2BoxerProgramOutputTask
 		if self.output_task != None: return
-		from PyQt4 import QtCore
+		from .PyQt import QtCore
 		self.output_task = EMBoxerWriteOutputTask(self.file_names, dfl_boxsize=self.box_size, current_tool=self.current_tool)
 		#self.output_task.emitter().task_idle.connect(self.on_output_task_idle)
 		self.output_task.run_form()
@@ -1958,7 +1958,7 @@ class EMBoxerModule(EMBoxerModuleVitals, PyQt4.QtCore.QObject):
 		if len(self.file_names) == 0: raise RuntimeError("Will not make a thumbs window if the number of images is zero")
 
 		if self.thumbs_window == None:
-			from PyQt4 import QtCore
+			from .PyQt import QtCore
 			get_application().setOverrideCursor(QtCore.Qt.BusyCursor)
 
 
@@ -2099,7 +2099,7 @@ class EMBoxerModule(EMBoxerModuleVitals, PyQt4.QtCore.QObject):
 	# 	self.main_2d_window.updateGL()
 
 	def set_current_file(self,file_name):
-		from PyQt4 import QtCore
+		from .PyQt import QtCore
 		get_application().setOverrideCursor(QtCore.Qt.BusyCursor)
 
 		if not file_exists(file_name): raise RuntimeError("The file %s does not exist" %file_name)
@@ -2299,7 +2299,7 @@ class EMBoxerWriteOutputTask(WorkFlowTask):
 		if len(coord_output_names) > 0:
 			self.write_output(params["filenames"],coord_output_names,EMBoxList.write_coordinates,params["output_boxsize"],"Writing Coordinates")
 
-		from PyQt4 import QtCore
+		from .PyQt import QtCore
 		#self.task_idle.emit()
 		self.form.close()
 		self.form = None
@@ -2367,7 +2367,7 @@ def get_coord_outnames(params):
 			output.append(base_name(name)+ '.box')
 	return output
 
-from PyQt4 import QtGui
+from .PyQt import QtGui
 class EMBoxerInspector(QtGui.QWidget):
 
 	PTCL_SHAPE_MAP = {}
@@ -2378,7 +2378,7 @@ class EMBoxerInspector(QtGui.QWidget):
 	PTCL_SHAPE_MAP["circle with marker"] = "rcirclepoint"
 
 	def __init__(self,target) :
-		from PyQt4 import QtCore, QtGui
+		from .PyQt import QtCore, QtGui
 		self.busy = True
 		self.tool_dynamic_vbl = None # this will be used to dynamic add widgets as the buttons are changed
 		self.dynamic_box_button_widget = None # this will be used to dynamic add widgets as the buttons are changed
@@ -2434,7 +2434,7 @@ class EMBoxerInspector(QtGui.QWidget):
 		self.target().run_output_dialog()
 
 	def get_display_tab(self):
-		from PyQt4 import QtCore, QtGui, Qt
+		from .PyQt import QtCore, QtGui, Qt
 		widget = QtGui.QWidget()
 		vbl =  QtGui.QVBoxLayout(widget)
 
@@ -2524,7 +2524,7 @@ class EMBoxerInspector(QtGui.QWidget):
 
 
 	def get_main_tab(self):
-		from PyQt4 import QtCore, QtGui, Qt
+		from .PyQt import QtCore, QtGui, Qt
 		widget = QtGui.QWidget()
 		vbl = QtGui.QVBoxLayout(widget)
 		vbl.setMargin(0)
@@ -2552,7 +2552,7 @@ class EMBoxerInspector(QtGui.QWidget):
 		return widget
 
 	def add_bottom_buttons(self,layout):
-		from PyQt4 import QtCore, QtGui, Qt
+		from .PyQt import QtCore, QtGui, Qt
 		hbl_t=QtGui.QHBoxLayout()
 
 		hbl_q=QtGui.QHBoxLayout()
@@ -2586,7 +2586,7 @@ class EMBoxerInspector(QtGui.QWidget):
 		self.busy = False
 
 	def add_boxing_button_group(self,layout):
-		from PyQt4 import QtCore, QtGui, Qt
+		from .PyQt import QtCore, QtGui, Qt
 
 		self.tool_button_group_box = QtGui.QGroupBox("Tools")
 		self.tool_button_group_box_vbl = QtGui.QVBoxLayout(self.tool_button_group_box)
@@ -2645,7 +2645,7 @@ class EMBoxerInspector(QtGui.QWidget):
 		if self.target(): self.target().set_box_size(box_size)
 
 	def keyPressEvent(self,event):
-		from PyQt4 import QtCore
+		from .PyQt import QtCore
 		if event.key() == QtCore.Qt.Key_F1:
 			try:
 				import webbrowser
@@ -2653,7 +2653,7 @@ class EMBoxerInspector(QtGui.QWidget):
 				return
 			except: pass
 
-			try: from PyQt4 import QtWebKit
+			try: from .PyQt import QtWebKit
 			except: return
 			try:
 				try:

@@ -63,7 +63,7 @@ def safe_float(x):
 	except: return 0.0
 
 import PyQt4
-from PyQt4 import QtCore, QtGui, QtOpenGL
+from .PyQt import QtCore, QtGui, QtOpenGL
 from .PyQt import QGLWidget
 from .PyQt import Qt
 from .PyQt import QListWidgetItem
@@ -214,7 +214,7 @@ class EMPlot3DWidget(EMGLWidget):
 		if event.key() == Qt.Key_C:
 			self.show_inspector(1)
 		elif event.key() == Qt.Key_F1:
-			try: from PyQt4 import QtWebKit
+			try: from .PyQt import QtWebKit
 			except: return
 			try:
 				try:
