@@ -44,7 +44,7 @@ from eman2_gui.emimage3d import EMImage3DWidget
 from eman2_gui.valslider import ValSlider
 import weakref
 from eman2_gui.emshape import EMShape
-from PyQt4 import QtCore, QtGui
+from eman2_gui.PyQt import QtCore, QtGui
 from eman2_gui.PyQt import Qt
 #import EMAN2db
 

@@ -236,7 +236,7 @@ def killdcserver(server,port,verbose):
 
 # We import Qt even if we don't need it
 try:
-	from PyQt4 import QtCore, QtGui
+	from eman2_gui.PyQt import QtCore, QtGui
 	from eman2_gui.PyQt import Qt
 except:
 	class dummy(object):

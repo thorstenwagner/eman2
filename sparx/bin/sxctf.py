@@ -828,7 +828,7 @@ def ctf_env_points(im_1d,bg_1d,ctf) :
 	return ret
 
 try:
-	from PyQt4 import QtCore, QtGui, QtOpenGL
+	from eman2_gui.PyQt import QtCore, QtGui, QtOpenGL
 	from eman2_gui.PyQt import Qt
 	from eman2_gui.valslider import ValSlider
 except:

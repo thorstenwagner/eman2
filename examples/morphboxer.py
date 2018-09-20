@@ -176,7 +176,7 @@ class MorphBoxingTool(EMBoxingTool):
 		return self.panel_object.get_widget()
 
 	def icon(self):
-		from PyQt4 import QtGui
+		from eman2_gui.PyQt import QtGui
 		return QtGui.QIcon(get_image_directory() + "white_box.png")
 
 	def set_panel_object(self,panel): self.panel_object = panel
@@ -310,7 +310,7 @@ class MorphBoxingPanel(object):
 	
 	def get_widget(self):
 		if self.widget == None:
-			from PyQt4 import QtCore, QtGui, Qt
+			from eman2_gui.PyQt import QtCore, QtGui, Qt
 			self.widget = QtGui.QWidget()
 			vbl = QtGui.QVBoxLayout(self.widget)
 			vbl.setMargin(0)
@@ -345,7 +345,7 @@ class ErasingPanel(object): # copied for ideas for the morph panel
 
 	def get_widget(self):
 		if self.widget == None:
-			from PyQt4 import QtCore, QtGui, Qt
+			from eman2_gui.PyQt import QtCore, QtGui, Qt
 			self.widget = QtGui.QWidget()
 			vbl = QtGui.QVBoxLayout(self.widget)
 			vbl.setMargin(0)

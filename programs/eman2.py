@@ -60,7 +60,7 @@ helpstring+="\n\nYou are currently running %s"%(FULLVERSIONSTRING)
 
 try:
 	if os.getenv("DISPLAY")==None : raise Exception
-	from PyQt4 import QtCore, QtGui
+	from eman2_gui.PyQt import QtCore, QtGui
 	from eman2_gui.PyQt import Qt
 except:
 	print(helpstring)

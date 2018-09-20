@@ -48,7 +48,7 @@ from numpy import array,arange
 import traceback
 
 try:
-	from PyQt4 import QtCore, QtGui, QtOpenGL
+	from eman2_gui.PyQt import QtCore, QtGui, QtOpenGL
 	from eman2_gui.PyQt import Qt
 	from eman2_gui.PyQt import QTimer
 	from eman2_gui.emshape import *

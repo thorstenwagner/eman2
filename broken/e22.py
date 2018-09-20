@@ -36,7 +36,7 @@ from __future__ import division
 import EMAN2
 from EMAN2 import *
 from eman2_gui.emimage import image_update
-from PyQt4 import QtCore, QtGui, QtOpenGL
+from eman2_gui.PyQt import QtCore, QtGui, QtOpenGL
 from eman2_gui.PyQt import Qt
 import threading
 from eman2_gui.emapplication import EMApp

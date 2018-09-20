@@ -52,7 +52,7 @@ class nothing(object):
 		return
 
 try: 
-	from PyQt4 import QtCore, QtGui
+	from eman2_gui.PyQt import QtCore, QtGui
 	from eman2_gui.PyQt import Qt
 	from eman2_gui.emimage2d import EMImage2DWidget
 	from eman2_gui.emplot2d import EMPlot2DWidget

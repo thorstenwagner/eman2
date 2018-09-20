@@ -19,7 +19,7 @@ from __future__ import print_function
 from builtins import range
 from builtins import object
 from eman2_gui.PyQt import QObject, pyqtSignal, pyqtSlot, QThread, QString, QThreadPool, QTimer
-from PyQt4 import QtCore, QtGui
+from eman2_gui.PyQt import QtCore, QtGui
 from eman2_gui.PyQt import QDialog, QGridLayout, QTreeWidget, QMessageBox, QFontMetrics
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas

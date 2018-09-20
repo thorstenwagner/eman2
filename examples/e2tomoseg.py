@@ -44,9 +44,9 @@ import os
 from eman2_gui.valslider import ValSlider, EMANToolButton, EMSpinWidget, EMQTColorWidget
 import weakref
 
-from PyQt4 import QtCore
+from eman2_gui.PyQt import QtCore
 from eman2_gui.PyQt import Qt
-from PyQt4 import QtGui
+from eman2_gui.PyQt import QtGui
 
 
 def main():

@@ -44,7 +44,7 @@ import os
 import sys
 
 from OpenGL import GL, GLU, GLUT
-from PyQt4 import QtCore, QtGui, QtOpenGL
+from eman2_gui.PyQt import QtCore, QtGui, QtOpenGL
 from eman2_gui.PyQt import Qt
 
 def main():

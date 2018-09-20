@@ -38,7 +38,7 @@ from EMAN2 import *
 from optparse import OptionParser
 
 try:
-	from PyQt4 import QtCore, QtGui, QtOpenGL
+	from eman2_gui.PyQt import QtCore, QtGui, QtOpenGL
 	from eman2_gui.PyQt import Qt
 	from eman2_gui.emshape import *
 	from eman2_gui.valslider import ValSlider,ValBox

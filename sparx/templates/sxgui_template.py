@@ -39,8 +39,8 @@ import os
 from subprocess import *
 from functools import partial  # Use to connect event-source widget and event handler
 from eman2_gui.PyQt import *
-from PyQt4 import QtGui
-from PyQt4 import QtCore
+from eman2_gui.PyQt import QtGui
+from eman2_gui.PyQt import QtCore
 from EMAN2 import *
 from EMAN2_cppwrap import *
 from global_def import *

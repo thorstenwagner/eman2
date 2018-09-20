@@ -18,7 +18,7 @@ from __future__ import print_function
 
 from builtins import range
 from builtins import object
-from PyQt4 import QtCore, QtGui
+from eman2_gui.PyQt import QtCore, QtGui
 from eman2_gui.PyQt import Qt
 from matplotlib import pylab
 try:

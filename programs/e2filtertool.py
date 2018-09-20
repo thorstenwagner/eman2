@@ -34,7 +34,7 @@ from __future__ import division
 
 from past.utils import old_div
 from builtins import range
-from PyQt4 import QtCore, QtGui
+from eman2_gui.PyQt import QtCore, QtGui
 from eman2_gui.PyQt import Qt
 from eman2_gui.PyQt import QTimer
 

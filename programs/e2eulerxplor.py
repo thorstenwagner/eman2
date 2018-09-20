@@ -39,7 +39,7 @@ from EMAN2db import db_open_dict, db_check_dict
 from OpenGL import GL,GLU,GLUT
 from OpenGL.GL import *
 from OpenGL.GLU import *
-from PyQt4 import QtGui,QtCore
+from eman2_gui.PyQt import QtGui,QtCore
 from eman2_gui.PyQt import Qt, QEvent
 from eman2_gui.PyQt import QListWidgetItem
 from eman2_gui.emanimationutil import OrientationListAnimation,Animator

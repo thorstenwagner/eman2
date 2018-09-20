@@ -39,7 +39,7 @@ from EMAN2 import *
 from EMAN2_utils import *
 import numpy as np
 import weakref
-from PyQt4 import QtCore, QtGui
+from eman2_gui.PyQt import QtCore, QtGui
 from eman2_gui.PyQt import Qt
 from eman2_gui.PyQt import QListWidgetItem
 from eman2_gui.emapplication import get_application, EMApp

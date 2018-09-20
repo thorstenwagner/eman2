@@ -47,7 +47,7 @@ import numpy as np
 import traceback
 
 try:
-	from PyQt4 import QtCore, QtGui, QtOpenGL
+	from eman2_gui.PyQt import QtCore, QtGui, QtOpenGL
 	from eman2_gui.PyQt import Qt
 	from eman2_gui.PyQt import QTimer
 except:
