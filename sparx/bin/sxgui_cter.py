@@ -48,8 +48,8 @@ import traceback
 
 try:
 	from PyQt4 import QtCore, QtGui, QtOpenGL
-	from PyQt4.QtCore import Qt
-	from PyQt4.QtCore import QTimer
+	from eman2_gui.PyQt import Qt
+	from eman2_gui.PyQt import QTimer
 except:
 	print("Warning: PyQt4 must be installed")
 	sys.exit(1)

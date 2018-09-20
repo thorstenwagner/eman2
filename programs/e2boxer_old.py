@@ -36,7 +36,7 @@ from __future__ import division
 from past.utils import old_div
 from builtins import range
 from builtins import object
-from PyQt4.QtGui import QAbstractButton
+from eman2_gui.PyQt import QAbstractButton
 from EMAN2 import BoxingTools,gm_time_string,Transform, E2init, E2end, E2progress,db_open_dict,EMArgumentParser
 from EMAN2db import db_check_dict
 from EMAN2jsondb import *
@@ -1806,7 +1806,7 @@ class SwarmTool(SwarmBoxer,EMBoxingTool):
 	def mouse_down(self,event):
 		m = self.get_2d_window().scr_to_img((event.x(),event.y()))
 		box_num = self.target().detect_box_collision(m)
-		from PyQt4.QtCore import Qt
+		from eman2_gui.PyQt import Qt
 		if box_num == -1:
 			if event.modifiers()&Qt.ShiftModifier :
 				return # the user tried to delete nothing
@@ -1816,7 +1816,7 @@ class SwarmTool(SwarmBoxer,EMBoxingTool):
 		else:
 			box = self.target().get_box(box_num)
 			if box.type in [SwarmBoxer.REF_NAME,SwarmBoxer.AUTO_NAME,SwarmBoxer.WEAK_REF_NAME]:
-				from PyQt4.QtCore import Qt
+				from eman2_gui.PyQt import Qt
 				if event.modifiers()&Qt.ShiftModifier :
 					self.handle_box_delete(box,box_num)
 				else:
@@ -1839,7 +1839,7 @@ class SwarmTool(SwarmBoxer,EMBoxingTool):
 
 	def mouse_drag(self,event) :
 		m=self.get_2d_window().scr_to_img((event.x(),event.y()))
-		from PyQt4.QtCore import Qt
+		from eman2_gui.PyQt import Qt
 		if event.modifiers()&Qt.ShiftModifier:
 			box_num = self.target().detect_box_collision(m)
 			box = self.target().get_box(box_num)
@@ -3118,7 +3118,7 @@ class GaussTool(GaussBoxer,EMBoxingTool):
 
 	def mouse_drag(self,event) :
 		m=self.get_2d_window().scr_to_img((event.x(),event.y()))
-		from PyQt4.QtCore import Qt
+		from eman2_gui.PyQt import Qt
 		if event.modifiers()&Qt.ShiftModifier:
 			box_num = self.target().detect_box_collision(m)
 			box = self.target().get_box(box_num)
@@ -3227,7 +3227,7 @@ class CTFInspectorWidget(QtGui.QWidget):
 
 	def paintEvent(self,event):
 		from PyQt4 import QtCore
-		from PyQt4.QtCore import Qt
+		from eman2_gui.PyQt import Qt
 		if (self.i_start is None and (i_start_initial > 0)):
 			self.i_start = i_start_initial
 		if (self.i_stop is None and (i_stop_initial > 0)):

@@ -7,7 +7,7 @@ from EMAN2 import *
 import os
 import numpy as np
 from PyQt4 import QtCore, QtGui
-from PyQt4.QtCore import Qt
+from eman2_gui.PyQt import Qt
 from eman2_gui.emimage2d import EMImage2DWidget
 from eman2_gui.emplot2d import EMPlot2DWidget
 from eman2_gui.emimagemx import EMImageMXWidget

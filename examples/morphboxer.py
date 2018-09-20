@@ -193,7 +193,7 @@ class MorphBoxingTool(EMBoxingTool):
 	def mouse_down(self,event) :
 		m = self.get_2d_window().scr_to_img((event.x(),event.y()))
 		box_num = self.target().detect_box_collision(m)
-		from PyQt4.QtCore import Qt
+		from eman2_gui.PyQt import Qt
 		if box_num == -1:
 			if event.modifiers()&Qt.ShiftModifier : return # the user tried to delete nothing
 			box_num = self.target().add_box(m[0],m[1],MorphBoxingTool.BOX_TYPE)
@@ -212,7 +212,7 @@ class MorphBoxingTool(EMBoxingTool):
 
 	def mouse_drag(self,event) :
 		m=self.get_2d_window().scr_to_img((event.x(),event.y()))
-		from PyQt4.QtCore import Qt
+		from eman2_gui.PyQt import Qt
 		if event.modifiers()&Qt.ShiftModifier:
 			box_num = self.target().detect_box_collision(m)
 			if ( box_num != -1):

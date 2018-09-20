@@ -45,7 +45,7 @@ from eman2_gui.valslider import ValSlider
 import weakref
 from eman2_gui.emshape import EMShape
 from PyQt4 import QtCore, QtGui
-from PyQt4.QtCore import Qt
+from eman2_gui.PyQt import Qt
 #import EMAN2db
 
 reconmodes=["gauss_2","gauss_3","gauss_5"]

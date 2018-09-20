@@ -45,7 +45,7 @@ import sys
 
 from OpenGL import GL, GLU, GLUT
 from PyQt4 import QtCore, QtGui, QtOpenGL
-from PyQt4.QtCore import Qt
+from eman2_gui.PyQt import Qt
 
 def main():
 	progname = os.path.basename(sys.argv[0])

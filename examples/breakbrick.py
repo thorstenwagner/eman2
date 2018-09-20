@@ -11,8 +11,8 @@ from eman2_gui.emshape import EMShape
 
 import PyQt4
 from PyQt4 import QtCore, QtGui, QtOpenGL
-from PyQt4.QtCore import Qt
-from PyQt4.QtCore import QTimer
+from eman2_gui.PyQt import Qt
+from eman2_gui.PyQt import QTimer
 
 def main():
 	

@@ -19,7 +19,7 @@ from __future__ import print_function
 from builtins import range
 from builtins import object
 from PyQt4 import QtCore, QtGui
-from PyQt4.QtCore import Qt
+from eman2_gui.PyQt import Qt
 from matplotlib import pylab
 try:
     from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvasQTAgg

@@ -49,8 +49,8 @@ import traceback
 
 try:
 	from PyQt4 import QtCore, QtGui, QtOpenGL
-	from PyQt4.QtCore import Qt
-	from PyQt4.QtCore import QTimer
+	from eman2_gui.PyQt import Qt
+	from eman2_gui.PyQt import QTimer
 	from eman2_gui.emshape import *
 	from eman2_gui.valslider import *
 except:

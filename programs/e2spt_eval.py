@@ -5,7 +5,7 @@ from __future__ import division
 from EMAN2 import *
 import numpy as np
 from PyQt4 import QtCore, QtGui
-from PyQt4.QtCore import Qt
+from eman2_gui.PyQt import Qt
 from eman2_gui import embrowser
 from eman2_gui.emapplication import EMApp
 from eman2_gui.emscene3d import EMScene3D
