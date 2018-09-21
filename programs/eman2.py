@@ -61,7 +61,6 @@ helpstring+="\n\nYou are currently running %s"%(FULLVERSIONSTRING)
 try:
 	if os.getenv("DISPLAY")==None : raise Exception
 	from PyQt4 import QtCore, QtGui
-	from PyQt4.QtCore import Qt
 except:
 	print(helpstring)
 	eval(input("Please press <enter> to exit"))
