@@ -35,7 +35,7 @@ from __future__ import absolute_import
 #
 from builtins import range
 from EMAN2 import get_image_directory, dump_processors_list
-from .PyQt import QtCore, QtGui
+from .PyQt import *
 from .emrctstrategy import Strategy2IMGMan, Strategy2IMGPair
 from EMAN2jsondb import js_open_dict
 from EMAN2 import *

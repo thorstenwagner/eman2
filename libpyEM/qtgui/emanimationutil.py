@@ -37,7 +37,7 @@ from builtins import range
 from builtins import object
 from time import time
 
-from .PyQt import QtCore
+from .PyQt import *
 from math import sin,acos
 from EMAN2 import Vec3f, Transform
 

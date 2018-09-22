@@ -46,8 +46,8 @@ from .valslider import EMQTColorWidget, ValSlider, EMSpinWidget
 
 from OpenGL.GL import *
 from OpenGL.GLU import *
-from .PyQt import QtCore, QtGui, QtOpenGL
-from .PyQt import QColor
+from .PyQt import *
+from .PyQt import *
 
 import numpy as np
 

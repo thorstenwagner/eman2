@@ -36,8 +36,8 @@ from __future__ import absolute_import
 
 from builtins import range
 from builtins import object
-from .PyQt import QtCore, QtGui, QtOpenGL
-from .PyQt import Qt
+from .PyQt import *
+from .PyQt import *
 from OpenGL import GL,GLU,GLUT
 from EMAN2 import Util,EMUtil,file_exists,IMAGE_UNKNOWN,gimme_image_dimensions3D,EMData
 import os

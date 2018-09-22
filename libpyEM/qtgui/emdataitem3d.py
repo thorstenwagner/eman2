@@ -52,7 +52,7 @@ from .valslider import ValSlider, EMLightControls, CameraControls, EMSpinWidget,
 from OpenGL import GL
 from OpenGL.GL import *
 from OpenGL.GLU import *
-from .PyQt import QtCore, QtGui
+from .PyQt import *
 
 import numpy as np
 

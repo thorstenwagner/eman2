@@ -35,8 +35,8 @@ from __future__ import absolute_import
 #
 
 from builtins import object
-from .PyQt import QtGui, QtCore, QtOpenGL
-from .PyQt import Qt
+from .PyQt import *
+from .PyQt import *
 import sys
 from .emimageutil import EMParentWin
 from EMAN2 import remove_directories_from_name, get_image_directory,get_3d_font_renderer, E2end,get_platform
@@ -44,7 +44,7 @@ import EMAN2db
 import weakref
 from libpyGLUtils2 import *
 
-try: from .PyQt import QtWebKit
+try: from .PyQt import *
 except: pass
 
 class ModuleEventsManager(object): 

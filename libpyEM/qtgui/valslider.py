@@ -36,9 +36,9 @@ from past.utils import old_div
 import sys, math, weakref
 from OpenGL.GL import *
 from OpenGL import GLU
-from .PyQt import QtCore, QtGui, QtOpenGL
-from .PyQt import Qt
-from .PyQt import QColor
+from .PyQt import *
+from .PyQt import *
+from .PyQt import *
 
 leftarrow = [
     '12 10 2 1',

@@ -43,9 +43,9 @@ from OpenGL import GL, GLU, GLUT
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
-from .PyQt import QtCore, QtGui, QtOpenGL
-from .PyQt import Qt
-from .PyQt import QListWidgetItem
+from .PyQt import *
+from .PyQt import *
+from .PyQt import *
 from .emglobjects import Camera2, get_default_gl_colors, EMViewportDepthTools2, get_RGB_tab, get_gl_lights_vector, init_glut, EM3DModel
 from .emimageutil import EMTransformPanel # for EMLightsInspector
 from math import *

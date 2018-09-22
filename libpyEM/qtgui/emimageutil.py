@@ -36,8 +36,8 @@ from __future__ import division
 from past.utils import old_div
 from builtins import range
 from builtins import object
-from .PyQt import QtGui,QtCore
-from .PyQt import Qt
+from .PyQt import *
+from .PyQt import *
 from math import *
 import numpy
 from EMAN2 import *

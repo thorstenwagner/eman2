@@ -62,10 +62,10 @@ def safe_float(x):
 	try: return float(x)
 	except: return 0.0
 
-from .PyQt import QtCore, QtGui, QtOpenGL
-from .PyQt import QGLWidget
-from .PyQt import Qt
-from .PyQt import QListWidgetItem
+from .PyQt import *
+from .PyQt import *
+from .PyQt import *
+from .PyQt import *
 from OpenGL import GL,GLU
 from OpenGL.GL import *
 import OpenGL.GL as gl
@@ -213,7 +213,7 @@ class EMPlot3DWidget(EMGLWidget):
 		if event.key() == Qt.Key_C:
 			self.show_inspector(1)
 		elif event.key() == Qt.Key_F1:
-			try: from .PyQt import QtWebKit
+			try: from .PyQt import *
 			except: return
 			try:
 				try:
