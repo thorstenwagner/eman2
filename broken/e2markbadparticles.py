@@ -102,13 +102,13 @@ def main():
 
 #	E2end(logid)
 
-class EMMarkPtclTool(QtGui.QMainWindow):
+class EMMarkPtclTool(QMainWindow):
 	"""This is a tool for marking bad particles"""
 
 	def __init__(self,extrafiles=None,verbose=0):
-		QtGui.QMainWindow.__init__(self)
+		QMainWindow.__init__(self)
 
-		app=QtGui.qApp
+		app=qApp
 		self.setWindowTitle("e2markbadparticles")
 
 		# Menu Bar
@@ -116,15 +116,15 @@ class EMMarkPtclTool(QtGui.QMainWindow):
 #		self.mfile_save_processed=self.mfile.addAction("Save processed data")
 		self.mfile_quit=self.mfile.addAction("Quit")
 
-		self.wtabs=QtGui.QTabWidget()
+		self.wtabs=QTabWidget()
 		self.setCentralWidget(self.wtabs)
 
 		self.wclasstab=EMClassPtclTool(extrafiles)
 		self.wtabs.addTab(self.wclasstab,"Classes")
 
-		self.vbl2 = QtGui.QVBoxLayout()
+		self.vbl2 = QVBoxLayout()
 		self.setlist=MyListWidget(self)
-		self.setlist.setSizePolicy(QtGui.QSizePolicy.Preferred,QtGui.QSizePolicy.Expanding)
+		self.setlist.setSizePolicy(QSizePolicy.Preferred,QSizePolicy.Expanding)
 		self.vbl2.addWidget(self.setlist)
 		
 
@@ -138,7 +138,7 @@ class EMMarkPtclTool(QtGui.QMainWindow):
 
 	def closeEvent(self,event):
 		self.wclasstab.close()
-		QtGui.QWidget.closeEvent(self, event)
+		QWidget.closeEvent(self, event)
 
 if __name__ == "__main__":
 	main()

@@ -60,7 +60,7 @@ class EMFileTypeValidator(object):
 		@return 0 if something went wrong, for example, the file is not valid
 		'''
 		
-		msg = QtGui.QMessageBox()
+		msg = QMessageBox()
 		vals = file_name.split(".")
 		if len(vals) < 2 or vals[-1] != self.type:
 			# error is therefore a string
@@ -111,7 +111,7 @@ class EMCoordFileValidator(object):
 				return 1
 				
 			except:
-				msg = QtGui.QMessageBox()
+				msg = QMessageBox()
 				msg.setText("%s is not a valid coordinate file" %file_name)
 				msg.exec_()
 				return 0
@@ -257,7 +257,7 @@ class EMSingleImageSaveDialog(EMFileSaver):
 		try:
 			self.__item.write_image(out_file, -1)
 		except:
-			msg = QtGui.QMessageBox()
+			msg = QMessageBox()
 			msg.setText("An exception occured while writing %s, please try again" %out_file)
 			msg.exec_()
 			tmp_file_object.remove_tmp_file()
@@ -333,7 +333,7 @@ class EMSaveImageValidator(object):
 		@return 0 if something went wrong (e.g. the user cancelled), 1 if it's okay to call save now
 		'''
 		
-		msg = QtGui.QMessageBox()
+		msg = QMessageBox()
 		error = self.__validate_file_name(file_name)
 		if error != None:
 			# error is therefore a string
@@ -416,7 +416,7 @@ class EMStackSaveDialog(EMFileSaver):
 		@return 0 if there was an error, 1 if there was not
 		@exception NotImplementedError raised when the EMFileExistsDialog returns an unknown code
 		'''
-		msg = QtGui.QMessageBox()
+		msg = QMessageBox()
 			
 		tmp_file_object = EMDummyTmpFileHandle(file)
 		if self.validator.is_overwriting():
@@ -425,7 +425,7 @@ class EMStackSaveDialog(EMFileSaver):
 		total_images = len(self.__item_list)
 
 		out_file = tmp_file_object.get_tmp_file_name()
-		progress = QtGui.QProgressDialog("Writing files", "abort", 0, 2*total_images,None)
+		progress = QProgressDialog("Writing files", "abort", 0, 2*total_images,None)
 		progress.show()
 		tally = 0
 		exc_list = None
@@ -491,7 +491,7 @@ class EMStackSaveDialog(EMFileSaver):
 		'''
 		return self.file_name_used
 
-class EMFileExistsDialog(QtGui.QDialog):
+class EMFileExistsDialog(QDialog):
 	'''
 	Runs a dialog asking if the user wants to overwrite,append to, or cancel the operation.
 	Appending may not be possible in which case nly the Overwrite and Cancel buttons are available.
@@ -515,9 +515,9 @@ class EMFileExistsDialog(QtGui.QDialog):
 		@param item_list a list - the first object must have supply the get_attr_dict function, the keys "nx", "ny" and "nz therein
 		If you want to use this function for a single EMData object then just put it in a list
 		'''
-		QtGui.QDialog.__init__(self,None)
+		QDialog.__init__(self,None)
 		self.resize(480,320)
-		self.setWindowIcon(QtGui.QIcon(get_image_directory() + "/eman.png"))
+		self.setWindowIcon(QIcon(get_image_directory() + "/eman.png"))
 		self.setWindowTitle("File already exists")
 		self.appendable_types = ["hed","img","spi","hdf"] #image types that can be stacks - TODO bdb ?
 		
@@ -535,15 +535,15 @@ class EMFileExistsDialog(QtGui.QDialog):
 				append_enable=True
 		
 		# some widgets
-		vbl = QtGui.QVBoxLayout(self)
-		hbl = QtGui.QHBoxLayout()
-		overwrite = QtGui.QPushButton("Overwrite")
-		cancel = QtGui.QPushButton("Cancel")
+		vbl = QVBoxLayout(self)
+		hbl = QHBoxLayout()
+		overwrite = QPushButton("Overwrite")
+		cancel = QPushButton("Cancel")
 		
 		# add Widgets to Layouts
 		hbl.addWidget(cancel)
 		if append_enable:
-			append = QtGui.QPushButton("Append")
+			append = QPushButton("Append")
 			hbl.addWidget(append)
 		hbl.addWidget(overwrite)
 		if (len(filename) > 3 and filename[:4] == "bdb:"):
@@ -551,10 +551,10 @@ class EMFileExistsDialog(QtGui.QDialog):
 			overwrite.setToolTip("Overwriting bdb files is currently disabled.")
 		
 		# Text to alert the user
-		hbl2 = QtGui.QHBoxLayout()
-		text_edit = QtGui.QTextEdit("",self)
+		hbl2 = QHBoxLayout()
+		text_edit = QTextEdit("",self)
 		text_edit.setReadOnly(True)
-		text_edit.setWordWrapMode(QtGui.QTextOption.WordWrap)
+		text_edit.setWordWrapMode(QTextOption.WordWrap)
 		if (filename == ""):
 			if append_enable:
 				help = "The file already exists. You can choose to append to it, to overwrite it, or to cancel this operation."
@@ -571,7 +571,7 @@ class EMFileExistsDialog(QtGui.QDialog):
 		text_edit.setText(help)
 		hbl2.addWidget(text_edit,0)
 		
-		groupbox = QtGui.QGroupBox("Warning")
+		groupbox = QGroupBox("Warning")
 		groupbox.setLayout(hbl2)
 		vbl.addWidget(groupbox)
 		
@@ -617,7 +617,7 @@ class EMFileExistsDialog(QtGui.QDialog):
 		1 - The user hit overwrite
 		2 - The user hit append 
 		'''
-		QtGui.QDialog.exec_(self)
+		QDialog.exec_(self)
 		return self.__result
 	
 class EMTmpFileHandle(object):

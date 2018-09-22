@@ -75,7 +75,7 @@ rightarrow = [
 def clamp(x0,val,x1):
 	return int(max(min(val,x1),x0))
 
-class ValSlider(QtGui.QWidget):
+class ValSlider(QWidget):
 	"""The valslider class represents a connected text widget and horizontal slider.
 	showenable - if -1, no enable box shown, if 0, shown unchecked, if 1 shown and checked
 	setValue(float) - to programatically change the value
@@ -89,7 +89,7 @@ class ValSlider(QtGui.QWidget):
 
 	def __init__(self, parent=None, rng=None, label=None, value=0,labelwidth=30,showenable=-1,rounding=3):
 		#if not parent: raise Exception,"ValSliders must have parents"
-		QtGui.QWidget.__init__(self,parent)
+		QWidget.__init__(self,parent)
 		
 		#print label, "allocated"
 		
@@ -102,22 +102,22 @@ class ValSlider(QtGui.QWidget):
 		self.intonly=0
 		self.rounding = rounding
 		
-		self.hboxlayout = QtGui.QHBoxLayout(self)
+		self.hboxlayout = QHBoxLayout(self)
 		self.hboxlayout.setMargin(0)
 		self.hboxlayout.setSpacing(6)
 		self.hboxlayout.setObjectName("hboxlayout")
 		
 		if showenable>=0 :
-			self.enablebox=QtGui.QCheckBox(self)
+			self.enablebox=QCheckBox(self)
 			self.enablebox.setChecked(showenable)
 			self.hboxlayout.addWidget(self.enablebox)
 			self.enablebox.toggled[bool].connect(self.setEnabled)
 		
 		if label:
-			self.label = QtGui.QLabel(self)
+			self.label = QLabel(self)
 			self.setLabel(label)
 			
-			sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(0),QtGui.QSizePolicy.Policy(0))
+			sizePolicy = QSizePolicy(QSizePolicy.Policy(0),QSizePolicy.Policy(0))
 #			sizePolicy.setHorizontalStretch(1)
 #			sizePolicy.setVerticalStretch(0)
 #			sizePolicy.setHeightForWidth(self.text.sizePolicy().hasHeightForWidth())
@@ -129,9 +129,9 @@ class ValSlider(QtGui.QWidget):
 			self.hboxlayout.addWidget(self.label)
 		
 		
-		self.text = QtGui.QLineEdit(self)
+		self.text = QLineEdit(self)
 		
-		sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(7),QtGui.QSizePolicy.Policy(0))
+		sizePolicy = QSizePolicy(QSizePolicy.Policy(7),QSizePolicy.Policy(0))
 		sizePolicy.setHorizontalStretch(1)
 		sizePolicy.setVerticalStretch(0)
 		sizePolicy.setHeightForWidth(self.text.sizePolicy().hasHeightForWidth())
@@ -140,9 +140,9 @@ class ValSlider(QtGui.QWidget):
 		self.text.setObjectName("text")
 		self.hboxlayout.addWidget(self.text)
 		
-		self.slider = QtGui.QSlider(self)
+		self.slider = QSlider(self)
 		
-		sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(7),QtGui.QSizePolicy.Policy(0))
+		sizePolicy = QSizePolicy(QSizePolicy.Policy(7),QSizePolicy.Policy(0))
 		sizePolicy.setHorizontalStretch(7)
 		sizePolicy.setVerticalStretch(0)
 		sizePolicy.setHeightForWidth(self.slider.sizePolicy().hasHeightForWidth())
@@ -296,7 +296,7 @@ class ValSlider(QtGui.QWidget):
 		self.updates()
 		self.updatet()
 
-class ValBox(QtGui.QWidget):
+class ValBox(QWidget):
 	"""A ValSlider without the slider part. Everything is the same except that the slider doesn't exist,
 	so for virtually all purposes it could be used as a drop-in replacement.
 	"""
@@ -306,7 +306,7 @@ class ValBox(QtGui.QWidget):
 
 	def __init__(self, parent=None, rng=None, label=None, value=0,labelwidth=30,showenable=-1):
 		#if not parent: raise Exception,"ValSliders must have parents"
-		QtGui.QWidget.__init__(self,parent)
+		QWidget.__init__(self,parent)
 		
 		if rng : self.rng=list(rng)
 		else : self.rng=[0,1.0]
@@ -316,22 +316,22 @@ class ValBox(QtGui.QWidget):
 		self.intonly=0
 		self.digits=5		# digits of precision to display
 		
-		self.hboxlayout = QtGui.QHBoxLayout(self)
+		self.hboxlayout = QHBoxLayout(self)
 		self.hboxlayout.setMargin(0)
 		self.hboxlayout.setSpacing(6)
 		self.hboxlayout.setObjectName("hboxlayout")
 		
 		if showenable>=0 :
-			self.enablebox=QtGui.QCheckBox(self)
+			self.enablebox=QCheckBox(self)
 			self.enablebox.setChecked(showenable)
 			self.hboxlayout.addWidget(self.enablebox)
 			self.enablebox.toggled[bool].connect(self.setEnabled)
 			
 		if label:
-			self.label = QtGui.QLabel(self)
+			self.label = QLabel(self)
 			self.setLabel(label)
 			
-			sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(0),QtGui.QSizePolicy.Policy(0))
+			sizePolicy = QSizePolicy(QSizePolicy.Policy(0),QSizePolicy.Policy(0))
 #			sizePolicy.setHorizontalStretch(1)
 #			sizePolicy.setVerticalStretch(0)
 #			sizePolicy.setHeightForWidth(self.text.sizePolicy().hasHeightForWidth())
@@ -343,9 +343,9 @@ class ValBox(QtGui.QWidget):
 			self.hboxlayout.addWidget(self.label)
 		
 		
-		self.text = QtGui.QLineEdit(self)
+		self.text = QLineEdit(self)
 		
-		sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(7),QtGui.QSizePolicy.Policy(0))
+		sizePolicy = QSizePolicy(QSizePolicy.Policy(7),QSizePolicy.Policy(0))
 		sizePolicy.setHorizontalStretch(1)
 		sizePolicy.setVerticalStretch(0)
 		sizePolicy.setHeightForWidth(self.text.sizePolicy().hasHeightForWidth())
@@ -448,7 +448,7 @@ class ValBox(QtGui.QWidget):
 	def updateboth(self):
 		self.updatet()
 
-class StringBox(QtGui.QWidget):
+class StringBox(QWidget):
 	"""A ValBox but it takes arbitrary text. Basically maintains the label/enable functionality for a QLineEdit widget
 	"""
 	enableChanged = pyqtSignal(int)
@@ -457,27 +457,27 @@ class StringBox(QtGui.QWidget):
 
 	def __init__(self, parent=None, label=None, value="",labelwidth=30,showenable=-1):
 		#if not parent: raise Exception,"ValSliders must have parents"
-		QtGui.QWidget.__init__(self,parent)
+		QWidget.__init__(self,parent)
 		
 		if value==None : value=""
 		self.ignore=0
 		
-		self.hboxlayout = QtGui.QHBoxLayout(self)
+		self.hboxlayout = QHBoxLayout(self)
 		self.hboxlayout.setMargin(0)
 		self.hboxlayout.setSpacing(6)
 		self.hboxlayout.setObjectName("hboxlayout")
 		
 		if showenable>=0 :
-			self.enablebox=QtGui.QCheckBox(self)
+			self.enablebox=QCheckBox(self)
 			self.enablebox.setChecked(showenable)
 			self.hboxlayout.addWidget(self.enablebox)
 			self.enablebox.toggled[bool].connect(self.setEnabled)
 			
 		if label:
-			self.label = QtGui.QLabel(self)
+			self.label = QLabel(self)
 			self.setLabel(label)
 			
-			sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(0),QtGui.QSizePolicy.Policy(0))
+			sizePolicy = QSizePolicy(QSizePolicy.Policy(0),QSizePolicy.Policy(0))
 #			sizePolicy.setHorizontalStretch(1)
 #			sizePolicy.setVerticalStretch(0)
 #			sizePolicy.setHeightForWidth(self.text.sizePolicy().hasHeightForWidth())
@@ -489,10 +489,10 @@ class StringBox(QtGui.QWidget):
 			self.hboxlayout.addWidget(self.label)
 		
 		
-		self.text = QtGui.QLineEdit(self)
+		self.text = QLineEdit(self)
 		self.text.setText(value)
 		
-		sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(7),QtGui.QSizePolicy.Policy(0))
+		sizePolicy = QSizePolicy(QSizePolicy.Policy(7),QSizePolicy.Policy(0))
 		sizePolicy.setHorizontalStretch(1)
 		sizePolicy.setVerticalStretch(0)
 		sizePolicy.setHeightForWidth(self.text.sizePolicy().hasHeightForWidth())
@@ -533,7 +533,7 @@ class StringBox(QtGui.QWidget):
 		return str(self.label.text())
 		
 
-class CheckBox(QtGui.QWidget):
+class CheckBox(QWidget):
 	"""A QCheckBox with a label
 	"""
 	enableChanged = pyqtSignal(int)
@@ -541,29 +541,29 @@ class CheckBox(QtGui.QWidget):
 
 	def __init__(self, parent=None, label=None, value="",labelwidth=30,showenable=-1):
 		#if not parent: raise Exception,"ValSliders must have parents"
-		QtGui.QWidget.__init__(self,parent)
+		QWidget.__init__(self,parent)
 		
 		if value==None : value=False
 		if value!=False and value!=True : value=True
 		
 		self.ignore=0
 		
-		self.hboxlayout = QtGui.QHBoxLayout(self)
+		self.hboxlayout = QHBoxLayout(self)
 		self.hboxlayout.setMargin(0)
 		self.hboxlayout.setSpacing(6)
 		self.hboxlayout.setObjectName("hboxlayout")
 		
 		if showenable>=0 :
-			self.enablebox=QtGui.QCheckBox(self)
+			self.enablebox=QCheckBox(self)
 			self.enablebox.setChecked(showenable)
 			self.hboxlayout.addWidget(self.enablebox)
 			self.enablebox.toggled[bool].connect(self.setEnabled)
 			
 		if label:
-			self.label = QtGui.QLabel(self)
+			self.label = QLabel(self)
 			self.setLabel(label)
 			
-			sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(0),QtGui.QSizePolicy.Policy(0))
+			sizePolicy = QSizePolicy(QSizePolicy.Policy(0),QSizePolicy.Policy(0))
 #			sizePolicy.setHorizontalStretch(1)
 #			sizePolicy.setVerticalStretch(0)
 #			sizePolicy.setHeightForWidth(self.text.sizePolicy().hasHeightForWidth())
@@ -575,7 +575,7 @@ class CheckBox(QtGui.QWidget):
 			self.hboxlayout.addWidget(self.label)
 		
 		
-		self.check = QtGui.QCheckBox(self)
+		self.check = QCheckBox(self)
 #		print "'%s'"%str(value)
 		self.check.setChecked(value)
 		self.hboxlayout.addWidget(self.check)
@@ -620,7 +620,7 @@ class CheckBox(QtGui.QWidget):
 		return str(self.label.text())
 
 
-class RangeSlider(QtGui.QWidget):
+class RangeSlider(QWidget):
 	"""This is an int slider with two values in a fixed range (v0,v1) in a fixed range (min,max). Each value
 	can be set individually or the pair can be moved up and down together. The values are displayed at
 	the top and bottom of the vertical slider.
@@ -629,14 +629,14 @@ class RangeSlider(QtGui.QWidget):
 
 	def __init__(self, parent=None, rng=(0,100), value=(25,75)):
 		#if not parent: raise Exception,"ValSliders must have parents"
-		QtGui.QWidget.__init__(self,parent)
+		QWidget.__init__(self,parent)
 		
 		self.rng=tuple(rng)
 		self.value=tuple(value)
 		self.mdownloc=None
 		if len(rng)!=2 or len(value)!=2 : raise Exception("RangeSlider needs a valid range and value)")
 
-		sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(0),QtGui.QSizePolicy.Policy(7))
+		sizePolicy = QSizePolicy(QSizePolicy.Policy(0),QSizePolicy.Policy(7))
 		sizePolicy.setHorizontalStretch(0)
 		sizePolicy.setVerticalStretch(7)
 		sizePolicy.setHeightForWidth(False)
@@ -647,7 +647,7 @@ class RangeSlider(QtGui.QWidget):
 
 	def paintEvent(self,event):
 		"""Redraws the widget"""
-		p=QtGui.QPainter(self)
+		p=QPainter(self)
 		p.setPen(Qt.gray)
 		p.drawRect(1,1,self.size().width()-2,self.size().height()-2)
 		p.setPen(Qt.black)
@@ -728,7 +728,7 @@ class RangeSlider(QtGui.QWidget):
 	def getValue(self):
 		return self.value
 		
-class EMSpinWidget(QtGui.QWidget):
+class EMSpinWidget(QWidget):
 	"""
 	Widget for a unbounded spin box using left and right arrow keys. When the value is changed
 	valueChanged(int) is emited
@@ -739,7 +739,7 @@ class EMSpinWidget(QtGui.QWidget):
 	valueChanged = pyqtSignal(int)
 
 	def __init__(self, value, coeff, rounding=2, maxarrowwidth=20, postivemode=False, wheelstep=1):
-		QtGui.QWidget.__init__(self)
+		QWidget.__init__(self)
 		self.value = value
 		self.coeff = coeff
 		self.powercoeff = 0.0
@@ -748,18 +748,18 @@ class EMSpinWidget(QtGui.QWidget):
 		self.wheelstep=wheelstep
 		self.rounding = rounding
 		
-		shbox = QtGui.QHBoxLayout()
-		self.lbutton = QtGui.QPushButton("",self)
-		self.lbutton.setIcon(QtGui.QIcon(QtGui.QPixmap(leftarrow)))
+		shbox = QHBoxLayout()
+		self.lbutton = QPushButton("",self)
+		self.lbutton.setIcon(QIcon(QPixmap(leftarrow)))
 		self.lbutton.setAutoRepeat(True)
 		self.lbutton.setAutoRepeatDelay(200)
 		shbox.addWidget(self.lbutton)
-		self.numbox = QtGui.QLineEdit(str(self.value), self)
+		self.numbox = QLineEdit(str(self.value), self)
 		shbox.addWidget(self.numbox)
 		self.lbutton.setMaximumHeight(self.numbox.height())
 		self.lbutton.setMaximumWidth(self.maxarrowwidth)
-		self.rbutton = QtGui.QPushButton("",self)
-		self.rbutton.setIcon(QtGui.QIcon(QtGui.QPixmap(rightarrow)))
+		self.rbutton = QPushButton("",self)
+		self.rbutton.setIcon(QIcon(QPixmap(rightarrow)))
 		self.rbutton.setAutoRepeat(True)
 		self.rbutton.setAutoRepeatDelay(200)
 		self.rbutton.setMaximumHeight(self.numbox.height())
@@ -829,7 +829,7 @@ class EMSpinWidget(QtGui.QWidget):
 			self.numbox.setText(str(self.value))
 			print("ERROR!!! You must enter a number")
 		
-class EMQTColorWidget(QtGui.QWidget):
+class EMQTColorWidget(QWidget):
 	"""
 	A widget displaying a color box that is used to control colors
 	multiple boxes can be implemented
@@ -838,10 +838,10 @@ class EMQTColorWidget(QtGui.QWidget):
 	newconnection = pyqtSignal()
 
 	def __init__(self, parent=None, red=255, green=255, blue=255, width=30, height=30):
-		QtGui.QWidget.__init__(self, parent)
+		QWidget.__init__(self, parent)
 		self.width = width
 		self.height = height
-		self.color = QtGui.QColor(red,green,blue)
+		self.color = QColor(red,green,blue)
 		self.setMinimumHeight(self.width+2)
 		self.setMinimumWidth(self.height+2)
 		self.setAcceptDrops(True)
@@ -854,13 +854,13 @@ class EMQTColorWidget(QtGui.QWidget):
 		return self.color
 		
 	def paintEvent(self, e):
-		qp = QtGui.QPainter()
+		qp = QPainter()
 		qp.begin(self)
 		self._draw_widget(qp)
 		qp.end()
 		
 	def _draw_widget(self, qp):
-		pen = QtGui.QPen(QtGui.QColor(0, 0, 0))
+		pen = QPen(QColor(0, 0, 0))
 		pen.setWidth(2)
 		qp.setPen(pen)
 		qp.setBrush(self.color)
@@ -870,7 +870,7 @@ class EMQTColorWidget(QtGui.QWidget):
 		e.accept()
 		
 	def dropEvent(self, e):
-		self.color = QtGui.QColor(e.mimeData().colorData())
+		self.color = QColor(e.mimeData().colorData())
 		self.update()
 		self.newcolor.emit(self.color)
 
@@ -884,7 +884,7 @@ class EMQTColorWidget(QtGui.QWidget):
 	def _dragdrop(self, e):
 		mimeData = QMimeData()
 		mimeData.setColorData(self.color)
-		drag = QtGui.QDrag(self)
+		drag = QDrag(self)
 		drag.setMimeData(mimeData)
 		drag.setHotSpot(e.pos() - self.rect().topLeft())
 		dropAction = drag.exec_(Qt.MoveAction)
@@ -929,20 +929,20 @@ def singleton(cls):
 	return getinstance
     
 @singleton
-class EMQtColorDialog(QtGui.QColorDialog):
+class EMQtColorDialog(QColorDialog):
 	"""
 	The Is to create a non-modal color dialog. Only one color dialog is allowed at once, so I use the singltion pattern
 	"""
 	canceled = pyqtSignal()
 
 	def __init__(self, inicolor):
-		QtGui.QColorDialog.__init__(self, inicolor)
+		QColorDialog.__init__(self, inicolor)
 		self.hidden = False
 		self.setWindowFlags(Qt.Window)
 		self.show()
 	
 	def hideEvent(self, e):
-		QtGui.QColorDialog.hideEvent(self, e)
+		QColorDialog.hideEvent(self, e)
 		self.canceled.emit()
 		self.hidden = True
 
@@ -1189,7 +1189,7 @@ class CameraControls(QtOpenGL.QGLWidget):
 	def updateWidget(self):
 		self.update()
 		
-class EMANToolButton(QtGui.QToolButton):
+class EMANToolButton(QToolButton):
 	"""
 	This widget is a toolbutton that is toogleable. Only one button can be down at any given point.
 	The only weakness is only one of these button groups can be used at any given time. It is possible 
@@ -1198,7 +1198,7 @@ class EMANToolButton(QtGui.QToolButton):
 	clicked = pyqtSignal(int)
 	toolpanellist = []
 	def __init__(self):
-		QtGui.QToolButton.__init__(self)
+		QToolButton.__init__(self)
 		self.setMinimumWidth(30)
 		self.setMinimumHeight(30)
 		self.weakrefself = weakref.ref(self)
@@ -1213,7 +1213,7 @@ class EMANToolButton(QtGui.QToolButton):
 				tool().setDown(False)
 	
 	def setDown(self, state, quiet=True):
-		QtGui.QToolButton.setDown(self, state)
+		QToolButton.setDown(self, state)
 		if state: self.setSelfAsUnique()
 		if not quiet: self.clicked.emit(self.isDown())
 		

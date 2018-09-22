@@ -571,19 +571,19 @@ class EMVolumeModel(EM3DModel):
 		self.vdtools.set_update_P_inv()
 
 
-class EMVolumeInspector(QtGui.QWidget):
+class EMVolumeInspector(QWidget):
 	def __init__(self,target) :
-		QtGui.QWidget.__init__(self,None)
+		QWidget.__init__(self,None)
 		self.target=weakref.ref(target)
-		self.setWindowIcon(QtGui.QIcon(get_image_directory() +"desktop.png"))
+		self.setWindowIcon(QIcon(get_image_directory() +"desktop.png"))
 		self.rotation_sliders = EMTransformPanel(target,self)
 		
-		self.vbl = QtGui.QVBoxLayout(self)
+		self.vbl = QVBoxLayout(self)
 		self.vbl.setMargin(0)
 		self.vbl.setSpacing(6)
 		self.vbl.setObjectName("vbl")
 		
-		self.hbl = QtGui.QHBoxLayout()
+		self.hbl = QHBoxLayout()
 		self.hbl.setMargin(0)
 		self.hbl.setSpacing(6)
 		self.hbl.setObjectName("hbl")
@@ -593,20 +593,20 @@ class EMVolumeInspector(QtGui.QWidget):
 		self.hist.setObjectName("hist")
 		self.hbl.addWidget(self.hist)
 		
-		self.vbl2 = QtGui.QVBoxLayout()
+		self.vbl2 = QVBoxLayout()
 		self.vbl2.setMargin(0)
 		self.vbl2.setSpacing(6)
 		self.vbl2.setObjectName("vbl2")
 		self.hbl.addLayout(self.vbl2)
 	
-		self.cubetog = QtGui.QPushButton("Cube")
+		self.cubetog = QPushButton("Cube")
 		self.cubetog.setCheckable(1)
 		self.vbl2.addWidget(self.cubetog)
 		
-		self.defaults = QtGui.QPushButton("Defaults")
+		self.defaults = QPushButton("Defaults")
 		self.vbl2.addWidget(self.defaults)
 		
-		self.tabwidget = QtGui.QTabWidget()
+		self.tabwidget = QTabWidget()
 		
 		self.tabwidget.addTab(self.get_main_tab(), "Main")
 		self.tabwidget.addTab(self.get_GL_tab(),"GL")
@@ -639,10 +639,10 @@ class EMVolumeInspector(QtGui.QWidget):
 		return self.maintab.vbl
 	
 	def get_GL_tab(self):
-		self.gltab = QtGui.QWidget()
+		self.gltab = QWidget()
 		gltab = self.gltab
 		
-		gltab.vbl = QtGui.QVBoxLayout(self.gltab )
+		gltab.vbl = QVBoxLayout(self.gltab )
 		gltab.vbl.setMargin(0)
 		gltab.vbl.setSpacing(6)
 		gltab.vbl.setObjectName("Main")
@@ -662,9 +662,9 @@ class EMVolumeInspector(QtGui.QWidget):
 	
 	def get_main_tab(self):
 	
-		self.maintab = QtGui.QWidget()
+		self.maintab = QWidget()
 		maintab = self.maintab
-		maintab.vbl = QtGui.QVBoxLayout(self.maintab)
+		maintab.vbl = QVBoxLayout(self.maintab)
 		maintab.vbl.setMargin(0)
 		maintab.vbl.setSpacing(6)
 		maintab.vbl.setObjectName("Main")
@@ -680,17 +680,17 @@ class EMVolumeInspector(QtGui.QWidget):
 		self.bright.setValue(0.0)
 		maintab.vbl.addWidget(self.bright)
 
-		self.hbl_smp = QtGui.QHBoxLayout()
+		self.hbl_smp = QHBoxLayout()
 		self.hbl_smp.setMargin(0)
 		self.hbl_smp.setSpacing(6)
 		self.hbl_smp.setObjectName("Texture Oversampling")
 		maintab.vbl.addLayout(self.hbl_smp)
 		
-		self.smp_label = QtGui.QLabel()
+		self.smp_label = QLabel()
 		self.smp_label.setText('Texture Oversampling')
 		self.hbl_smp.addWidget(self.smp_label)
 		
-		self.smp = QtGui.QSpinBox(maintab)
+		self.smp = QSpinBox(maintab)
 		self.smp.setMaximum(10)
 		self.smp.setMinimum(1)
 		self.smp.setValue(1)

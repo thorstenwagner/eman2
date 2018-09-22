@@ -578,14 +578,14 @@ class ErasingPanel(object):
 	def get_widget(self):
 		if self.widget == None:
 			from .PyQt import QtCore, QtGui, Qt
-			self.widget = QtGui.QWidget()
-			vbl = QtGui.QVBoxLayout(self.widget)
+			self.widget = QWidget()
+			vbl = QVBoxLayout(self.widget)
 			vbl.setMargin(0)
 			vbl.setSpacing(6)
 			vbl.setObjectName("vbl")
 
-			hbl = QtGui.QHBoxLayout()
-			hbl.addWidget(QtGui.QLabel("Erase Radius:"))
+			hbl = QHBoxLayout()
+			hbl.addWidget(QLabel("Erase Radius:"))
 			from .valslider import ValSlider
 			self.erase_rad_edit = ValSlider(None,(0.0,1000.0),"")
 			self.erase_rad_edit.setValue(int(self.erase_radius))
@@ -593,7 +593,7 @@ class ErasingPanel(object):
 			hbl.addWidget(self.erase_rad_edit)
 
 
-			self.unerase = QtGui.QCheckBox("Unerase")
+			self.unerase = QCheckBox("Unerase")
 			self.unerase.setChecked(False)
 
 			vbl.addLayout(hbl)
@@ -619,17 +619,17 @@ class ManualBoxingPanel(object):
 	def get_widget(self):
 		if self.widget == None:
 			from .PyQt import QtCore, QtGui, Qt
-			self.widget = QtGui.QWidget()
-			vbl = QtGui.QGridLayout(self.widget)
+			self.widget = QWidget()
+			vbl = QGridLayout(self.widget)
 			vbl.setMargin(0)
 			vbl.setSpacing(10)
 			vbl.setObjectName("vbl")
-			self.auto_center_checkbox = QtGui.QCheckBox("Auto-center")
-			self.clear=QtGui.QPushButton("Clear")
-			self.clearfrom = QtGui.QLineEdit(str(-1))
+			self.auto_center_checkbox = QCheckBox("Auto-center")
+			self.clear=QPushButton("Clear")
+			self.clearfrom = QLineEdit(str(-1))
 			vbl.addWidget(self.auto_center_checkbox,1,0)
 			vbl.addWidget(self.clear,2,0)
-			vbl.addWidget(QtGui.QLabel("Keep range #:"),3,0)
+			vbl.addWidget(QLabel("Keep range #:"),3,0)
 			vbl.addWidget(self.clearfrom,3,1)
 			
 
@@ -662,7 +662,7 @@ class EraseTool(EMBoxingTool):
 
 	def icon(self):
 		from .PyQt import QtGui
-		return QtGui.QIcon(get_image_directory() + "boxer_erase.png")
+		return QIcon(get_image_directory() + "boxer_erase.png")
 
 	def get_widget(self):
 		if self.panel_object == None:
@@ -769,7 +769,7 @@ class ManualBoxingTool(object):
 
 	def icon(self):
 		from .PyQt import QtGui
-		return QtGui.QIcon(get_image_directory() + "white_box.png")
+		return QIcon(get_image_directory() + "white_box.png")
 
 
 	def set_panel_object(self,panel): self.panel_object = panel
@@ -2368,7 +2368,7 @@ def get_coord_outnames(params):
 	return output
 
 from .PyQt import QtGui
-class EMBoxerInspector(QtGui.QWidget):
+class EMBoxerInspector(QWidget):
 
 	PTCL_SHAPE_MAP = {}
 	PTCL_SHAPE_MAP["none"] = "hidden"
@@ -2383,28 +2383,28 @@ class EMBoxerInspector(QtGui.QWidget):
 		self.tool_dynamic_vbl = None # this will be used to dynamic add widgets as the buttons are changed
 		self.dynamic_box_button_widget = None # this will be used to dynamic add widgets as the buttons are changed
 		self.ptcl_display_dict = None # this will be a dict mapping the names in the
-		QtGui.QWidget.__init__(self,None)
-		self.setWindowIcon(QtGui.QIcon(get_image_directory() +"green_boxes.png"))
+		QWidget.__init__(self,None)
+		self.setWindowIcon(QIcon(get_image_directory() +"green_boxes.png"))
 		self.setWindowTitle("e2boxer")
 		self.target=weakref.ref(target)
 
-		self.vbl = QtGui.QVBoxLayout(self)
+		self.vbl = QVBoxLayout(self)
 		self.vbl.setMargin(0)
 		self.vbl.setSpacing(6)
 		self.vbl.setObjectName("vbl")
 
-		self.tab_widget = QtGui.QTabWidget()
+		self.tab_widget = QTabWidget()
 		self.tab_widget.addTab(self.get_main_tab(),"Main")
 		self.tab_widget.addTab(self.get_display_tab(),"Display")
 		self.vbl.addWidget(self.tab_widget)
 
-		self.gen_output_but=QtGui.QPushButton("Write output")
+		self.gen_output_but=QPushButton("Write output")
 		self.vbl.addWidget(self.gen_output_but)
 
-		self.done_but=QtGui.QPushButton("Done")
+		self.done_but=QPushButton("Done")
 		self.vbl.addWidget(self.done_but)
 
-		self.status_bar = QtGui.QStatusBar()
+		self.status_bar = QStatusBar()
 		self.vbl.addWidget(self.status_bar)
 		self.status_bar.showMessage("Ready",10000)
 
@@ -2435,32 +2435,32 @@ class EMBoxerInspector(QtGui.QWidget):
 
 	def get_display_tab(self):
 		from .PyQt import QtCore, QtGui, Qt
-		widget = QtGui.QWidget()
-		vbl =  QtGui.QVBoxLayout(widget)
+		widget = QWidget()
+		vbl =  QVBoxLayout(widget)
 
 		#  Insert the plot widget
-		viewhbl = QtGui.QVBoxLayout()
+		viewhbl = QVBoxLayout()
 
-		self.viewboxes = QtGui.QCheckBox("Particle Window")
+		self.viewboxes = QCheckBox("Particle Window")
 		self.viewboxes.setChecked(True)
-		self.viewimage = QtGui.QCheckBox("2D Image Window")
+		self.viewimage = QCheckBox("2D Image Window")
 		self.viewimage.setChecked(True)
 
 		viewhbl.addWidget(self.viewboxes)
 		viewhbl.addWidget(self.viewimage)
 
 		if self.target().has_thumbs():
-			self.viewthumbs = QtGui.QCheckBox("Thumbnails Window")
+			self.viewthumbs = QCheckBox("Thumbnails Window")
 			self.viewthumbs.setChecked(True)
 			viewhbl.addWidget(self.viewthumbs)
 
-		viewmanagement = QtGui.QGroupBox("Displayed Windows")
+		viewmanagement = QGroupBox("Displayed Windows")
 		viewmanagement.setLayout(viewhbl)
 		vbl.addWidget(viewmanagement)
 
 
-		viewhbl2 = QtGui.QHBoxLayout()
-		self.boxformats = QtGui.QComboBox(self)
+		viewhbl2 = QHBoxLayout()
+		self.boxformats = QComboBox(self)
 		for val in list(EMBoxerInspector.PTCL_SHAPE_MAP.keys()):
 			self.boxformats.addItem(val)
 
@@ -2477,7 +2477,7 @@ class EMBoxerInspector(QtGui.QWidget):
 			raise RuntimeError("Unknown ptcl display shape %s" %val)
 
 
-		displayboxes = QtGui.QGroupBox("Displayed Boxes")
+		displayboxes = QGroupBox("Displayed Boxes")
 		displayboxes.setLayout(viewhbl2)
 		vbl.addWidget(displayboxes)
 
@@ -2525,20 +2525,20 @@ class EMBoxerInspector(QtGui.QWidget):
 
 	def get_main_tab(self):
 		from .PyQt import QtCore, QtGui, Qt
-		widget = QtGui.QWidget()
-		vbl = QtGui.QVBoxLayout(widget)
+		widget = QWidget()
+		vbl = QVBoxLayout(widget)
 		vbl.setMargin(0)
 		vbl.setSpacing(6)
 
-		box_size_hbl=QtGui.QHBoxLayout()
+		box_size_hbl=QHBoxLayout()
 		box_size_hbl.setMargin(0)
 		box_size_hbl.setSpacing(2)
 
-		self.box_size_label = QtGui.QLabel("Box Size:",self)
+		self.box_size_label = QLabel("Box Size:",self)
 		box_size_hbl.addWidget(self.box_size_label)
-		self.pos_int_validator = QtGui.QIntValidator(self)
+		self.pos_int_validator = QIntValidator(self)
 		self.pos_int_validator.setBottom(1)
-		self.box_size = QtGui.QLineEdit(str(self.target().get_box_size()),self)
+		self.box_size = QLineEdit(str(self.target().get_box_size()),self)
 		self.box_size.setValidator(self.pos_int_validator)
 		box_size_hbl.addWidget(self.box_size)
 
@@ -2553,15 +2553,15 @@ class EMBoxerInspector(QtGui.QWidget):
 
 	def add_bottom_buttons(self,layout):
 		from .PyQt import QtCore, QtGui, Qt
-		hbl_t=QtGui.QHBoxLayout()
+		hbl_t=QHBoxLayout()
 
-		hbl_q=QtGui.QHBoxLayout()
-		self.quality=QtGui.QLabel("Image Quality:")
+		hbl_q=QHBoxLayout()
+		self.quality=QLabel("Image Quality:")
 		qual_tt = "Assign a quality number to the image. This acts as metadata for your convenience and is displayed in eman2 forms when possible."
 		self.quality.setToolTip(qual_tt)
 		hbl_q.addWidget(self.quality)
 
-		self.image_qualities = QtGui.QComboBox()
+		self.image_qualities = QComboBox()
 		for i in range(10):
 			self.image_qualities.addItem(str(i))
 		self.image_qualities.setCurrentIndex(2)
@@ -2588,17 +2588,17 @@ class EMBoxerInspector(QtGui.QWidget):
 	def add_boxing_button_group(self,layout):
 		from .PyQt import QtCore, QtGui, Qt
 
-		self.tool_button_group_box = QtGui.QGroupBox("Tools")
-		self.tool_button_group_box_vbl = QtGui.QVBoxLayout(self.tool_button_group_box)
-		self.tool_dynamic_vbl = QtGui.QVBoxLayout()
+		self.tool_button_group_box = QGroupBox("Tools")
+		self.tool_button_group_box_vbl = QVBoxLayout(self.tool_button_group_box)
+		self.tool_dynamic_vbl = QVBoxLayout()
 
-		hbl = QtGui.QHBoxLayout()
-		current_tool_label = QtGui.QLabel("Current Boxing Tool:")
-		self.current_tool_combobox = QtGui.QComboBox()
+		hbl = QHBoxLayout()
+		current_tool_label = QLabel("Current Boxing Tool:")
+		self.current_tool_combobox = QComboBox()
 		hbl.addWidget(current_tool_label)
 		hbl.addWidget(self.current_tool_combobox)
 
-		self.tools_stacked_widget = QtGui.QStackedWidget()
+		self.tools_stacked_widget = QStackedWidget()
 		self.tool_dynamic_vbl.addLayout(hbl)
 		self.tool_dynamic_vbl.addWidget(self.tools_stacked_widget)
 		self.tool_button_group_box_vbl.addLayout(self.tool_dynamic_vbl,1)

@@ -38,13 +38,13 @@ def run(cmd):
 	launch_childprocess(cmd)
 	
 	
-class EMDrawWindow(QtGui.QMainWindow):
+class EMDrawWindow(QMainWindow):
 
 	def __init__(self,application,options,datafile=None):
-		QtGui.QWidget.__init__(self)
+		QWidget.__init__(self)
 		self.imgview = EMImage2DWidget()
-		self.setCentralWidget(QtGui.QWidget())
-		self.gbl = QtGui.QGridLayout(self.centralWidget())
+		self.setCentralWidget(QWidget())
+		self.gbl = QGridLayout(self.centralWidget())
 		
 		self.gbl.addWidget(self.imgview,0,0)
 		self.options=options

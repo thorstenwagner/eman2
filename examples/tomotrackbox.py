@@ -88,7 +88,7 @@ feature from all slices. Generally best for uniform objects like vesicles."""
 	
 	E2end(logid)
 	
-class TrackerControl(QtGui.QWidget):
+class TrackerControl(QWidget):
 	def __init__(self,app,maxshift,invert=False,seqali=False,tiltstep=2.0):
 		self.app=app
 		self.maxshift=maxshift
@@ -97,26 +97,26 @@ class TrackerControl(QtGui.QWidget):
 		self.tiltstep=tiltstep
 		
 		# the control panel
-		QtGui.QWidget.__init__(self,None)
+		QWidget.__init__(self,None)
 
-		self.gbl = QtGui.QGridLayout(self)
+		self.gbl = QGridLayout(self)
 		self.gbl.setMargin(0)
 		self.gbl.setSpacing(6)
 		self.gbl.setObjectName("hbl")
 		
 		# action buttons
-		self.bcenalign=QtGui.QPushButton("Center Align")
-		self.bprojalign=QtGui.QPushButton("Proj. Realign")
-		self.btiltaxis=QtGui.QPushButton("Tilt Axis")
-		self.btiltaxisval=QtGui.QLineEdit("90.0")
-		self.bsavedata=QtGui.QPushButton("Save Data")
-		self.breconst=QtGui.QPushButton("3D Normal")
-		self.sbmode=QtGui.QSpinBox(self)
+		self.bcenalign=QPushButton("Center Align")
+		self.bprojalign=QPushButton("Proj. Realign")
+		self.btiltaxis=QPushButton("Tilt Axis")
+		self.btiltaxisval=QLineEdit("90.0")
+		self.bsavedata=QPushButton("Save Data")
+		self.breconst=QPushButton("3D Normal")
+		self.sbmode=QSpinBox(self)
 		self.sbmode.setRange(0,2)
 		self.sbmode.setValue(0)
-		self.bmagict=QtGui.QPushButton("3D Tomofill")
-		self.bmagics=QtGui.QPushButton("3D Sph")
-		self.bmagicc=QtGui.QPushButton("3D Cyl")
+		self.bmagict=QPushButton("3D Tomofill")
+		self.bmagics=QPushButton("3D Sph")
+		self.bmagicc=QPushButton("3D Cyl")
 		self.vslpfilt=ValSlider(self,(0,.5),"Filter",0.5,50)
 		
 		self.gbl.addWidget(self.bcenalign,0,0)
@@ -167,11 +167,11 @@ class TrackerControl(QtGui.QWidget):
 		self.im2d.show()
 		
 	def closeEvent(self,event):
-		self.im2d.closeEvent(QtGui.QCloseEvent())
-		self.imboxed.closeEvent(QtGui.QCloseEvent())
-		self.improj.closeEvent(QtGui.QCloseEvent())
-		self.imslice.closeEvent(QtGui.QCloseEvent())
-		self.imvol.closeEvent(QtGui.QCloseEvent())
+		self.im2d.closeEvent(QCloseEvent())
+		self.imboxed.closeEvent(QCloseEvent())
+		self.improj.closeEvent(QCloseEvent())
+		self.imslice.closeEvent(QCloseEvent())
+		self.imvol.closeEvent(QCloseEvent())
 		event.accept()
 		
 	def do_cenalign(self,x=0):

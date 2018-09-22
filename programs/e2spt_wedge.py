@@ -114,10 +114,10 @@ def wedgestats(volume,angle, wedgei, wedgef):
 	return(mean,sigma)
 
 
-class MissingWedgeViewer(QtGui.QWidget):
+class MissingWedgeViewer(QWidget):
 	""" Display a missing wedge"""
 	def __init__(self, filename, angle, wedgei=0.0, wedgef=1.0):
-		QtGui.QWidget.__init__(self)
+		QWidget.__init__(self)
 		self.setWindowTitle('The Wedge Viewer')
 		self.setMinimumWidth(400)
 		self.setMinimumHeight(400)
@@ -130,27 +130,27 @@ class MissingWedgeViewer(QtGui.QWidget):
 		
 		self.dataitems= []
 		
-		grid=QtGui.QGridLayout()
+		grid=QGridLayout()
 		# Make threed widget
 		self.widget3d=emscene3d.EMScene3D()
 		grid.addWidget(self.widget3d, 0, 0, 1, 4)
 		# make contols
-		combolabel = QtGui.QLabel("Volume Idx")
-		self.volcombobox = QtGui.QComboBox()
-		self.fitbutton = QtGui.QPushButton("Fit Wedge")
+		combolabel = QLabel("Volume Idx")
+		self.volcombobox = QComboBox()
+		self.fitbutton = QPushButton("Fit Wedge")
 		self.fitbutton.setEnabled(False)
-		labeli = QtGui.QLabel("Wedge_i")
-		self.wedgei = QtGui.QLineEdit(str(wedgei))
-		labelf = QtGui.QLabel("Wedge_f")
-		self.wedgef = QtGui.QLineEdit(str(wedgef))
-		wmlabel = QtGui.QLabel("Wedge Mean")
-		wslabel = QtGui.QLabel("Wedge Sigma")
-		self.wedgemeanwidget = QtGui.QLineEdit("0.0")
+		labeli = QLabel("Wedge_i")
+		self.wedgei = QLineEdit(str(wedgei))
+		labelf = QLabel("Wedge_f")
+		self.wedgef = QLineEdit(str(wedgef))
+		wmlabel = QLabel("Wedge Mean")
+		wslabel = QLabel("Wedge Sigma")
+		self.wedgemeanwidget = QLineEdit("0.0")
 		self.wedgemeanwidget.setReadOnly(True)
-		self.wedgesigmawidget = QtGui.QLineEdit("0.0")
+		self.wedgesigmawidget = QLineEdit("0.0")
 		self.wedgesigmawidget.setReadOnly(True)
-		self.setwedgestats = QtGui.QPushButton("Set Wedege stats, This Vol")
-		self.setallwedgestats = QtGui.QPushButton("Set Wedege stats, All Vols")
+		self.setwedgestats = QPushButton("Set Wedege stats, This Vol")
+		self.setallwedgestats = QPushButton("Set Wedege stats, All Vols")
 		grid.addWidget(combolabel, 1, 0)
 		grid.addWidget(self.volcombobox, 1, 1)
 		grid.addWidget(self.fitbutton, 1 ,2, 1, 2)

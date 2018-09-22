@@ -2,13 +2,13 @@ from __future__ import print_function
 from __future__ import division
 from eman2_gui.PyQt import QtCore, QtGui
 
-class MouseAndKeyModifiers(QtGui.QWidget):
+class MouseAndKeyModifiers(QWidget):
 	def __init__(self, parent = None):
-		QtGui.QWidget.__init__(self, parent)
+		QWidget.__init__(self, parent)
 		
-		layout = QtGui.QVBoxLayout()
-		label = QtGui.QLabel("Click here to test mouse buttons: Left, Right, Middle\nand keyboard modifiers: Ctrl, Alt, Shift, and Command (a Mac key)")
-		self.text_browser = QtGui.QTextBrowser()
+		layout = QVBoxLayout()
+		label = QLabel("Click here to test mouse buttons: Left, Right, Middle\nand keyboard modifiers: Ctrl, Alt, Shift, and Command (a Mac key)")
+		self.text_browser = QTextBrowser()
 		layout.addWidget(label)
 		layout.addWidget(self.text_browser)
 		
@@ -38,7 +38,7 @@ class MouseAndKeyModifiers(QtGui.QWidget):
 
 if __name__ == "__main__":
 	import sys
-	app = QtGui.QApplication(sys.argv)
+	app = QApplication(sys.argv)
 	window = MouseAndKeyModifiers()
 	window.show()
 	window.raise_()

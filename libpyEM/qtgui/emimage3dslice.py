@@ -440,20 +440,20 @@ class EM3DSliceModel(EM3DModel):
 		self.vdtools.set_update_P_inv()
 		
 
-class EM3DSliceInspector(QtGui.QWidget):
+class EM3DSliceInspector(QWidget):
 	def __init__(self,target) :
 		self.busy = False
-		QtGui.QWidget.__init__(self,None)
-		self.setWindowIcon(QtGui.QIcon(get_image_directory() +"desktop.png"))
+		QWidget.__init__(self,None)
+		self.setWindowIcon(QIcon(get_image_directory() +"desktop.png"))
 		self.transform_panel = EMTransformPanel(target,self)
 		self.target=weakref.ref(target)
 		
-		self.vbl = QtGui.QVBoxLayout(self)
+		self.vbl = QVBoxLayout(self)
 		self.vbl.setMargin(0)
 		self.vbl.setSpacing(6)
 		self.vbl.setObjectName("vbl")
 		
-		self.hbl = QtGui.QHBoxLayout()
+		self.hbl = QHBoxLayout()
 		self.hbl.setMargin(0)
 		self.hbl.setSpacing(6)
 		self.hbl.setObjectName("hbl")
@@ -463,17 +463,17 @@ class EM3DSliceInspector(QtGui.QWidget):
 		self.hist.setObjectName("hist")
 		self.hbl.addWidget(self.hist)
 		
-		self.vbl2 = QtGui.QVBoxLayout()
+		self.vbl2 = QVBoxLayout()
 		self.vbl2.setMargin(0)
 		self.vbl2.setSpacing(6)
 		self.vbl2.setObjectName("vbl2")
 		self.hbl.addLayout(self.vbl2)
 	
-		self.cubetog = QtGui.QPushButton("Cube")
+		self.cubetog = QPushButton("Cube")
 		self.cubetog.setCheckable(1)
 		self.vbl2.addWidget(self.cubetog)
 		
-		self.defaults = QtGui.QPushButton("Defaults")
+		self.defaults = QPushButton("Defaults")
 		self.vbl2.addWidget(self.defaults)
 		
 		self.vbl.addWidget(self.get_main_tab())
@@ -531,14 +531,14 @@ class EM3DSliceInspector(QtGui.QWidget):
 
 	def get_main_tab(self):
 	
-		self.maintab = QtGui.QWidget()
+		self.maintab = QWidget()
 		maintab = self.maintab
-		maintab.vbl = QtGui.QVBoxLayout(self.maintab)
+		maintab.vbl = QVBoxLayout(self.maintab)
 		maintab.vbl.setMargin(0)
 		maintab.vbl.setSpacing(6)
 		maintab.vbl.setObjectName("Main")
 		
-		self.hbl_slice = QtGui.QHBoxLayout()
+		self.hbl_slice = QHBoxLayout()
 		self.hbl_slice.setMargin(0)
 		self.hbl_slice.setSpacing(6)
 		self.hbl_slice.setObjectName("Axis")
@@ -549,7 +549,7 @@ class EM3DSliceInspector(QtGui.QWidget):
 		self.slice.setValue(1.0)
 		self.hbl_slice.addWidget(self.slice)
 		
-		self.axisCombo = QtGui.QComboBox(maintab)
+		self.axisCombo = QComboBox(maintab)
 		self.axisCombo.addItem(' z ')
 		self.axisCombo.addItem(' y ')
 		self.axisCombo.addItem(' x ')

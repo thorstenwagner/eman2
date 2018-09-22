@@ -248,8 +248,8 @@ except:
 				traceback.print_exc()
 
 	QtGui=dummy(True)
-	QtGui.QWidget=dummy
-	QtGui.QMainWindow=dummy
+	QWidget=dummy
+	QMainWindow=dummy
 	QtCore=dummy(True)
 	QAbstractTableModel=dummy
 	
@@ -263,7 +263,7 @@ def runservmon():
 #	activedata=TaskData(queue.active)
 #	completedata=TaskData(queue.complete)
 
-	app = QtGui.QApplication([])
+	app = QApplication([])
 	window = GUIservmon()
 	
 #	ui.tableView.setModel(data)
@@ -273,34 +273,34 @@ def runservmon():
 	
 	app.exec_()
 	
-class GUIservmon(QtGui.QMainWindow):
+class GUIservmon(QMainWindow):
 	"""A DC server monitor GUI"""
 	def __init__(self):
-		QtGui.QWidget.__init__(self,None)
+		QWidget.__init__(self,None)
 
-		self.cw=QtGui.QWidget()
+		self.cw=QWidget()
 		self.setCentralWidget(self.cw)
-		self.vbl=QtGui.QVBoxLayout(self.cw)
+		self.vbl=QVBoxLayout(self.cw)
 		
-		self.tabs = QtGui.QTabWidget()
+		self.tabs = QTabWidget()
 		self.vbl.addWidget(self.tabs)
-		self.tabs.setSizePolicy(QtGui.QSizePolicy.Preferred,QtGui.QSizePolicy.Expanding)
+		self.tabs.setSizePolicy(QSizePolicy.Preferred,QSizePolicy.Expanding)
 	
-		self.activetab=QtGui.QWidget()
-		self.vblat=QtGui.QVBoxLayout(self.activetab)
-		self.actview=QtGui.QTableView()
+		self.activetab=QWidget()
+		self.vblat=QVBoxLayout(self.activetab)
+		self.actview=QTableView()
 		self.vblat.addWidget(self.actview)
 		self.tabs.addTab(self.activetab,"Active")
 		
-		self.donetab=QtGui.QWidget()
-		self.vbldt=QtGui.QVBoxLayout(self.donetab)
-		self.doneview=QtGui.QTableView()
+		self.donetab=QWidget()
+		self.vbldt=QVBoxLayout(self.donetab)
+		self.doneview=QTableView()
 		self.vbldt.addWidget(self.doneview)
 		self.tabs.addTab(self.donetab,"Complete")
 		
-		self.clienttab=QtGui.QWidget()
-		self.vblct=QtGui.QVBoxLayout(self.clienttab)
-		self.clientview=QtGui.QTableView()
+		self.clienttab=QWidget()
+		self.vblct=QVBoxLayout(self.clienttab)
+		self.clientview=QTableView()
 		self.vblct.addWidget(self.clientview)
 		self.tabs.addTab(self.clienttab,"Clients")
 		

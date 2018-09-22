@@ -8,9 +8,9 @@ from eman2_gui.emshapeitem3d import *
 
 from EMAN2 import *
 
-class GLdemo(QtGui.QWidget):
+class GLdemo(QWidget):
 	def __init__(self):
-		QtGui.QWidget.__init__(self)
+		QWidget.__init__(self)
 		self.widget = EMScene3D()
 
 		self.cube1 = EMCube(50.0)
@@ -39,7 +39,7 @@ class GLdemo(QtGui.QWidget):
 		#self.widget.showInspector()
 		
 		# QT stuff to display the widget
-		vbox = QtGui.QVBoxLayout()
+		vbox = QVBoxLayout()
 		vbox.addWidget(self.widget)
 		self.setLayout(vbox)
 		self.setGeometry(300, 300, 600, 600)
@@ -50,7 +50,7 @@ class GLdemo(QtGui.QWidget):
 		
 if __name__ == "__main__":
 	import sys
-	app = QtGui.QApplication(sys.argv)
+	app = QApplication(sys.argv)
 	window = GLdemo()
 	window.show()
 	app.exec_()

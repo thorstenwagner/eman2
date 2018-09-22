@@ -45,16 +45,16 @@ from eman2_gui.empmwidgets import *
 from eman2_gui.valslider import EMQTColorWidget
 from eman2_gui.embrowser import EMBrowserWidget
 
-class EMProjectManager(QtGui.QMainWindow):
+class EMProjectManager(QMainWindow):
 	""" The EM Project Manager is a QT application to provide a GUI for EMAN2 job managment.
 	See the wiki for more details. For documentation see the EMAN2 WIKI """
 	def __init__(self):
-		QtGui.QMainWindow.__init__(self)
+		QMainWindow.__init__(self)
 		# default PM attributes
 		self.pm_cwd = os.getcwd()
 		self.pn_project_name_default='Unknown'
 		self.pm_icon = self.pm_icon_default = get_image_directory() + "EMAN2Icon.png"
-		self.setWindowIcon(QtGui.QIcon(QtGui.QPixmap(pmicon)))
+		self.setWindowIcon(QIcon(QPixmap(pmicon)))
 
 		# Set Defaults
 		self.notebook = None
@@ -70,17 +70,17 @@ class EMProjectManager(QtGui.QMainWindow):
 
 		# Make the project manager layout
 		self.makeMenues()
-		font = QtGui.QFont()
+		font = QFont()
 		font.setBold(True)
-		centralwidget = QtGui.QWidget()
-		vsplitter = QtGui.QSplitter(Qt.Vertical)
+		centralwidget = QWidget()
+		vsplitter = QSplitter(Qt.Vertical)
 
 		# Make the tiltebars
-		grid = QtGui.QGridLayout()
+		grid = QGridLayout()
 		grid.addWidget(self.makeTilteBarWidget(), 0, 0, 1, 3)
 		#grid.addWidget(workflowcontrollabel, 1,0)
 		grid.addWidget(self.makeModeWidget(font))
-		guilabel = QtGui.QLabel("EMAN2 Program Interface", centralwidget)
+		guilabel = QLabel("EMAN2 Program Interface", centralwidget)
 		guilabel.setFont(font)
 		guilabel.setMaximumHeight(20)
 		grid.addWidget(guilabel, 1,1)
@@ -139,7 +139,7 @@ class EMProjectManager(QtGui.QMainWindow):
 		icons=tree[0]
 
 		for icon in icons:
-			self.icons[icon] = QtGui.QIcon(EMAN2DIR+icons[icon])
+			self.icons[icon] = QIcon(EMAN2DIR+icons[icon])
 
 	def makeMenues(self):
 		"""
@@ -150,7 +150,7 @@ class EMProjectManager(QtGui.QMainWindow):
 		# File menu
 		filemenu = menubar.addMenu('&File')
 		# exit
-		exit = QtGui.QAction('Exit', self)
+		exit = QAction('Exit', self)
 		exit.setShortcut('Ctrl+Q')
 		exit.setStatusTip('Exit application')
 		exit.triggered.connect(self.close)
@@ -158,12 +158,12 @@ class EMProjectManager(QtGui.QMainWindow):
 
 		# Project
 		projectmenu = menubar.addMenu('&Project')
-		openproject = QtGui.QAction('Open Project', self)
+		openproject = QAction('Open Project', self)
 		openproject.setShortcut('Ctrl+O')
 		openproject.setStatusTip('Open Project')
 		openproject.triggered.connect(self._on_openproject)
 		projectmenu.addAction(openproject)
-		editproject = QtGui.QAction('Edit Project', self)
+		editproject = QAction('Edit Project', self)
 		editproject.setShortcut('Ctrl+E')
 		editproject.setStatusTip('Edit Project')
 		editproject.triggered.connect(self._on_editproject)
@@ -173,13 +173,13 @@ class EMProjectManager(QtGui.QMainWindow):
 
 		# Utils
 		utilsmenu = menubar.addMenu('&Utilities')
-		filebrowser = QtGui.QAction('File Browser', self)
+		filebrowser = QAction('File Browser', self)
 		filebrowser.setShortcut('Ctrl+F')
 		filebrowser.setStatusTip('File Browser')
 		utilsmenu.addAction(filebrowser)
 		utilsmenu.addSeparator()
 		filebrowser.triggered.connect(self._on_browse)
-		self.dumpterminal = QtGui.QAction('Dump Terminal', self)
+		self.dumpterminal = QAction('Dump Terminal', self)
 		self.dumpterminal.setCheckable(True)
 		self.dumpterminal.setChecked(False)
 		utilsmenu.addAction(self.dumpterminal)
@@ -188,22 +188,22 @@ class EMProjectManager(QtGui.QMainWindow):
 
 		# Help
 		helpmenu = menubar.addMenu('&Help')
-		about = QtGui.QAction('About', self)
+		about = QAction('About', self)
 		about.setStatusTip('About')
 		helpmenu.addAction(about)
-		helpdoc = QtGui.QAction('Help', self)
+		helpdoc = QAction('Help', self)
 		helpdoc.setStatusTip('Help')
 		helpmenu.addAction(helpdoc)
 
 	def makeModeWidget(self, font):
 		""" Return a mode control widget """
-		widget = QtGui.QWidget()
-		box = QtGui.QHBoxLayout()
+		widget = QWidget()
+		box = QHBoxLayout()
 		box.setContentsMargins(0,0,0,0)
-		workflowcontrollabel = QtGui.QLabel("Workflow Mode", widget)
+		workflowcontrollabel = QLabel("Workflow Mode", widget)
 		workflowcontrollabel.setFont(font)
 		workflowcontrollabel.setMaximumHeight(20)
-		self.modeCB = QtGui.QComboBox()
+		self.modeCB = QComboBox()
 		# To add a new mode add an item to the list, and then add the json file in fuction: makeStackedWidget
 		self.modeCB.addItem("SPR")
 		self.modeCB.addItem("Tomo")
@@ -255,23 +255,23 @@ class EMProjectManager(QtGui.QMainWindow):
 		"""
 		Make the title bar widget (Project ICON + label)
 		"""
-		tbwidget = QtGui.QFrame()
-		tbwidget.setFrameShape(QtGui.QFrame.StyledPanel)
-		grid = QtGui.QGridLayout()
+		tbwidget = QFrame()
+		tbwidget.setFrameShape(QFrame.StyledPanel)
+		grid = QGridLayout()
 		self.PMIcon = PMIcon(self.pm_icon, tbwidget)
 		self.PMIcon.setAlignment(Qt.AlignLeft)
 		grid.addWidget(self.PMIcon,0 , 0, 2, 1)
-		self.PMTitle = QtGui.QLabel("EMAN2 Project Manager ")
+		self.PMTitle = QLabel("EMAN2 Project Manager ")
 		self.PMTitle.setAlignment(Qt.AlignCenter)
-		self.PMProjectNameBanner = QtGui.QLabel("Project Name: "+self.pn_project_name)
+		self.PMProjectNameBanner = QLabel("Project Name: "+self.pn_project_name)
 		self.PMProjectNameBanner.setAlignment(Qt.AlignCenter)
-		titlefont = QtGui.QFont()
+		titlefont = QFont()
 		titlefont.setPointSize(30)
 		titlefont.setBold(True)
 		titlefont.setItalic(True)
 		self.PMTitle.setFont(titlefont)
 		self.PMTitle.setAlignment(Qt.AlignBottom)
-		pmnamefont = QtGui.QFont()
+		pmnamefont = QFont()
 		pmnamefont.setBold(True)
 		self.PMProjectNameBanner.setFont(pmnamefont)
 		grid.addWidget(self.PMTitle, 0, 1, 1, 2)
@@ -284,7 +284,7 @@ class EMProjectManager(QtGui.QMainWindow):
 		"""
 		This is the stacked widget to manage the tree types. To Add modes, do so here. Be sure to add the mode to the combo box in function: makeModeWidget
 		"""
-		self.tree_stacked_widget = QtGui.QStackedWidget()
+		self.tree_stacked_widget = QStackedWidget()
 		self.tree_stacked_widget.setMinimumWidth(300)
 		self.tree_stacked_widget.addWidget(self.makeTreeWidget(os.getenv("EMAN2DIR")+'/lib/pmconfig/spr.json', 'Single Particle Refinement'))
 		self.tree_stacked_widget.addWidget(self.makeTreeWidget(os.getenv("EMAN2DIR")+'/lib/pmconfig/tomo.json', 'Tomography'))
@@ -298,12 +298,12 @@ class EMProjectManager(QtGui.QMainWindow):
 		When a python script is called for the first time a GUI widget is made and added to the stack
 		The First Widget on the stack is the blank widget, the rest are e2program widgets
 		"""
-		self.gui_stacked_widget = QtGui.QStackedWidget()
+		self.gui_stacked_widget = QStackedWidget()
 		# Set the initial height of the browser
 		#self.gui_stacked_widget.setMinimumHeight(250)
-		self.gui_stacked_widget.setFrameShape(QtGui.QFrame.StyledPanel)
+		self.gui_stacked_widget.setFrameShape(QFrame.StyledPanel)
 		# Blank screen widget
-		self.gui_stacked_widget.addWidget(QtGui.QWidget())
+		self.gui_stacked_widget.addWidget(QWidget())
 		self.stackedWidgetHash = {}
 
 		return self.gui_stacked_widget
@@ -312,23 +312,23 @@ class EMProjectManager(QtGui.QMainWindow):
 		"""
 		Get get ToolBar widget
 		"""
-		toolwidget = QtGui.QFrame()
+		toolwidget = QFrame()
 		#toolwidget.setFrameShape(QtGui.QFrame.StyledPanel)
-		tbox = QtGui.QVBoxLayout()
-		self.browsebutton = QtGui.QToolButton()
-		self.browsebutton.setIcon(QtGui.QIcon(QtGui.QPixmap(browseicon)))
+		tbox = QVBoxLayout()
+		self.browsebutton = QToolButton()
+		self.browsebutton.setIcon(QIcon(QPixmap(browseicon)))
 		self.browsebutton.setToolTip("Browse button")
 		self.browsebutton.setMinimumWidth(30)
 		self.browsebutton.setMinimumHeight(30)
 		self.helpbutton = PMToolButton()
-		self.helpbutton.setIcon(QtGui.QIcon(QtGui.QPixmap(helpicon)))
+		self.helpbutton.setIcon(QIcon(QPixmap(helpicon)))
 		self.helpbutton.setToolTip("Help button")
 		self.logbutton = PMToolButton()
 		self.logbutton.setToolTip("Display the note book")
-		self.logbutton.setIcon(QtGui.QIcon(QtGui.QPixmap(noteicon)))
+		self.logbutton.setIcon(QIcon(QPixmap(noteicon)))
 		self.taskmanagerbutton = PMToolButton()
 		self.taskmanagerbutton.setToolTip("Diaplay the task manager")
-		self.taskmanagerbutton.setIcon(QtGui.QIcon(QtGui.QPixmap(taskicon)))
+		self.taskmanagerbutton.setIcon(QIcon(QPixmap(taskicon)))
 		tbox.addWidget(self.browsebutton)
 		tbox.addWidget(self.helpbutton)
 		tbox.addWidget(self.logbutton)
@@ -425,19 +425,19 @@ class EMProjectManager(QtGui.QMainWindow):
 		#programtoolwidget = QtGui.QFrame()
 		#programtoolwidget.setFrameShape(QtGui.QFrame.StyledPanel)
 		#tbox = QtGui.QVBoxLayout()
-		self.wikibutton = QtGui.QToolButton()
-		self.wikibutton.setIcon(QtGui.QIcon(QtGui.QPixmap(wikiicon)))
+		self.wikibutton = QToolButton()
+		self.wikibutton.setIcon(QIcon(QPixmap(wikiicon)))
 		self.wikibutton.setToolTip("Show Wiki button")
 		self.wikibutton.setMinimumWidth(30)
 		self.wikibutton.setMinimumHeight(30)
 		self.wikibutton.setEnabled(False)
 		self.expertbutton = PMToolButton()
 		self.expertbutton.setDown(False, quiet=True)
-		self.expertbutton.setIcon(QtGui.QIcon(QtGui.QPixmap(experticon)))
+		self.expertbutton.setIcon(QIcon(QPixmap(experticon)))
 		self.expertbutton.setToolTip("ExpertMode")
 		self.expertbutton.setEnabled(False)
-		self.wizardbutton = QtGui.QToolButton()
-		self.wizardbutton.setIcon(QtGui.QIcon(QtGui.QPixmap(wizardicon)))
+		self.wizardbutton = QToolButton()
+		self.wizardbutton.setIcon(QIcon(QPixmap(wizardicon)))
 		self.wizardbutton.setToolTip("Form Wizard")
 		self.wizardbutton.setMinimumWidth(30)
 		self.wizardbutton.setMinimumHeight(30)
@@ -489,12 +489,12 @@ class EMProjectManager(QtGui.QMainWindow):
 		"""
 		Get the e2program interface command buttons widget
 		"""
-		cmdwidget = QtGui.QFrame()
-		cmdwidget.setFrameShape(QtGui.QFrame.StyledPanel)
+		cmdwidget = QFrame()
+		cmdwidget.setFrameShape(QFrame.StyledPanel)
 		cmdwidget.setMaximumHeight(40)
-		hbox = QtGui.QHBoxLayout()
-		self.cancelbutton = QtGui.QPushButton("Cancel")
-		self.launchbutton = QtGui.QPushButton("Launch")
+		hbox = QHBoxLayout()
+		self.cancelbutton = QPushButton("Cancel")
+		self.launchbutton = QPushButton("Launch")
 		hbox.addWidget(self.cancelbutton)
 		hbox.addWidget(self.launchbutton)
 		hbox.setContentsMargins(4,4,4,4)
@@ -635,7 +635,7 @@ class EMProjectManager(QtGui.QMainWindow):
 		tree = json.loads(data)
 		jsonfile.close()
 
-		QTree = QtGui.QTreeWidget()
+		QTree = QTreeWidget()
 		QTree.setHeaderLabel(treename)
 
 		for toplevel in tree:
@@ -929,13 +929,13 @@ class EMPopen(subprocess.Popen):
 			# Some sort of syncronization issue
 			time.sleep(0.1)
 
-class EMAN2StatusBar(QtGui.QTextEdit):
+class EMAN2StatusBar(QTextEdit):
 	"""
 	The Stats bar for PM
 	"""
 	def __init__(self, text, style):
-		QtGui.QTextEdit.__init__(self)
-		self.setFrameShape(QtGui.QFrame.Panel | QtGui.QFrame.Sunken)
+		QTextEdit.__init__(self)
+		self.setFrameShape(QFrame.Panel | QFrame.Sunken)
 		self.setLineWidth(2)
 		#self.setMargin(4)
 		self.setTextInteractionFlags(Qt.NoTextInteraction)
@@ -945,7 +945,7 @@ class EMAN2StatusBar(QtGui.QTextEdit):
 
 	def setMessage(self, text, style=""):
 		textcursor = self.textCursor()
-		textcursor.movePosition(QtGui.QTextCursor.End)
+		textcursor.movePosition(QTextCursor.End)
 		if textcursor.columnNumber() !=0:
 			self.insertHtml("<br><span style=%s>%s</span>"%(style, text))
 		else:
@@ -954,24 +954,24 @@ class EMAN2StatusBar(QtGui.QTextEdit):
 
 
 
-class PMIcon(QtGui.QLabel):
+class PMIcon(QLabel):
 	"""
 	The Icon manager for PM
 	"""
 	def __init__(self, image, parent=None):
-		QtGui.QLabel.__init__(self, ("<img src=\"%s\" />")%image, parent)
+		QLabel.__init__(self, ("<img src=\"%s\" />")%image, parent)
 
 	def setIcon(self, image):
 		self.setText(("<img src=\"%s\" />")%image)
 
-class EMWizard(QtGui.QWizard):
+class EMWizard(QWizard):
 	"""
 	This creates a wizard for filling out EM program forms.
 	wizarddata is a list of dicts
 	e2gui is a reference to a PMProgramWidget which is what this wizard is to fill out
 	"""
 	def __init__(self, wizarddata, e2gui):
-		QtGui.QWizard.__init__(self)
+		QWizard.__init__(self)
 		#self.setModal(True)
 		self.setWindowTitle("e2program wizard")
 		self.e2gui = e2gui
@@ -980,27 +980,27 @@ class EMWizard(QtGui.QWizard):
 			self.addPage(EMWizardPage(page, self.e2gui))
 
 
-class EMWizardPage(QtGui.QWizardPage):
+class EMWizardPage(QWizardPage):
 	"""
 	Make a page for the wizard, uses input validation. If input is not valid send a message to the PM status bar and you will not be allowed to continue to the next wizard page
 	"""
 	def __init__(self, page, e2gui):
-		QtGui.QWizardPage.__init__(self)
+		QWizardPage.__init__(self)
 		self.e2gui = e2gui
 		self.widgetlist = []
 
 		#Set Hep info
 		self.setTitle(page["TITLE"])
-		label = QtGui.QLabel(page["INST"])
+		label = QLabel(page["INST"])
 		label.setWordWrap(True)
 		# add to grid
-		grid = QtGui.QGridLayout()
+		grid = QGridLayout()
 		grid.addWidget(label,0,0)
 
 		# Add widgets stuff
-		frame = QtGui.QFrame()
-		frame.setFrameStyle(QtGui.QFrame.StyledPanel)
-		framegrid = QtGui.QGridLayout()
+		frame = QFrame()
+		frame.setFrameStyle(QFrame.StyledPanel)
+		framegrid = QGridLayout()
 		framegrid.setContentsMargins(6,0,6,0)
 
 		# Insanely if I were to just addWidget using self.e2gui.widgethash[widget], it steals it from the PMGUI layout, so I need to make a copy !!!
@@ -1023,13 +1023,13 @@ class EMWizardPage(QtGui.QWizardPage):
 			widget[0].setValue(widget[1].getValue())
 		return True
 
-class TheHelp(QtGui.QWidget):
+class TheHelp(QWidget):
 	"""
 	A little widget to aid in the daily chores. Good help is hard to find these days.....
 	This is a GUI to e2help.py. Documentation is autogenerated from the EMAN2 C++ core
 	"""
 	def __init__(self, pm=None):
-		QtGui.QWidget.__init__(self)
+		QWidget.__init__(self)
 		if pm:
 			self.pm = weakref.ref(pm)
 		else:
@@ -1038,9 +1038,9 @@ class TheHelp(QtGui.QWidget):
 		self.widgetgeometry = None
 
 		self.setWindowTitle('The Help')
-		grid = QtGui.QGridLayout()
+		grid = QGridLayout()
 		grid.addWidget(self.getToolBar(), 0, 0)
-		self.textbox = QtGui.QTextEdit()
+		self.textbox = QTextEdit()
 		self.textbox.setReadOnly(True)
 		grid.addWidget(self.textbox, 1, 0)
 		self.setLayout(grid)
@@ -1050,22 +1050,22 @@ class TheHelp(QtGui.QWidget):
 
 	def getToolBar(self):
 		""" Return the toolbar widget """
-		tbwidget = QtGui.QWidget()
-		grid = QtGui.QGridLayout()
+		tbwidget = QWidget()
+		grid = QGridLayout()
 		grid.setContentsMargins(6,0,6,0)
 
-		font = QtGui.QFont()
+		font = QFont()
 		font.setBold(True)
-		helplabel = QtGui.QLabel("EMAN2 topic:")
+		helplabel = QLabel("EMAN2 topic:")
 		helplabel.setFont(font)
 		helplabel.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
 
-		hbox = QtGui.QHBoxLayout()
+		hbox = QHBoxLayout()
 		hbox.addWidget(PMIcon(get_image_directory() + "SirEMAN2.png"))
 		hbox.addWidget(helplabel)
 		hbox.setContentsMargins(0,0,0,0)
 		grid.addLayout(hbox,0, 0)
-		self.helpcb = QtGui.QComboBox()
+		self.helpcb = QComboBox()
 		grid.addWidget(self.helpcb, 0, 1, 1, 2)
 
 		self.helpcb.addItem("aligners")
@@ -1113,42 +1113,42 @@ class TheHelp(QtGui.QWidget):
 
 	def hideEvent(self, event):
 		""" This remebers the geometry when we hide the widget """
-		QtGui.QWidget.hideEvent(self, event)
+		QWidget.hideEvent(self, event)
 		self.widgetgeometry = self.geometry()
 
 	def showEvent(self, event):
 		""" This recalls the geometry when we show the widget """
-		QtGui.QWidget.showEvent(self, event)
+		QWidget.showEvent(self, event)
 		if self.widgetgeometry: self.setGeometry(self.widgetgeometry)
 
 	def closeEvent(self, event):
 		if self.pm: self.pm().thehelp = None
 		if self.pm: self.pm().updateProject()
 
-class NoteBook(QtGui.QWidget):
+class NoteBook(QWidget):
 	"""
 	The Notebook for PM. The note book will reflect top levels jobs run, even if they were run on the command line. This class needs some work, b/c the notebook exhibits some funny font and color
 	behaviour. This is probably because the cursor is not a strict observer of the NoteBook state.
 	When jobs are laucned the command is recorded in this widget. In addition this widget saves its text as an HTML file named. pmnotes.html in the local project directory
 	"""
 	def __init__(self, pm):
-		QtGui.QWidget.__init__(self)
+		QWidget.__init__(self)
 		self.pm = weakref.ref(pm)
 		self.donotsave = False
 		self.widgetgeometry = None
 
 		self.setWindowTitle('NoteBook')
-		grid = QtGui.QGridLayout()
-		font = QtGui.QFont()
+		grid = QGridLayout()
+		font = QFont()
 		font.setBold(True)
-		textlabel = QtGui.QLabel("EMAN2 NoteBook")
+		textlabel = QLabel("EMAN2 NoteBook")
 		textlabel.setFont(font)
 		self.texteditbox = PMTextEdit(self)
 		grid.addWidget(textlabel,0,0)
 		grid.addWidget(self.getToolBar(),1,0,1,2)
 		grid.addWidget(self.texteditbox,2,0,1,2)
-		self.savepb = QtGui.QPushButton("Save")
-		self.closepb = QtGui.QPushButton("Close")
+		self.savepb = QPushButton("Save")
+		self.closepb = QPushButton("Close")
 		grid.addWidget(self.savepb, 3,0)
 		grid.addWidget(self.closepb, 3,1)
 		self.setLayout(grid)
@@ -1164,25 +1164,25 @@ class NoteBook(QtGui.QWidget):
 
 	def getToolBar(self):
 		""" Return the toolbar widget """
-		tbwidget = QtGui.QWidget()
-		hbox = QtGui.QHBoxLayout()
+		tbwidget = QWidget()
+		hbox = QHBoxLayout()
 		self.dbdict = js_open_dict(self.pm().getPMCWD()+"/info/notebook.json")
 
 		# font type
-		self.fontdb = QtGui.QFontDatabase()
-		self.fontfamily = QtGui.QComboBox()
+		self.fontdb = QFontDatabase()
+		self.fontfamily = QComboBox()
 		self.fontfamily.addItems(self.fontdb.families())
 
 		# font size
-		self.fontsizecb = QtGui.QComboBox()
+		self.fontsizecb = QComboBox()
 
 		# Bold italic, underline
 		self.boldbutton = PMToolButton()
 		self.italicbutton = PMToolButton()
 		self.underlinebutton = PMToolButton()
-		self.boldbutton.setIcon(QtGui.QIcon(QtGui.QPixmap(boldicon)))
-		self.italicbutton.setIcon(QtGui.QIcon(QtGui.QPixmap(italicicon)))
-		self.underlinebutton.setIcon(QtGui.QIcon(QtGui.QPixmap(underlineicon)))
+		self.boldbutton.setIcon(QIcon(QPixmap(boldicon)))
+		self.italicbutton.setIcon(QIcon(QPixmap(italicicon)))
+		self.underlinebutton.setIcon(QIcon(QPixmap(underlineicon)))
 		self.fontcolor = EMQTColorWidget(red=0,green=0,blue=0)
 
 		# Add widgets
@@ -1203,7 +1203,7 @@ class NoteBook(QtGui.QWidget):
 			self.boldbutton.setDown(bool(self.dbdict['BOLDFONT']), quiet=1)
 			self.italicbutton.setDown(bool(self.dbdict['ITALICFONT']), quiet=1)
 			self.underlinebutton.setDown(bool(self.dbdict['UNDERLINE']), quiet=1)
-			self.fontcolor.setColor(QtGui.QColor(self.dbdict['FONTCOLOR'][0],self.dbdict['FONTCOLOR'][1],self.dbdict['FONTCOLOR'][2]))
+			self.fontcolor.setColor(QColor(self.dbdict['FONTCOLOR'][0],self.dbdict['FONTCOLOR'][1],self.dbdict['FONTCOLOR'][2]))
 			self.texteditbox.updateFont()
 		else:
 			self._load_fontsizes()
@@ -1214,7 +1214,7 @@ class NoteBook(QtGui.QWidget):
 		self.boldbutton.stateChanged[bool].connect(self._fontchange)
 		self.italicbutton.stateChanged[bool].connect(self._fontchange)
 		self.underlinebutton.stateChanged[bool].connect(self._fontchange)
-		self.fontcolor.newcolor[QtGui.QColor].connect(self._fontchange)
+		self.fontcolor.newcolor[QColor].connect(self._fontchange)
 
 		return tbwidget
 
@@ -1274,7 +1274,7 @@ class NoteBook(QtGui.QWidget):
 	def insertNewJob(self, job, time):
 		""" Insert a new job into the Html """
 		textcursor = self.texteditbox.textCursor()
-		textcursor.movePosition(QtGui.QTextCursor.End)
+		textcursor.movePosition(QTextCursor.End)
 		textcursor.insertText('\n')
 		textcursor.insertHtml("<b>Job Launched on <i>%s</i>:<font color=blue> %s</font></b>"%(time, job))
 
@@ -1301,12 +1301,12 @@ class NoteBook(QtGui.QWidget):
 
 	def hideEvent(self, event):
 		""" This remebers the geometry when we hide the widget """
-		QtGui.QWidget.hideEvent(self, event)
+		QWidget.hideEvent(self, event)
 		self.widgetgeometry = self.geometry()
 
 	def showEvent(self, event):
 		""" This recalls the geometry when we show the widget """
-		QtGui.QWidget.showEvent(self, event)
+		QWidget.showEvent(self, event)
 		if self.widgetgeometry: self.setGeometry(self.widgetgeometry)
 
 	def closeEvent(self, event):
@@ -1314,18 +1314,18 @@ class NoteBook(QtGui.QWidget):
 		self.pm().notebook = None
 		self.pm().updateProject()
 
-class PMTextEdit(QtGui.QTextEdit):
+class PMTextEdit(QTextEdit):
 	""" Sub class of the QTextEdit widget to observe the PMNoteBook """
 	def __init__(self, parent):
-		QtGui.QTextEdit.__init__(self)
+		QTextEdit.__init__(self)
 		self.parent = weakref.ref(parent)
 
-		self.setPMFontWeight(QtGui.QFont.Normal)
-		self.setPMTextColor(QtGui.QColor(0,0,0))
+		self.setPMFontWeight(QFont.Normal)
+		self.setPMTextColor(QColor(0,0,0))
 
 	def mousePressEvent(self,event):
 		""" Stupidly, TextEdit resets the font based on its context, which I find undesireable """
-		QtGui.QTextEdit.mousePressEvent(self, event)
+		QTextEdit.mousePressEvent(self, event)
 		self.setFontWeight(self.pmfontweight)
 		self.setTextColor(self.textcolor)
 
@@ -1356,9 +1356,9 @@ class PMTextEdit(QtGui.QTextEdit):
 	def updateFont(self):
 		""" When the NoteBook state is changed this function is called """
 		if self.parent().boldbutton.isDown():
-			self.setPMFontWeight(QtGui.QFont.Bold)
+			self.setPMFontWeight(QFont.Bold)
 		else:
-			self.setPMFontWeight(QtGui.QFont.Normal)
+			self.setPMFontWeight(QFont.Normal)
 		try : self.setPMFontSize(int(self.parent().fontsizecb.currentText()))
 		except: self.setPMFontSize(10)
 		self.setPMTextColor(self.parent().fontcolor.getColor())
@@ -1366,28 +1366,28 @@ class PMTextEdit(QtGui.QTextEdit):
 		self.setPMFontItalic(self.parent().italicbutton.isDown())
 		self.setPMFontUnderline(self.parent().underlinebutton.isDown())
 
-class TaskManager(QtGui.QWidget):
+class TaskManager(QWidget):
 	"""
 	The Task manager for PM, unlike e2workflow.py, this actualy works. Well sort of... Is uses a SIGTERM soft kill, which when it works is nice because EMAN2 jobs are
 	processed by EMAN2 eveent handlers, thus producing clean kills. Oftern though the job completely ignores SIGTERM and keeps on humming. Perhaps SIGTERM shoudl
 	be replaced with SIGKILL to hard kill it. Downside is that the kill could be dirty and corrupt. On the up side your jobs will actually be killed!
 	"""
 	def __init__(self, pm):
-		QtGui.QWidget.__init__(self)
+		QWidget.__init__(self)
 		self.pm = weakref.ref(pm)
 		self.widgetgeometry = None
 		self.setWindowTitle('Task Manager')
 
-		grid = QtGui.QGridLayout()
-		font = QtGui.QFont()
+		grid = QGridLayout()
+		font = QFont()
 		font.setBold(True)
-		textlabel = QtGui.QLabel("Running Tasks")
+		textlabel = QLabel("Running Tasks")
 		textlabel.setFont(font)
 		grid.addWidget(textlabel,0,0)
-		self.list_widget = QtGui.QListWidget()
+		self.list_widget = QListWidget()
 		grid.addWidget(self.list_widget,1,0,1,2)
-		self.killpb = QtGui.QPushButton("Kill")
-		self.closepb = QtGui.QPushButton("Close")
+		self.killpb = QPushButton("Kill")
+		self.closepb = QPushButton("Close")
 		grid.addWidget(self.killpb, 2,0)
 		grid.addWidget(self.closepb, 2,1)
 		self.setLayout(grid)
@@ -1548,7 +1548,7 @@ class TaskManager(QtGui.QWidget):
 
 	def _on_kill(self):
 		killsig=signal.SIGTERM
-		modifiers = QtGui.QApplication.keyboardModifiers()
+		modifiers = QApplication.keyboardModifiers()
 		if modifiers == Qt.ShiftModifier:
 			print("Shift held. Will force kill processes")
 			killsig=signal.SIGKILL
@@ -1600,22 +1600,22 @@ class TaskManager(QtGui.QWidget):
 
 	def hideEvent(self, event):
 		""" This remebers the geometry when we hide the widget """
-		QtGui.QWidget.hideEvent(self, event)
+		QWidget.hideEvent(self, event)
 		self.widgetgeometry = self.geometry()
 
 	def showEvent(self, event):
 		""" This recalls the geometry when we show the widget """
-		QtGui.QWidget.showEvent(self, event)
+		QWidget.showEvent(self, event)
 		if self.widgetgeometry: self.setGeometry(self.widgetgeometry)
 
 	def closeEvent(self, event):
 		self.pm().taskmanager = None
 		self.pm().updateProject()
 
-class PMQListWidgetItem(QtGui.QListWidgetItem):
+class PMQListWidgetItem(QListWidgetItem):
 	""" A subclass of the QListWidgetItem for use in the task manger listwidget"""
 	def __init__(self, text):
-		QtGui.QListWidgetItem.__init__(self, text)
+		QListWidgetItem.__init__(self, text)
 		self.pid = None
 		self.programname = None
 
@@ -1637,12 +1637,12 @@ class PMQListWidgetItem(QtGui.QListWidgetItem):
 	def getProgramName(self):
 		return self.programname
 
-class PMProgramWidget(QtGui.QTabWidget):
+class PMProgramWidget(QTabWidget):
 	"""
 	Creates a program interface for each e2 program, for each mode, etc. This is a tab widget and there are three tabs, a GUI tab, a comand line tab and a help tab
 	"""
 	def __init__(self, options, program, pm, mode):
-		QtGui.QTabWidget.__init__(self)
+		QTabWidget.__init__(self)
 		self.pm = weakref.ref(pm)
 		self.setMinimumHeight(210) # Size of the tool bar
 
@@ -1651,13 +1651,13 @@ class PMProgramWidget(QtGui.QTabWidget):
 		self.addTab(self.guiwidget, "GUI")
 
 		# Add command tab
-		self.guitexteditbox = QtGui.QTextEdit("")
-		self.guitexteditbox.setWordWrapMode(QtGui.QTextOption.WrapAnywhere)
+		self.guitexteditbox = QTextEdit("")
+		self.guitexteditbox.setWordWrapMode(QTextOption.WrapAnywhere)
 		self.addTab(self.guitexteditbox, "Command")
 
 		# Add help tab
-		self.helptexteditbox = QtGui.QTextEdit("")
-		self.helptexteditbox.setWordWrapMode(QtGui.QTextOption.WordWrap)
+		self.helptexteditbox = QTextEdit("")
+		self.helptexteditbox.setWordWrapMode(QTextOption.WordWrap)
 		self.helptexteditbox.setReadOnly(True)
 		self.helptexteditbox.viewport().setCursor(Qt.ArrowCursor)
 		self.helptexteditbox.setText(self.pm().loadUsage(self.pm().getProgram()))
@@ -1698,14 +1698,14 @@ class PMProgramWidget(QtGui.QTabWidget):
 
 		self.previoustab = idx
 
-class PMGUIWidget(QtGui.QScrollArea):
+class PMGUIWidget(QScrollArea):
 	"""
 	Creates a GUI widget using a dict derived from the e2program options. Instances of this widget are added to the QStackedWidget on the right hand side of the PM.
 	When the user clicks on a leaf node in the workflow tree an instace of this class is created, if it doesn't already exists, and added to the stckedwidget. If it
 	already exists, then it is rendered visible.
 	"""
 	def __init__(self, options, program, pm, mode):
-		QtGui.QScrollArea.__init__(self)
+		QScrollArea.__init__(self)
 		self.errorstate = False
 		# I need both an ordered list and an associavite means of accessing the widgets
 		self.widgetlist = []
@@ -1717,7 +1717,7 @@ class PMGUIWidget(QtGui.QScrollArea):
 		self.mode = mode
 
 		# loop through options (a list of dicts) and generate the GUI widget
-		gridbox = QtGui.QGridLayout()
+		gridbox = QGridLayout()
 		for option in options:
 			"""create the correct widget type"""
 			if ('expert' in  option) and self.pm().getProgramExpertMode() < 2: continue	# Do no add expertmode options if not in expert mode (defined as 2, available AND turned on) Should have used ENUM here
@@ -1758,14 +1758,14 @@ class PMGUIWidget(QtGui.QScrollArea):
 
 		# Now make a widget and add it to the scroll area
 		gridbox.setContentsMargins(0,0,0,0)
-		self.scwidget = QtGui.QWidget()
+		self.scwidget = QWidget()
 		self.scwidget.setLayout(gridbox)
 		self.scwidget.setMinimumWidth(self.width()-1.5*self.verticalScrollBar().width())
 		self.scwidget.setMaximumWidth(self.width()-1.5*self.verticalScrollBar().width())
 		self.setWidget(self.scwidget)
 		self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
 		self.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
-		self.setSizePolicy(QtGui.QSizePolicy.Fixed,QtGui.QSizePolicy.Fixed)
+		self.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Fixed)
 
 	def getRowSpan(self, option):
 		"""Return the rowspan"""
@@ -1941,12 +1941,12 @@ class PMGUIWidget(QtGui.QScrollArea):
 	def _on_message(self, s):
 		self.pm().statusbar.setMessage(str(s),"color:red;")
 
-class PMQTreeWidgetItem(QtGui.QTreeWidgetItem):
+class PMQTreeWidgetItem(QTreeWidgetItem):
 	"""
 	Custon QTreeWidget for PM, holds a bunch of properites relating to the e2program(or table) it represnsts.
 	"""
 	def __init__(self, qstring):
-		QtGui.QTreeWidgetItem.__init__(self, qstring)
+		QTreeWidgetItem.__init__(self, qstring)
 		self.program = None
 		self.table = None
 		self.mode = ""
@@ -2009,17 +2009,17 @@ class PMQTreeWidgetItem(QtGui.QTreeWidgetItem):
 	def getExpertMode(self):
 		return self.exmodestate
 
-class PMToolButton(QtGui.QToolButton):
+class PMToolButton(QToolButton):
 	""" Create a toogle button """
 	stateChanged = pyqtSignal(bool)
 
 	def __init__(self):
-		QtGui.QToolButton.__init__(self)
+		QToolButton.__init__(self)
 		self.setMinimumWidth(30)
 		self.setMinimumHeight(30)
 
 	def setDown(self, state, quiet=False):
-		QtGui.QToolButton.setDown(self, state)
+		QToolButton.setDown(self, state)
 		if not quiet: self.stateChanged.emit(state)
 
 	def mousePressEvent(self, event):
@@ -2028,21 +2028,21 @@ class PMToolButton(QtGui.QToolButton):
 	def mouseReleaseEvent(self, event):
 		pass
 
-class ProjectDialog(QtGui.QDialog):
+class ProjectDialog(QDialog):
 	"""
 	Class for the Project New and Edit dialogs
 	"""
 	def __init__(self, pm):
-		QtGui.QDialog.__init__(self)
+		QDialog.__init__(self)
 		self.pm = pm
 
 		# Dialog line edit fields
 		minwidth = 8*max(len(self.pm.pm_cwd),len(self.pm.pm_icon))
-		frame = QtGui.QFrame()
-		frame.setFrameStyle(QtGui.QFrame.StyledPanel)
-		grid = QtGui.QGridLayout()
+		frame = QFrame()
+		frame.setFrameStyle(QFrame.StyledPanel)
+		grid = QGridLayout()
 		# add intro
-		textbox = QtGui.QTextEdit("")
+		textbox = QTextEdit("")
 		textbox.setHtml("Welcome to the EMAN2 project manager. Please add project specific paramters below. For Questions email: <a href='mailto:sludtke@bcm.edu'>sludtke@bcm.edu<\a>")
 		textbox.setMaximumHeight(66)
 		textbox.setReadOnly(True)
@@ -2050,28 +2050,28 @@ class ProjectDialog(QtGui.QDialog):
 
 		grid.addWidget(textbox, 0, 0, 1, 2)
 		# add pm name and icon
-		project_name_label = QtGui.QLabel("Project Name")
-		self.project_name = QtGui.QLineEdit()
+		project_name_label = QLabel("Project Name")
+		self.project_name = QLineEdit()
 		self.project_name.setMinimumWidth(minwidth)
 		grid.addWidget(project_name_label, 1, 0)
 		grid.addWidget(self.project_name, 1, 1)
-		icon_path_label = QtGui.QLabel("Project Icon")
-		self.icon_path = QtGui.QLineEdit()
+		icon_path_label = QLabel("Project Icon")
+		self.icon_path = QLineEdit()
 		self.icon_path.setMinimumWidth(minwidth)
 		grid.addWidget(icon_path_label, 2, 0)
 		grid.addWidget(self.icon_path, 2, 1)
 		# Mass
-		particle_mass_label = QtGui.QLabel("Particle Mass (kDa)")
-		self.particle_mass = QtGui.QLineEdit()
+		particle_mass_label = QLabel("Particle Mass (kDa)")
+		self.particle_mass = QLineEdit()
 		grid.addWidget(particle_mass_label, 3, 0)
 		grid.addWidget(self.particle_mass, 3, 1)
 		# Scope pars
-		micrscope_cs_label = QtGui.QLabel("Microscope CS (mm)")
-		self.micrscope_cs = QtGui.QLineEdit()
-		microscope_voltage_label = QtGui.QLabel("Microscope Voltage")
-		self.microscope_voltage = QtGui.QLineEdit()
-		microscope_apix_label = QtGui.QLabel("Microscope apix")
-		self.microscope_apix = QtGui.QLineEdit()
+		micrscope_cs_label = QLabel("Microscope CS (mm)")
+		self.micrscope_cs = QLineEdit()
+		microscope_voltage_label = QLabel("Microscope Voltage")
+		self.microscope_voltage = QLineEdit()
+		microscope_apix_label = QLabel("Microscope apix")
+		self.microscope_apix = QLineEdit()
 		grid.addWidget(micrscope_cs_label, 4, 0)
 		grid.addWidget(self.micrscope_cs, 4, 1)
 		grid.addWidget(microscope_voltage_label, 5, 0)
@@ -2082,9 +2082,9 @@ class ProjectDialog(QtGui.QDialog):
 		frame.setLayout(grid)
 
 		# Ok, cancel buttons
-		done_pb = QtGui.QPushButton("Ok")
-		cancel_pb = QtGui.QPushButton("Cancel")
-		sgrid = QtGui.QGridLayout()
+		done_pb = QPushButton("Ok")
+		cancel_pb = QPushButton("Cancel")
+		sgrid = QGridLayout()
 		sgrid.addWidget(frame,0,0,1,2)
 		sgrid.addWidget(done_pb,1,0)
 		sgrid.addWidget(cancel_pb,1,1)

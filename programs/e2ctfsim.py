@@ -88,21 +88,21 @@ except:
 	print("Error: PyQt4 must be installed")
 	sys.exit(1)
 
-class MyListWidget(QtGui.QListWidget):
+class MyListWidget(QListWidget):
 	"""Exactly like a normal list widget but intercepts a few keyboard events"""
-	keypress = pyqtSignal(QtGui.QKeyEvent)
+	keypress = pyqtSignal(QKeyEvent)
 
 	def keyPressEvent(self,event):
 
 		if event.key() in (Qt.Key_Up,Qt.Key_Down) :
-			QtGui.QListWidget.keyPressEvent(self,event)
+			QListWidget.keyPressEvent(self,event)
 			return
 
 		self.keypress.emit(event)
 #		event.key()==Qt.Key_I
 
 
-class GUIctfsim(QtGui.QWidget):
+class GUIctfsim(QWidget):
 	module_closed = pyqtSignal()
 
 	def __init__(self,application,apix=1.0,voltage=300.0,cs=4.1,ac=10.0,samples=256,apply=None):
@@ -137,8 +137,8 @@ class GUIctfsim(QtGui.QWidget):
 			print("A/pix reset to ",self.df_apix)
 			self.applyim=EMImage2DWidget(application=self.app())
 
-		QtGui.QWidget.__init__(self,None)
-		self.setWindowIcon(QtGui.QIcon(get_image_directory() + "ctf.png"))
+		QWidget.__init__(self,None)
+		self.setWindowIcon(QIcon(get_image_directory() + "ctf.png"))
 
 		self.data=[]
 		self.curset=0
@@ -157,18 +157,18 @@ class GUIctfsim(QtGui.QWidget):
 		self.guiim.mmode="app"
 
 		# This object is itself a widget we need to set up
-		self.hbl = QtGui.QHBoxLayout(self)
+		self.hbl = QHBoxLayout(self)
 		self.hbl.setMargin(0)
 		self.hbl.setSpacing(6)
 		self.hbl.setObjectName("hbl")
 
 		# plot list and plot mode combobox
-		self.vbl2 = QtGui.QVBoxLayout()
+		self.vbl2 = QVBoxLayout()
 		self.setlist=MyListWidget(self)
-		self.setlist.setSizePolicy(QtGui.QSizePolicy.Preferred,QtGui.QSizePolicy.Expanding)
+		self.setlist.setSizePolicy(QSizePolicy.Preferred,QSizePolicy.Expanding)
 		self.vbl2.addWidget(self.setlist)
 
-		self.splotmode=QtGui.QComboBox(self)
+		self.splotmode=QComboBox(self)
 		self.splotmode.addItem("Amplitude")
 		self.splotmode.addItem("Intensity")
 		self.splotmode.addItem("Int w sum")
@@ -177,7 +177,7 @@ class GUIctfsim(QtGui.QWidget):
 		self.hbl.addLayout(self.vbl2)
 
 		# ValSliders for CTF parameters
-		self.vbl = QtGui.QVBoxLayout()
+		self.vbl = QVBoxLayout()
 		self.vbl.setMargin(0)
 		self.vbl.setSpacing(6)
 		self.vbl.setObjectName("vbl")
@@ -186,7 +186,7 @@ class GUIctfsim(QtGui.QWidget):
 		#self.samp = ValSlider(self,(0,5.0),"Amp:",0)
 		#self.vbl.addWidget(self.samp)
 
-		self.imginfo=QtGui.QLabel("Info",self)
+		self.imginfo=QLabel("Info",self)
 		self.vbl.addWidget(self.imginfo)
 
 		self.sdefocus=ValSlider(self,(0,5),"Defocus:",0,90)
@@ -221,8 +221,8 @@ class GUIctfsim(QtGui.QWidget):
 		self.vbl.addWidget(self.ssamples)
 
 
-		self.hbl_buttons = QtGui.QHBoxLayout()
-		self.newbut = QtGui.QPushButton("New")
+		self.hbl_buttons = QHBoxLayout()
+		self.newbut = QPushButton("New")
 		self.hbl_buttons.addWidget(self.newbut)
 		self.vbl.addLayout(self.hbl_buttons)
 

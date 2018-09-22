@@ -452,7 +452,7 @@ except:
 		def __init__(self,parent):
 			print("Qt4 has not been loaded")
 	QtGui=dummy()
-	QtGui.QWidget=QWidget
+	QWidget=QWidget
 
 def display_validation_plots(path, radcut, planethres, plotdatalabels=False, color='#00ff00', plotzaxiscolor=False):
 	from eman2_gui.emimage2d import EMImage2DWidget
@@ -521,33 +521,33 @@ def computeRGBcolor(value, minval, maxval):
 		R = 1.0 - B
 		return "#%02x%02x%02x"%(255*R,255*G,255*B)
 	
-class EMValidationPlot(QtGui.QWidget):
+class EMValidationPlot(QWidget):
 	"""Make a plot to display validation info"""
 	def __init__(self):
-		QtGui.QWidget.__init__(self)
-		box = QtGui.QVBoxLayout()
+		QWidget.__init__(self)
+		box = QVBoxLayout()
 		self.polarplot = EMPolarPlot2DWidget()
 		self.polarplot.setMinimumHeight(50)
 		self.polarplot.setMinimumWidth(50)
 		self.resize(480,580)
 		
-		meanAngLabel = QtGui.QLabel("Mean Tilt Angle") 
-		self.meanAngle = QtGui.QLineEdit("")
-		meanAxisLabel = QtGui.QLabel("Mean Tilt Axis") 
-		self.meanAxis = QtGui.QLineEdit("")
-		rmsdAngLabel = QtGui.QLabel("RMSD Tilt Angle") 
-		self.rmsdAngle = QtGui.QLineEdit("")
-		rmsdAxisLabel = QtGui.QLabel("RMSD Tilt Axis") 
-		self.rmsdAxis = QtGui.QLineEdit("")
-		pointsLabel = QtGui.QLabel("Num points")
-		self.points = QtGui.QLineEdit("")
-		self.pointlabel = QtGui.QLabel("Right click to pick the nearest point")
+		meanAngLabel = QLabel("Mean Tilt Angle") 
+		self.meanAngle = QLineEdit("")
+		meanAxisLabel = QLabel("Mean Tilt Axis") 
+		self.meanAxis = QLineEdit("")
+		rmsdAngLabel = QLabel("RMSD Tilt Angle") 
+		self.rmsdAngle = QLineEdit("")
+		rmsdAxisLabel = QLabel("RMSD Tilt Axis") 
+		self.rmsdAxis = QLineEdit("")
+		pointsLabel = QLabel("Num points")
+		self.points = QLineEdit("")
+		self.pointlabel = QLabel("Right click to pick the nearest point")
 		
 		
-		frame = QtGui.QFrame()
-		frame.setFrameShape(QtGui.QFrame.StyledPanel)
+		frame = QFrame()
+		frame.setFrameShape(QFrame.StyledPanel)
 		frame.setMaximumHeight(100)
-		grid = QtGui.QGridLayout()
+		grid = QGridLayout()
 		grid.addWidget(meanAngLabel, 0, 0)
 		grid.addWidget(self.meanAngle, 0, 1)
 		grid.addWidget(meanAxisLabel, 0, 2)

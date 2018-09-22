@@ -722,14 +722,14 @@ class EMAsymmetricUnitInspector(EMSymInspector):
 
 	def add_au_table(self):
 
-		self.au_tab= QtGui.QWidget()
-		self.au_tab.vbl = QtGui.QVBoxLayout(self.au_tab)
+		self.au_tab= QWidget()
+		self.au_tab.vbl = QVBoxLayout(self.au_tab)
 
 		self.au_data = self.target().au_data
 		combo_entries = list(self.au_data.keys())
 		combo_entries.sort()
 		combo_entries.reverse()
-		self.combo = QtGui.QComboBox(self)
+		self.combo = QComboBox(self)
 		for e in combo_entries:
 			self.combo.addItem(e)
 
@@ -739,9 +739,9 @@ class EMAsymmetricUnitInspector(EMSymInspector):
 		self.au_tab.vbl.addWidget(self.combo)
 		self.refine_dir = combo_entries[0]
 
-		self.list_widget = QtGui.QListWidget(None)
+		self.list_widget = QListWidget(None)
 
-		self.list_widget.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
+		self.list_widget.setSelectionMode(QAbstractItemView.SingleSelection)
 		self.list_widget.setMouseTracking(True)
 		self.list_widget.itemClicked[QListWidgetItem].connect(self.list_widget_item_clicked)
 
@@ -766,7 +766,7 @@ class EMAsymmetricUnitInspector(EMSymInspector):
 		for i,vals in enumerate(self.au_data[self.refine_dir]):
 			choice = vals[0]
 
-			a = QtGui.QListWidgetItem(str(choice),self.list_widget)
+			a = QListWidgetItem(str(choice),self.list_widget)
 			if first_time and i == 0:
 				self.list_widget.setItemSelected(a,True)
 			elif len(choice) > 4 and (choice[-4:] == s_text):

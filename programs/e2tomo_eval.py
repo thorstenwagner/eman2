@@ -40,20 +40,20 @@ def main():
 	E2end(logid)
 	
 	
-class TomoEvalGUI(QtGui.QWidget):
+class TomoEvalGUI(QWidget):
 
 	
 	def __init__(self, options):
 		
 		self.path="tomograms/"
-		QtGui.QWidget.__init__(self,None)
+		QWidget.__init__(self,None)
 
 
 		self.win_size=[1000,680]
 		self.setMinimumSize(self.win_size[0], self.win_size[1])
 
 		# This object is itself a widget we need to set up
-		self.gbl = QtGui.QGridLayout(self)
+		self.gbl = QGridLayout(self)
 		self.gbl.setMargin(8)
 		self.gbl.setSpacing(6)
 		self.gbl.setColumnStretch(0,4)
@@ -62,7 +62,7 @@ class TomoEvalGUI(QtGui.QWidget):
 		self.gbl.setRowStretch(0,1)
 
 		# Micrograph list
-		self.imglst=QtGui.QTableWidget(1, 3, self)
+		self.imglst=QTableWidget(1, 3, self)
 		self.imglst.verticalHeader().hide()
 		
 		self.gbl.addWidget(self.imglst,0,0,11,1)
@@ -81,32 +81,32 @@ class TomoEvalGUI(QtGui.QWidget):
 		self.wg_thumbnail.setMinimumHeight(330)
 		self.gbl.addWidget(self.wg_thumbnail, 0,1,3,2)
 		
-		self.bt_show2d=QtGui.QPushButton("Show2D")
+		self.bt_show2d=QPushButton("Show2D")
 		self.bt_show2d.setToolTip("Show 2D images")
 		self.gbl.addWidget(self.bt_show2d, 4,1,1,2)
 		
-		self.bt_runboxer=QtGui.QPushButton("Boxer")
+		self.bt_runboxer=QPushButton("Boxer")
 		self.bt_runboxer.setToolTip("Run spt_boxer")
 		self.gbl.addWidget(self.bt_runboxer, 5,1)
 		
-		self.bt_refresh=QtGui.QPushButton("Refresh")
+		self.bt_refresh=QPushButton("Refresh")
 		self.bt_refresh.setToolTip("Refresh")
 		self.gbl.addWidget(self.bt_refresh, 5,2)
 		
-		self.bt_showtlts=QtGui.QPushButton("ShowTilts")
+		self.bt_showtlts=QPushButton("ShowTilts")
 		self.bt_showtlts.setToolTip("Show raw tilt series")
 		self.gbl.addWidget(self.bt_showtlts, 6,1)
 		
-		self.bt_plottpm=QtGui.QPushButton("TiltParams")
+		self.bt_plottpm=QPushButton("TiltParams")
 		self.bt_plottpm.setToolTip("Plot tilt parameters")
 		self.gbl.addWidget(self.bt_plottpm, 6,2)
 		
-		self.bt_plotloss=QtGui.QPushButton("PlotLoss")
+		self.bt_plotloss=QPushButton("PlotLoss")
 		self.bt_plotloss.setToolTip("Plot alignment loss")
 		self.gbl.addWidget(self.bt_plotloss, 7,1)
 		
 		
-		self.bt_plotctf=QtGui.QPushButton("PlotCtf")
+		self.bt_plotctf=QPushButton("PlotCtf")
 		self.bt_plotctf.setToolTip("Plot CTF estimation")
 		self.gbl.addWidget(self.bt_plotctf, 7,2)
 		
@@ -128,16 +128,16 @@ class TomoEvalGUI(QtGui.QWidget):
 		self.wg_tltimage.set_scale(.2)
 		self.cur_tlt=None
 		
-		self.setspanel=QtGui.QListWidget(self)
+		self.setspanel=QListWidget(self)
 		self.gbl.addWidget(self.setspanel, 8,1,2,2)
 		self.itemflags=	Qt.ItemFlags(Qt.ItemIsEditable)|Qt.ItemFlags(Qt.ItemIsSelectable)|Qt.ItemFlags(Qt.ItemIsEnabled)|Qt.ItemFlags(Qt.ItemIsUserCheckable)
 		
-		self.wg_notes=QtGui.QTextEdit(self)
+		self.wg_notes=QTextEdit(self)
 		self.wg_notes.setText("Comments:")
 		#self.wg_notes.setStyleSheet("color: rgb(150, 150, 150);")
 		self.gbl.addWidget(self.wg_notes, 10,1,1,2)
 		
-		self.setspanel.itemChanged[QtGui.QListWidgetItem].connect(self.clickset)
+		self.setspanel.itemChanged[QListWidgetItem].connect(self.clickset)
 		self.wg_notes.textChanged.connect(self.noteupdate)
 		
 		self.wg_plot2d=EMPlot2DWidget()
@@ -223,7 +223,7 @@ class TomoEvalGUI(QtGui.QWidget):
 		for k in list(self.ptclcls.keys()):
 			v=self.ptclcls[k]
 			kname="    {}\t:  {}".format(k, v[1])
-			item=QtGui.QListWidgetItem(kname)
+			item=QListWidgetItem(kname)
 			item.setFlags(self.itemflags)
 			self.setspanel.addItem(item)
 			item.setCheckState(Qt.Checked)
@@ -236,15 +236,15 @@ class TomoEvalGUI(QtGui.QWidget):
 		self.imglst.setHorizontalHeaderLabels(["ID", "file name", "#box", "loss"])
 		for i,info in enumerate(self.imginfo):
 			#### use Qt.EditRole so we can sort them as numbers instead of strings
-			it=QtGui.QTableWidgetItem()
+			it=QTableWidgetItem()
 			it.setData(Qt.EditRole, int(info["id"]))
 			self.imglst.setItem(i,0,it)
-			self.imglst.setItem(i,1,QtGui.QTableWidgetItem(str(info["basename"])))
+			self.imglst.setItem(i,1,QTableWidgetItem(str(info["basename"])))
 			nbox=0
 			for kname in list(info["boxcls"].keys()):
 				if self.ptclcls[kname][0]==1:
 					nbox+=info["boxcls"][kname]
-			it=QtGui.QTableWidgetItem()
+			it=QTableWidgetItem()
 			it.setData(Qt.EditRole, int(nbox))
 			self.imglst.setItem(i,2, it)
 			if len(info["loss"])==0:
@@ -252,7 +252,7 @@ class TomoEvalGUI(QtGui.QWidget):
 			else: 
 				loss=np.round(np.mean(info["loss"]), 2)
 			
-			it=QtGui.QTableWidgetItem()
+			it=QTableWidgetItem()
 			it.setData(Qt.EditRole, float(loss))
 			self.imglst.setItem(i,3, it)
 		

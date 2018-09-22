@@ -237,7 +237,7 @@ get_application = em_app_instance.get_instance
 #def get_application() : return QtGui.qApp
 
 
-class EMApp(QtGui.QApplication):
+class EMApp(QApplication):
 	def __init__(self):
 		self.children = []
 		
@@ -245,16 +245,16 @@ class EMApp(QtGui.QApplication):
 		self.timer_function = None
 		self.tmr = None
 		
-		QtGui.QApplication.__init__(self, sys.argv)
+		QApplication.__init__(self, sys.argv)
 		
-		style=QtGui.QStyleFactory.create("Plastique")
+		style=QStyleFactory.create("Plastique")
 		
 		if style==None:
 			print("Note: standard Plastique style not available, controls may be distorted. Using ", end=' ')
 			
 			# the first one should work, but we have the loop, just in case
-			for s in list(QtGui.QStyleFactory.keys()):
-				style=QtGui.QStyleFactory.create(s)
+			for s in list(QStyleFactory.keys()):
+				style=QStyleFactory.create(s)
 				if style!=None: 
 					print(s)
 					break
@@ -368,10 +368,10 @@ class EMApp(QtGui.QApplication):
 
 		
 	
-class EMProgressDialog(QtGui.QProgressDialog):
+class EMProgressDialog(QProgressDialog):
 	def __init__(self,label_text,cancel_button_text, minimum, maximum, parent = None):
-		QtGui.QProgressDialog.__init__(self,label_text,cancel_button_text, minimum, maximum, parent)
-		self.setWindowIcon(QtGui.QIcon(get_image_directory() + "/eman.png"))
+		QProgressDialog.__init__(self,label_text,cancel_button_text, minimum, maximum, parent)
+		self.setWindowIcon(QIcon(get_image_directory() + "/eman.png"))
 
 
 def error(msg,title="Almost"):
@@ -386,9 +386,9 @@ class EMErrorMessageDisplay(object):
 		'''
 		error_message is a list of error messages
 		'''
-		msg = QtGui.QMessageBox()
+		msg = QMessageBox()
 		msg.setWindowTitle(title)
-		msg.setWindowIcon(QtGui.QIcon(get_image_directory() + "/eman.png"))
+		msg.setWindowIcon(QIcon(get_image_directory() + "/eman.png"))
 		mes = ""
 		if isinstance(error_message,tuple): error_message=list(error_message)
 		if isinstance(error_message,list):

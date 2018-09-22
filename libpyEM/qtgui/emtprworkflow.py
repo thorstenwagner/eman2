@@ -257,7 +257,7 @@ class E2TomoFilterParticlesTask(WorkFlowTask):
 		
 		outnames = self.output_names(params)
 		
-		progress = QtGui.QProgressDialog("Processing files...", "Abort", 0, len(params["filenames"]),None)
+		progress = QProgressDialog("Processing files...", "Abort", 0, len(params["filenames"]),None)
 		progress.show()
 	
 		i = 0

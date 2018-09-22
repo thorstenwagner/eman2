@@ -105,7 +105,7 @@ XYData.__len__=XYData.get_size
 try:
 	if __IPYTHON__ : GUIMode=True
 	from eman2_gui import QtGui
-	app=QtGui.qApp
+	app=qApp
 except:
 	GUIMode=False
 	app = 0

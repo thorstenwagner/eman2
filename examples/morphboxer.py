@@ -177,7 +177,7 @@ class MorphBoxingTool(EMBoxingTool):
 
 	def icon(self):
 		from eman2_gui.PyQt import QtGui
-		return QtGui.QIcon(get_image_directory() + "white_box.png")
+		return QIcon(get_image_directory() + "white_box.png")
 
 	def set_panel_object(self,panel): self.panel_object = panel
 	def unique_name(self): return MorphBoxingTool.BOX_TYPE
@@ -311,13 +311,13 @@ class MorphBoxingPanel(object):
 	def get_widget(self):
 		if self.widget == None:
 			from eman2_gui.PyQt import QtCore, QtGui, Qt
-			self.widget = QtGui.QWidget()
-			vbl = QtGui.QVBoxLayout(self.widget)
+			self.widget = QWidget()
+			vbl = QVBoxLayout(self.widget)
 			vbl.setMargin(0)
 			vbl.setSpacing(6)
 			vbl.setObjectName("vbl")
-			self.auto_center_checkbox = QtGui.QCheckBox("Auto-center")
-			self.clear=QtGui.QPushButton("Clear")
+			self.auto_center_checkbox = QCheckBox("Auto-center")
+			self.clear=QPushButton("Clear")
 			vbl.addWidget(self.auto_center_checkbox)
 			vbl.addWidget(self.clear)
 			self.clear.clicked[bool].connect(self.clear_clicked)
@@ -346,21 +346,21 @@ class ErasingPanel(object): # copied for ideas for the morph panel
 	def get_widget(self):
 		if self.widget == None:
 			from eman2_gui.PyQt import QtCore, QtGui, Qt
-			self.widget = QtGui.QWidget()
-			vbl = QtGui.QVBoxLayout(self.widget)
+			self.widget = QWidget()
+			vbl = QVBoxLayout(self.widget)
 			vbl.setMargin(0)
 			vbl.setSpacing(6)
 			vbl.setObjectName("vbl")
 
-			hbl = QtGui.QHBoxLayout()
-			hbl.addWidget(QtGui.QLabel("Erase Radius:"))
+			hbl = QHBoxLayout()
+			hbl.addWidget(QLabel("Erase Radius:"))
 			from eman2_gui.valslider import ValSlider
 			self.erase_rad_edit = ValSlider(None,(0.0,1000.0),"")
 			self.erase_rad_edit.setValue(int(self.erase_radius))
 			self.erase_rad_edit.setEnabled(True)
 			hbl.addWidget(self.erase_rad_edit)
 
-			self.unerase = QtGui.QCheckBox("Unerase")
+			self.unerase = QCheckBox("Unerase")
 			self.unerase.setChecked(False)
 
 			vbl.addLayout(hbl)

@@ -816,7 +816,7 @@ class Microscope(QtOpenGL.QGLWidget):
 	def mousePressEvent(self, QMouseEvent):
 		p=self.scr_to_img(QMouseEvent.pos())
 		self.startpy=p[1]
-		modifiers = QtGui.QApplication.keyboardModifiers()
+		modifiers = QApplication.keyboardModifiers()
 		if modifiers == Qt.ShiftModifier:
 			self.hold_shift=True
 		else:
@@ -917,10 +917,10 @@ class Microscope(QtOpenGL.QGLWidget):
 		print("Exit..")
 		exit()
 
-class MainWindow(QtGui.QMainWindow):
+class MainWindow(QMainWindow):
 	
 	def __init__(self, options):
-		QtGui.QMainWindow.__init__(self)
+		QMainWindow.__init__(self)
 		
 		if options.twod:
 			self.twodview = EMImage2DWidget()

@@ -108,15 +108,15 @@ class EMDeleteItemAction(EMItemAction,EMMultiItemAction,EMActionDelegate):
 		self.__delete_items( [item] )
 
 	def __delete_items(self,items):
-		msg = QtGui.QMessageBox()
+		msg = QMessageBox()
 		msg.setText("Deletion will be permanent. Are you sure you want to delete the selected file(s)?")
 		s = ""
 		for i in items: s+=i.text()+"\n"
 		msg.setInformativeText(s)
-		msg.setStandardButtons(QtGui.QMessageBox.Cancel | QtGui.QMessageBox.Ok )
-		msg.setDefaultButton(QtGui.QMessageBox.Cancel)
+		msg.setStandardButtons(QMessageBox.Cancel | QMessageBox.Ok )
+		msg.setDefaultButton(QMessageBox.Cancel)
 		ret = msg.exec_()
-		if ret == QtGui.QMessageBox.Cancel: return False
+		if ret == QMessageBox.Cancel: return False
 		
 		for item in items:
 			delegate= item.get_delegate()
@@ -297,12 +297,12 @@ def EMSelectorBaseTemplate(Type):
 			self.single_selection = single_selection # Flag indicating single selection in interface
 			self.browse_delegates = [EMBDBDelegate(self), EMFileSystemDelegate(self)] # Object capable of returning listed items based on url- Add your own
 			
-			self.hbl = QtGui.QVBoxLayout(self)
+			self.hbl = QVBoxLayout(self)
 			self.hbl.setMargin(0)
 			self.hbl.setSpacing(6)
 			self.hbl.setObjectName("hbl")
 			
-			self.setWindowIcon(QtGui.QIcon(get_image_directory() + "/display_icon.png"))
+			self.setWindowIcon(QIcon(get_image_directory() + "/display_icon.png"))
 			
 			self.__init_filter_combo()
 			
@@ -314,7 +314,7 @@ def EMSelectorBaseTemplate(Type):
 			self.previews = [] # keeps track of all of the preview windows
 #			self.module_events = [] # used to coordinate signals from the modules, especially close events, to free memory
 			self.list_widget_data= [] # entries should be tuples containing (current folder item)
-			self.splitter = QtGui.QSplitter(self)
+			self.splitter = QSplitter(self)
 			self.splitter.setChildrenCollapsible(False)
 
 			self.add_list_widget()
@@ -324,7 +324,7 @@ def EMSelectorBaseTemplate(Type):
 			
 			self.__load_url(e2getcwd(),self.list_widgets[0])
 	
-			self.bottom_hbl = QtGui.QHBoxLayout()
+			self.bottom_hbl = QHBoxLayout()
 			self.bottom_hbl.addWidget(self.filter_text,0)
 			self.bottom_hbl.addWidget(self.filter_combo,1)
 			self.__init_buttons()
@@ -347,10 +347,10 @@ def EMSelectorBaseTemplate(Type):
 			get_application().attach_child(self)
 			
 		def __init_buttons(self):
-			self.ok_button = QtGui.QPushButton("Ok")
+			self.ok_button = QPushButton("Ok")
 			self.ok_button.adjustSize()
 			
-			self.cancel_button = QtGui.QPushButton("Cancel")
+			self.cancel_button = QPushButton("Cancel")
 			self.cancel_button.adjustSize()
 		
 			self.ok_button.clicked[bool].connect(self.ok_button_clicked)
@@ -425,8 +425,8 @@ def EMSelectorBaseTemplate(Type):
 			self.lock = False
 					
 		def __init_filter_combo(self):
-			self.filter_text = QtGui.QLabel("Filter:",self)
-			self.filter_combo = QtGui.QComboBox(None)
+			self.filter_text = QLabel("Filter:",self)
+			self.filter_combo = QComboBox(None)
 			self.filter_combo.addItem("EM types")
 			self.filter_combo.addItem("Databases") # this doesn't really do anything
 			self.filter_combo.addItem("*.spi,*.hdf,*.img, bdb:")
@@ -458,19 +458,19 @@ def EMSelectorBaseTemplate(Type):
 			
 			#list_widget.contextMenuEvent = self.list_widget_context_menu_event
 			
-			if self.single_selection:list_widget.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
-			else: list_widget.setSelectionMode(QtGui.QAbstractItemView.ExtendedSelection)
+			if self.single_selection:list_widget.setSelectionMode(QAbstractItemView.SingleSelection)
+			else: list_widget.setSelectionMode(QAbstractItemView.ExtendedSelection)
 			list_widget.setMouseTracking(True)	
 			self.list_widgets.append(list_widget)
 			self.splitter.addWidget(list_widget)
 			
 			self.list_widget_data.append(None)
 			
-			list_widget.itemDoubleClicked[QtGui.QListWidgetItem].connect(self.list_widget_dclicked)
+			list_widget.itemDoubleClicked[QListWidgetItem].connect(self.list_widget_dclicked)
 			#QtCore.QObject.connect(list_widget, QtCore.SIGNAL("itemPressed(QListWidgetItem*)"),self.list_widget_clicked)
 			#QtCore.QObject.connect(list_widget, QtCore.SIGNAL("currentRowChanged (int)"),self.list_widget_row_changed)
 			#QtCore.QObject.connect(list_widget, QtCore.SIGNAL("paintEvent (int)"),self.list_widget_row_changed)
-			list_widget.itemEntered[QtGui.QListWidgetItem].connect(self.list_widget_item_entered)
+			list_widget.itemEntered[QListWidgetItem].connect(self.list_widget_item_entered)
 			#QtCore.QObject.connect(list_widget, QtCore.SIGNAL("currentItemChanged(QListWidgetItem*,QListWidgetItem*)"),self.list_widget_current_changed)
 			#QtCore.QObject.connect(list_widget, QtCore.SIGNAL("itemChanged(QListWidgetItem*)"),self.list_widget_item_changed)
 			#\QtCore.QObject.connect(list_widget, QtCore.SIGNAL("itemActivated(QListWidgetItem*)"),self.list_widget_item_activated)
@@ -708,7 +708,7 @@ def fspsort(x):
 	y=x.rsplit(".",1)
 	return y[1]+"."+y[0]
 
-EMBrowserType = EMSelectorBaseTemplate(QtGui.QWidget)
+EMBrowserType = EMSelectorBaseTemplate(QWidget)
 class EMBrowser(EMBrowserType):
 	def __init__(self, single_selection=False, usescenegraph=False):
 		EMBrowserType.__init__(self,single_selection)
@@ -718,17 +718,17 @@ class EMBrowser(EMBrowserType):
 		
 		self.__init_action_delegates()
 		
-		bottom_hbl2 = QtGui.QHBoxLayout()
+		bottom_hbl2 = QHBoxLayout()
 		self.__init_preview_options()
 		bottom_hbl2.addWidget(self.preview_options,0)
 		self.hbl.addLayout(bottom_hbl2)
 				
-		bottom_hbl3 = QtGui.QHBoxLayout()
+		bottom_hbl3 = QHBoxLayout()
 		self.__init_plot_options()
 		bottom_hbl3.addWidget(self.replace,0)
 		bottom_hbl3.addWidget(self.include,0)
 		
-		self.groupbox = QtGui.QGroupBox("Plot/3D options")
+		self.groupbox = QGroupBox("Plot/3D options")
 		self.groupbox.setLayout(bottom_hbl3)
 		self.groupbox.setEnabled(False)
 		
@@ -781,12 +781,12 @@ class EMBrowser(EMBrowserType):
 		self.action_delegates[SAVE_SUBSET] = EMSaveStackSaveAction()
 		
 	def __init_plot_options(self):
-		self.replace = QtGui.QRadioButton("Replace")
-		self.include = QtGui.QRadioButton("Include")
+		self.replace = QRadioButton("Replace")
+		self.include = QRadioButton("Include")
 		self.include.setChecked(True)
 
 	def __init_preview_options(self):
-		self.preview_options = QtGui.QComboBox(self)
+		self.preview_options = QComboBox(self)
 		#self.preview_options.addItem("No preview")
 		self.preview_options.addItem("Single preview")
 		self.preview_options.addItem("Multi preview")
@@ -837,7 +837,7 @@ class EMBrowser(EMBrowserType):
 		selected_items = l.selectedItems()
 		if len(selected_items) == 0: return
 		
-		menu = QtGui.QMenu()
+		menu = QMenu()
 		self.menu_selected_items = selected_items
 		if len(selected_items) == 1:
 			first_item = selected_items[0]
@@ -889,7 +889,7 @@ class EMBrowser(EMBrowserType):
 					menu.addAction(SAVE_SUBSET)
 				
 
-		menu.triggered[QtGui.QAction].connect(self.menu_action_triggered)
+		menu.triggered[QAction].connect(self.menu_action_triggered)
 		self.action_list_widget = l # only set if the menu acutally triggers
 		menu.exec_(event.globalPos())
 		
@@ -912,17 +912,17 @@ class EMBrowser(EMBrowserType):
 			get_application().setOverrideCursor(Qt.ArrowCursor)
 			return
 
-EMSelectorDialogType = EMSelectorBaseTemplate(QtGui.QDialog)
+EMSelectorDialogType = EMSelectorBaseTemplate(QDialog)
 class EMSelectorDialog(EMSelectorDialogType):
 	def __init__(self,single_selection=False,save_as_mode=True): #TODO: figure out whether save_as_mode is needed (unused)
 		EMSelectorDialogType.__init__(self,single_selection)	
 
-		hbl2=QtGui.QHBoxLayout()
+		hbl2=QHBoxLayout()
 		hbl2.setMargin(0)
 		hbl2.setSpacing(2)
-		self.selection_label = QtGui.QLabel(SAVE_AS,self)
+		self.selection_label = QLabel(SAVE_AS,self)
 		hbl2.addWidget(self.selection_label)
-		self.save_as_line_edit = QtGui.QLineEdit("",self)
+		self.save_as_line_edit = QLineEdit("",self)
 		hbl2.addWidget(self.save_as_line_edit,0)
 		self.hbl.insertLayout(1,hbl2)
 		self.dialog_mode = True
@@ -939,7 +939,7 @@ class EMSelectorDialog(EMSelectorDialogType):
 		Wraps QtGui.QDialog.exec_
 		@return a list of selected filenames
 		'''
-		QtGui.QDialog.exec_(self)
+		QDialog.exec_(self)
 		return self.dialog_result
 	
 	def set_validator(self,validator):
@@ -1004,7 +1004,7 @@ class EMSelectorDialog(EMSelectorDialogType):
 		
 		directory = self.get_current_directory()
 		if directory == None:
-			msg = QtGui.QMessageBox()
+			msg = QMessageBox()
 			msg.setText("Can not deduce the current directory. Please update your selection")
 			msg.exec_()
 			return
@@ -1051,18 +1051,18 @@ class EMSelectorDialog(EMSelectorDialogType):
 		return ret
 	
 	
-class EMListWidget(QtGui.QListWidget):
+class EMListWidget(QListWidget):
 	'''
 	Customized ListWidget as displayed in the browser
 	'''
 	def __init__(self,target,*args):
 		self.target = weakref.ref(target)
-		QtGui.QListWidget.__init__(self,*args)
+		QListWidget.__init__(self,*args)
 		self.reset_vars()
 	
 	def clear(self):
 		self.reset_vars()
-		QtGui.QListWidget.clear(self)
+		QListWidget.clear(self)
 		
 	def contextMenuEvent(self,event):
 		self.target().list_widget_context_menu_event(event)
@@ -1417,7 +1417,7 @@ class EMFileSystemDelegate(EMBrowseDelegate):
 
 		return item
 
-class EMListItem(QtGui.QListWidgetItem):
+class EMListItem(QListWidgetItem):
 	'''
 	Base class definition providing the pubic interface of list widget items as 
 	required by the EMSelector
@@ -1428,7 +1428,7 @@ class EMListItem(QtGui.QListWidgetItem):
 		@param delegate an instance of an EMBrowseDelegate - a strong reference is made to this
 		@param text the string that will be displayed in the QtGui.QListWidgetItem
 		'''
-		QtGui.QListWidgetItem.__init__(self,self.get_icon(),text)
+		QListWidgetItem.__init__(self,self.get_icon(),text)
 		self.delegate = delegate
 		self.context_menu_options = {} # this is used for running context menu actions
 		self.icon = None
@@ -1444,7 +1444,7 @@ class EMListItem(QtGui.QListWidgetItem):
 	def get_icon(self):
 		'''Supply your own Icon'''
 		if EMListItem.ICON == None:
-			EMListItem.ICON = QtGui.QIcon(get_image_directory() + "/File.png")
+			EMListItem.ICON = QIcon(get_image_directory() + "/File.png")
 		return EMListItem.ICON
 
 	def get_attr_dict(self):
@@ -1503,7 +1503,7 @@ class EMUpArrowItem(EMListItem):
 		Supply your own Icon
 		'''
 		if EMUpArrowItem.ICON == None:
-			EMUpArrowItem.ICON = QtGui.QIcon(get_image_directory() + "/up_arrow.png")
+			EMUpArrowItem.ICON = QIcon(get_image_directory() + "/up_arrow.png")
 		return EMUpArrowItem.ICON
 	
 	def get_name(self): return EMUpArrowItem.NAME
@@ -1572,7 +1572,7 @@ class EM2DStackItem(EMDataListItem,EMStack2DCapableMixin):
 	def get_icon(self):
 		'''Supply your own Icon	'''
 		if EM2DStackItem.ICON == None:
-			EM2DStackItem.ICON = QtGui.QIcon(get_image_directory() + "/multiple_images.png")
+			EM2DStackItem.ICON = QIcon(get_image_directory() + "/multiple_images.png")
 		return EM2DStackItem.ICON
 	
 	def emdata_save_as_url(self): return self.delegate.emdata_save_as_url(self.get_url())
@@ -1617,7 +1617,7 @@ class EM3DStackItem(EMDataListItem):
 		Supply your own Icon
 		'''
 		if EM3DStackItem.ICON == None:
-			EM3DStackItem.ICON = QtGui.QIcon(get_image_directory() + "/multiple_images_3d.png")
+			EM3DStackItem.ICON = QIcon(get_image_directory() + "/multiple_images_3d.png")
 		return EM3DStackItem.ICON
 	# no preview for this item as of Feb 2009
 	def get_data(self):
@@ -1645,7 +1645,7 @@ class EM2DImageItem(EMDataListItem):
 		Supply your own Icon
 		'''
 		if EM2DImageItem.ICON == None:
-			EM2DImageItem.ICON = QtGui.QIcon(get_image_directory() + "/single_image.png")
+			EM2DImageItem.ICON = QIcon(get_image_directory() + "/single_image.png")
 		return EM2DImageItem.ICON
 
 	def get_metadata(self):
@@ -1679,7 +1679,7 @@ class EM3DImageItem(EM2DImageItem,EMStack2DCapableMixin):
 		Supply your own Icon
 		'''
 		if EM3DImageItem.ICON == None:
-			EM3DImageItem.ICON = QtGui.QIcon(get_image_directory() + "/single_image_3d.png")
+			EM3DImageItem.ICON = QIcon(get_image_directory() + "/single_image_3d.png")
 		return EM3DImageItem.ICON
 	
 	def default_view_action(self):
@@ -1762,7 +1762,7 @@ class EMFSPlotItem(EMListItem):
 		Supply your own Icon
 		'''
 		if EMFSPlotItem.ICON == None:
-			EMFSPlotItem.ICON = QtGui.QIcon(get_image_directory() + "/plot.png")
+			EMFSPlotItem.ICON = QIcon(get_image_directory() + "/plot.png")
 		return EMFSPlotItem.ICON
 	
 	def get_data(self):
@@ -1792,7 +1792,7 @@ class EMFSFolderItem(EMListItem):
 		Supply your own Icon
 		'''
 		if EMFSFolderItem.ICON == None:
-			EMFSFolderItem.ICON = QtGui.QIcon(get_image_directory() + "/Folder.png")
+			EMFSFolderItem.ICON = QIcon(get_image_directory() + "/Folder.png")
 		return EMFSFolderItem.ICON
 	
 	def get_url(self): return self.full_path
@@ -2087,7 +2087,7 @@ class EMBDBFolderItem(EMListItem):
 		Supply your own Icon
 		'''
 		if EMBDBFolderItem.ICON == None:
-			EMBDBFolderItem.ICON = QtGui.QIcon(get_image_directory() + "/database.png")
+			EMBDBFolderItem.ICON = QIcon(get_image_directory() + "/database.png")
 
 		return EMBDBFolderItem.ICON
 	
@@ -2108,7 +2108,7 @@ class EMBDBDirectoryItem(EMListItem):
 		Supply your own Icon
 		'''
 		if EMBDBDirectoryItem.ICON == None:
-			EMBDBDirectoryItem.ICON = QtGui.QIcon(get_image_directory() + "/Folder.png")
+			EMBDBDirectoryItem.ICON = QIcon(get_image_directory() + "/Folder.png")
 
 		return EMBDBDirectoryItem.ICON
 	
@@ -2128,7 +2128,7 @@ class EMBDBItem(EMListItem):
 		Supply your own Icon
 		'''
 		if EMBDBItem.ICON == None:
-			EMBDBItem.ICON = QtGui.QIcon(get_image_directory() + "/database.png")
+			EMBDBItem.ICON = QIcon(get_image_directory() + "/database.png")
 
 		return EMBDBItem.ICON
 
@@ -2170,7 +2170,7 @@ class EMBDBDictItem(EMListItem):
 		Supply your own Icon
 		'''
 		if EMBDBDictItem.ICON == None:
-			EMBDBDictItem.ICON = QtGui.QIcon(get_image_directory() + "/Bag.png")
+			EMBDBDictItem.ICON = QIcon(get_image_directory() + "/Bag.png")
 
 		return EMBDBDictItem.ICON
 

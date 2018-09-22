@@ -82,55 +82,55 @@ class EMItem3D(object): #inherit object for new-style class (new-stype classes r
 		@param layout, the layout to append to
 		@param idx, the row to being appnding to
 		"""
-		font = QtGui.QFont()
+		font = QFont()
 		font.setBold(True)
-		translatelabel = QtGui.QLabel("Translation")
+		translatelabel = QLabel("Translation")
 		translatelabel.setFont(font)
 		translatelabel.setAlignment(Qt.AlignCenter)
 		layout.addWidget(translatelabel, idx, 0, 1, 4)
-		txlabel = QtGui.QLabel("Tx")
-		tylabel = QtGui.QLabel("Ty")
+		txlabel = QLabel("Tx")
+		tylabel = QLabel("Ty")
 		txlabel.setAlignment(Qt.AlignRight)
 		tylabel.setAlignment(Qt.AlignRight)
-		attribdict["tx"] = QtGui.QLineEdit("0.0")
-		attribdict["ty"] = QtGui.QLineEdit("0.0")
+		attribdict["tx"] = QLineEdit("0.0")
+		attribdict["ty"] = QLineEdit("0.0")
 		attribdict["tx"].setMinimumWidth(100.0)
 		attribdict["ty"].setMinimumWidth(100.0)
 		layout.addWidget(txlabel, idx+1, 0, 1, 1)
 		layout.addWidget(attribdict["tx"], idx+1, 1, 1, 1)
 		layout.addWidget(tylabel, idx+1, 2, 1, 1)
 		layout.addWidget(attribdict["ty"], idx+1, 3, 1, 1)
-		tzlabel = QtGui.QLabel("Tz")
-		zoomlabel = QtGui.QLabel("Zm")
+		tzlabel = QLabel("Tz")
+		zoomlabel = QLabel("Zm")
 		tylabel.setAlignment(Qt.AlignRight)
 		zoomlabel.setAlignment(Qt.AlignRight)
-		attribdict["tz"] = QtGui.QLineEdit("0.0")
-		attribdict["zoom"] = QtGui.QLineEdit("1.0")
+		attribdict["tz"] = QLineEdit("0.0")
+		attribdict["zoom"] = QLineEdit("1.0")
 		attribdict["tz"].setMinimumWidth(100.0)
 		attribdict["zoom"].setMinimumWidth(100.0)
 		layout.addWidget(tzlabel, idx+2, 0, 1, 1)
 		layout.addWidget(attribdict["tz"], idx+2, 1, 1, 1)
 		layout.addWidget(zoomlabel, idx+2, 2, 1, 1)
 		layout.addWidget(attribdict["zoom"], idx+2, 3, 1, 1)
-		rotatelabel = QtGui.QLabel("EMAN Rotation")
+		rotatelabel = QLabel("EMAN Rotation")
 		rotatelabel.setFont(font)
 		rotatelabel.setAlignment(Qt.AlignCenter)
 		layout.addWidget(rotatelabel, idx+3, 0, 1, 4)
-		azlabel = QtGui.QLabel("Az")
+		azlabel = QLabel("Az")
 		azlabel.setAlignment(Qt.AlignRight)
-		attribdict["az"] = QtGui.QLineEdit("0.0")
-		altlabel = QtGui.QLabel("Alt")
+		attribdict["az"] = QLineEdit("0.0")
+		altlabel = QLabel("Alt")
 		altlabel.setAlignment(Qt.AlignRight)
-		attribdict["alt"] = QtGui.QLineEdit("0.0")
+		attribdict["alt"] = QLineEdit("0.0")
 		attribdict["az"] .setMinimumWidth(100.0)
 		attribdict["alt"].setMinimumWidth(100.0)
 		layout.addWidget(azlabel, idx+4, 0, 1, 1)
 		layout.addWidget(attribdict["az"], idx+4, 1, 1, 1)
 		layout.addWidget(altlabel, idx+4, 2, 1, 1)
 		layout.addWidget(attribdict["alt"], idx+4, 3, 1, 1)
-		philabel = QtGui.QLabel("Phi")
+		philabel = QLabel("Phi")
 		philabel.setAlignment(Qt.AlignRight)
-		attribdict["phi"] = QtGui.QLineEdit("0.0")
+		attribdict["phi"] = QLineEdit("0.0")
 		layout.addWidget(philabel, idx+5, 0, 1, 1)
 		layout.addWidget(attribdict["phi"], idx+5, 1, 1, 1)
 	
@@ -144,10 +144,10 @@ class EMItem3D(object): #inherit object for new-style class (new-stype classes r
 		"""
 		Get Data Widget
 		"""
-		nodewidget = QtGui.QWidget()
-		grid = QtGui.QGridLayout()
-		node_name_label = QtGui.QLabel("Node Name")
-		attribdict["node_name"] = QtGui.QLineEdit()
+		nodewidget = QWidget()
+		grid = QGridLayout()
+		node_name_label = QLabel("Node Name")
+		attribdict["node_name"] = QLineEdit()
 		grid.addWidget(node_name_label , 0, 0, 1, 2)
 		grid.addWidget(attribdict["node_name"], 0, 2, 1, 2)
 		EMItem3D.get_transformlayout(grid, 2, attribdict)
@@ -514,12 +514,12 @@ class EMItem3D(object): #inherit object for new-style class (new-stype classes r
 	def mouseReleaseEvent(self, event): pass
 	def wheelEvent(self, event): pass
 		
-class EMItem3DInspector(QtGui.QTabWidget):
+class EMItem3DInspector(QTabWidget):
 	"""
 	Class to make the EMItem GUI controls
 	"""
 	def __init__(self, name, item3d):
-		QtGui.QTabWidget.__init__(self)
+		QTabWidget.__init__(self)
 		self.item3d = weakref.ref(item3d)
 		self.name = name
 		self.inspector = None
@@ -533,8 +533,8 @@ class EMItem3DInspector(QtGui.QTabWidget):
 		
 	def addTabs(self):
 		""" Add a tab for each 'column' """
-		tabwidget = QtGui.QWidget()
-		gridbox = QtGui.QGridLayout()
+		tabwidget = QWidget()
+		gridbox = QGridLayout()
 		
 		EMItem3DInspector.addControls(self, gridbox)
 		
@@ -544,55 +544,55 @@ class EMItem3DInspector(QtGui.QTabWidget):
 	def addControls(self, gridbox):
 		""" Construct all the widgets in this Item Inspector """
 		# selection box and label
-		font = QtGui.QFont()
+		font = QFont()
 		font.setBold(True)
-		label = QtGui.QLabel(self.name,self)
+		label = QLabel(self.name,self)
 		label.setFont(font)
 		label.setAlignment(Qt.AlignCenter)
 		gridbox.addWidget(label, 0, 0, 1, 1)
-		databox = QtGui.QHBoxLayout()
+		databox = QHBoxLayout()
 		self.boundingbox = None
 		if self.item3d().boundingboxsize:
-			self.boundingbox = QtGui.QLabel("Size: "+self.item3d().boundingboxsize,self)
+			self.boundingbox = QLabel("Size: "+self.item3d().boundingboxsize,self)
 			databox.addWidget(self.boundingbox)
 		gridbox.addLayout(databox, 1, 0, 1, 1)
 		# angluar controls
-		xformframe = QtGui.QFrame()
-		xformframe.setFrameShape(QtGui.QFrame.StyledPanel)
-		xformbox = QtGui.QGridLayout()
-		xformlabel = QtGui.QLabel("Transformation", xformframe)
+		xformframe = QFrame()
+		xformframe.setFrameShape(QFrame.StyledPanel)
+		xformbox = QGridLayout()
+		xformlabel = QLabel("Transformation", xformframe)
 		xformlabel.setFont(font)
 		xformlabel.setAlignment(Qt.AlignCenter)
 		xformbox.addWidget(xformlabel, 0, 0, 1, 2)
 		# Rotations
-		self.rotcombobox = QtGui.QComboBox()
+		self.rotcombobox = QComboBox()
 		xformbox.addWidget(self.rotcombobox, 1, 0, 1, 2)
-		self.rotstackedwidget = QtGui.QStackedWidget()
+		self.rotstackedwidget = QStackedWidget()
 		self.addRotationWidgets()
 		xformbox.addWidget(self.rotstackedwidget, 2, 0, 1, 2)
 		#translations
-		txlabel = QtGui.QLabel("TX",xformframe)
+		txlabel = QLabel("TX",xformframe)
 		txlabel.setAlignment(Qt.AlignCenter)
 		xformbox.addWidget(txlabel, 3, 0, 1, 1)
-		tylabel = QtGui.QLabel("TY",xformframe)
+		tylabel = QLabel("TY",xformframe)
 		tylabel.setAlignment(Qt.AlignCenter)
 		xformbox.addWidget(tylabel, 3, 1, 1, 1)
 		self.tx = EMSpinWidget(0.0, 1.0)
 		self.ty = EMSpinWidget(0.0, 1.0)
 		xformbox.addWidget(self.tx, 4, 0, 1, 1)
 		xformbox.addWidget(self.ty, 4, 1, 1, 1)
-		tzlabel = QtGui.QLabel("TZ",xformframe)
+		tzlabel = QLabel("TZ",xformframe)
 		tzlabel.setAlignment(Qt.AlignCenter)
 		xformbox.addWidget(tzlabel, 5, 0, 1, 1)
-		zoomlabel = QtGui.QLabel("Zoom",xformframe)
+		zoomlabel = QLabel("Zoom",xformframe)
 		zoomlabel.setAlignment(Qt.AlignCenter)
 		xformbox.addWidget(zoomlabel, 5, 1, 1, 1)
 		self.tz = EMSpinWidget(0.0, 1.0)
 		self.zoom = EMSpinWidget(1.0, 0.1, postivemode=True, wheelstep=0.1)
 		xformbox.addWidget(self.tz, 6, 0, 1, 1)
 		xformbox.addWidget(self.zoom, 6, 1, 1, 1)
-		self.resetbuttontx = QtGui.QPushButton("Reset Tx")
-		self.resetbuttonrot = QtGui.QPushButton("Reset Rot")
+		self.resetbuttontx = QPushButton("Reset Tx")
+		self.resetbuttonrot = QPushButton("Reset Rot")
 		xformbox.addWidget(self.resetbuttontx, 7, 0, 1, 1)
 		xformbox.addWidget(self.resetbuttonrot, 7, 1, 1, 1)
 		xformframe.setLayout(xformbox)
@@ -733,16 +733,16 @@ class EMItem3DInspector(QtGui.QTabWidget):
 		
 	def addRotationWidgets(self):
 		""" Add alll the widgets for the various EMAN2 rotation conventions """
-		EMANwidget = QtGui.QWidget()
-		Imagicwidget = QtGui.QWidget()
-		Spiderwidget = QtGui.QWidget()
-		MRCwidget = QtGui.QWidget()
-		XYZwidget = QtGui.QWidget()
-		spinwidget = QtGui.QWidget()
-		sgirotwidget = QtGui.QWidget()
-		quaternionwidget = QtGui.QWidget()
+		EMANwidget = QWidget()
+		Imagicwidget = QWidget()
+		Spiderwidget = QWidget()
+		MRCwidget = QWidget()
+		XYZwidget = QWidget()
+		spinwidget = QWidget()
+		sgirotwidget = QWidget()
+		quaternionwidget = QWidget()
 		# EMAN
-		emanbox = QtGui.QVBoxLayout()
+		emanbox = QVBoxLayout()
 		self.emanazslider = ValSlider(EMANwidget, (0.0, 360.0), "  Az", rounding = 1)
 		self.emanaltslider = ValSlider(EMANwidget, (0.0, 180.0), "Alt", rounding = 1)
 		self.emanphislider = ValSlider(EMANwidget, (0.0, 360.0), "Phi", rounding = 1)
@@ -751,7 +751,7 @@ class EMItem3DInspector(QtGui.QTabWidget):
 		emanbox.addWidget(self.emanphislider)
 		EMANwidget.setLayout(emanbox)
 		# Imagic
-		imagicbox = QtGui.QVBoxLayout()
+		imagicbox = QVBoxLayout()
 		self.imagicgammaslider = ValSlider(Imagicwidget, (0.0, 360.0), "Gamma", rounding = 1)
 		self.imagicbetaslider = ValSlider(Imagicwidget, (0.0, 180.0), "     Beta", rounding = 1)
 		self.imagicalphaslider = ValSlider(Imagicwidget, (0.0, 360.0), "   Alpha", rounding = 1)
@@ -760,7 +760,7 @@ class EMItem3DInspector(QtGui.QTabWidget):
 		imagicbox.addWidget(self.imagicalphaslider)
 		Imagicwidget.setLayout(imagicbox)
 		# Spider
-		spiderbox = QtGui.QVBoxLayout()
+		spiderbox = QVBoxLayout()
 		self.spiderpsislider = ValSlider(Spiderwidget, (0.0, 360.0), "   Psi", rounding = 1)
 		self.spiderthetaslider = ValSlider(Spiderwidget, (0.0, 180.0), "Theta", rounding = 1)
 		self.spiderphislider = ValSlider(Spiderwidget, (0.0, 360.0), "   Phi", rounding = 1)
@@ -769,7 +769,7 @@ class EMItem3DInspector(QtGui.QTabWidget):
 		spiderbox.addWidget(self.spiderphislider)
 		Spiderwidget.setLayout(spiderbox)
 		# MRC
-		mrcbox = QtGui.QVBoxLayout()
+		mrcbox = QVBoxLayout()
 		self.mrcpsislider = ValSlider(MRCwidget, (0.0, 360.0), "      Psi", rounding = 1)
 		self.mrcthetaslider = ValSlider(MRCwidget, (0.0, 180.0), "  Theta", rounding = 1)
 		self.mrcomegaslider = ValSlider(MRCwidget, (0.0, 360.0), "Omega", rounding = 1)
@@ -778,7 +778,7 @@ class EMItem3DInspector(QtGui.QTabWidget):
 		mrcbox.addWidget(self.mrcomegaslider)
 		MRCwidget.setLayout(mrcbox)
 		# XYZ
-		xyzbox = QtGui.QVBoxLayout()
+		xyzbox = QVBoxLayout()
 		self.xyzzslider = ValSlider(XYZwidget, (0.0, 360.0), "Z", rounding = 1)
 		self.xyzyslider = ValSlider(XYZwidget, (0.0, 180.0), "Y", rounding = 1)
 		self.xyzxslider = ValSlider(XYZwidget, (0.0, 360.0), "X", rounding = 1)
@@ -787,7 +787,7 @@ class EMItem3DInspector(QtGui.QTabWidget):
 		xyzbox.addWidget(self.xyzxslider)
 		XYZwidget.setLayout(xyzbox)
 		# spin
-		spinbox = QtGui.QVBoxLayout()
+		spinbox = QVBoxLayout()
 		self.spinomegaslider = ValSlider(spinwidget, (0.0, 180.0), "Omega", rounding = 1)
 		self.spinn1slider = ValSlider(spinwidget, (0.0, 1.0), "       N1", rounding = 4)
 		self.spinn2slider = ValSlider(spinwidget, (0.0, 1.0), "       N2", rounding = 4)
@@ -798,7 +798,7 @@ class EMItem3DInspector(QtGui.QTabWidget):
 		spinbox.addWidget(self.spinn3slider)
 		spinwidget.setLayout(spinbox)
 		# sgirot
-		sgirotbox = QtGui.QVBoxLayout()
+		sgirotbox = QVBoxLayout()
 		self.sgirotqslider = ValSlider(sgirotwidget, (0.0, 180.0), " Q", rounding = 1)
 		self.sgirotn1slider = ValSlider(sgirotwidget, (0.0, 1.0), "N1", rounding = 4)
 		self.sgirotn2slider = ValSlider(sgirotwidget, (0.0, 1.0), "N2", rounding = 4)
@@ -809,7 +809,7 @@ class EMItem3DInspector(QtGui.QTabWidget):
 		sgirotbox.addWidget(self.sgirotn3slider)
 		sgirotwidget.setLayout(sgirotbox)
 		# quaternion
-		quaternionbox = QtGui.QVBoxLayout()
+		quaternionbox = QVBoxLayout()
 		self.quaternione0slider = ValSlider(quaternionwidget, (0.0, 1.0), "E0", rounding = 4)
 		self.quaternione1slider = ValSlider(quaternionwidget, (0.0, 1.0), "E1", rounding = 4)
 		self.quaternione2slider = ValSlider(quaternionwidget, (0.0, 1.0), "E2", rounding = 4)

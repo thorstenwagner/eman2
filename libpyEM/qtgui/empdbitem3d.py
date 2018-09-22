@@ -62,13 +62,13 @@ class EMPDBItem3D(EMItem3D):
 	@staticmethod
 	def getNodeDialogWidget(attribdict):
 		"""Get PDB Widget"""
-		pdbwidget = QtGui.QWidget()
-		grid = QtGui.QGridLayout()
-		node_name_data_label = QtGui.QLabel("PDB Model Label")
-		attribdict["node_name"] = QtGui.QLineEdit()
-		data_path_label = QtGui.QLabel("PDB Model Path")
-		attribdict["data_path"] = QtGui.QLineEdit()
-		browse_button = QtGui.QPushButton("Browse")
+		pdbwidget = QWidget()
+		grid = QGridLayout()
+		node_name_data_label = QLabel("PDB Model Label")
+		attribdict["node_name"] = QLineEdit()
+		data_path_label = QLabel("PDB Model Path")
+		attribdict["data_path"] = QLineEdit()
+		browse_button = QPushButton("Browse")
 		grid.addWidget(node_name_data_label, 0, 0, 1, 2)
 		grid.addWidget(attribdict["node_name"], 0, 2, 1, 2)
 		grid.addWidget(data_path_label, 1, 0, 1, 2)
@@ -82,7 +82,7 @@ class EMPDBItem3D(EMItem3D):
 	
 	@staticmethod
 	def _on_browse():
-		filename = QtGui.QFileDialog.getOpenFileName(None, 'Get file', os.getcwd())
+		filename = QFileDialog.getOpenFileName(None, 'Get file', os.getcwd())
 		if filename:
 			EMPDBItem3D.attribdict["data_path"].setText(filename)
 			#name = os.path.basename(str(filename))
@@ -179,8 +179,8 @@ class EMPDBItem3DInspector(EMItem3DInspector):
 
 	def addTabs(self):
 		""" Add a tab for each 'column' """
-		tabwidget = QtGui.QWidget()
-		gridbox = QtGui.QGridLayout()
+		tabwidget = QWidget()
+		gridbox = QGridLayout()
 		tabwidget.setLayout(gridbox)
 		self.addTab(tabwidget, "data")
 		# add data tab first, then basic
@@ -189,18 +189,18 @@ class EMPDBItem3DInspector(EMItem3DInspector):
 
 	def addControls(self, gridbox):
 		""" Construct all the widgets in this Item Inspector """
-		dataframe = QtGui.QFrame()
-		dataframe.setFrameShape(QtGui.QFrame.StyledPanel)
-		lfont = QtGui.QFont()
+		dataframe = QFrame()
+		dataframe.setFrameShape(QFrame.StyledPanel)
+		lfont = QFont()
 		lfont.setBold(True)
-		datagridbox = QtGui.QGridLayout()
-		self.data_checkbox= QtGui.QCheckBox("Display Bounding Box")
+		datagridbox = QGridLayout()
+		self.data_checkbox= QCheckBox("Display Bounding Box")
 		datagridbox.addWidget(self.data_checkbox, 0, 0)
-		self.file_browse_button = QtGui.QPushButton("Set Data Source")
+		self.file_browse_button = QPushButton("Set Data Source")
 		datagridbox.addWidget(self.file_browse_button, 1, 0)
 		dataframe.setLayout(datagridbox)
 		gridbox.addWidget(dataframe, 2, 0)
-		self.file_path_label = QtGui.QLabel()
+		self.file_path_label = QLabel()
 		self.file_path_label.setAlignment(Qt.AlignCenter)
 		self.file_path_label.setFont(lfont)
 		gridbox.addWidget(self.file_path_label, 3, 0)
@@ -211,7 +211,7 @@ class EMPDBItem3DInspector(EMItem3DInspector):
 
 	def onFileBrowse(self):
 		#TODO: replace this with an EMAN2 browser window once we re-write it
-		file_path = QtGui.QFileDialog.getOpenFileName(self, "Open PDB Model")
+		file_path = QFileDialog.getOpenFileName(self, "Open PDB Model")
 		if file_path:
 			self.file_path_label.setText(file_path)
 			self.item3d().setData(file_path)
@@ -249,10 +249,10 @@ class EMBallStickModel(EMPDBItem3D):
 	@staticmethod
 	def getNodeDialogWidget(attribdict):
 		"""Get Ball and Stick Model Widget"""
-		ballstickwidget = QtGui.QWidget()
-		grid = QtGui.QGridLayout()
-		node_name_model_label = QtGui.QLabel("PDB Structure Name")
-		attribdict["node_name"] = QtGui.QLineEdit(str(EMBallStickModel.representation))
+		ballstickwidget = QWidget()
+		grid = QGridLayout()
+		node_name_model_label = QLabel("PDB Structure Name")
+		attribdict["node_name"] = QLineEdit(str(EMBallStickModel.representation))
 		grid.addWidget(node_name_model_label, 0, 0, 1, 2)
 		grid.addWidget(attribdict["node_name"], 0, 2, 1, 2)
 		EMItem3D.get_transformlayout(grid, 2, attribdict)
@@ -1047,10 +1047,10 @@ class EMSphereModel(EMPDBItem3D):
 	@staticmethod
 	def getNodeDialogWidget(attribdict):
 		"""Get Spheres Model Widget"""
-		sphereswidget = QtGui.QWidget()
-		grid = QtGui.QGridLayout()
-		node_name_model_label = QtGui.QLabel("PDB Structure Name")
-		attribdict["node_name"] = QtGui.QLineEdit(str(EMSphereModel.representation))
+		sphereswidget = QWidget()
+		grid = QGridLayout()
+		node_name_model_label = QLabel("PDB Structure Name")
+		attribdict["node_name"] = QLineEdit(str(EMSphereModel.representation))
 		grid.addWidget(node_name_model_label, 0, 0, 1, 2)
 		grid.addWidget(attribdict["node_name"], 0, 2, 1, 2)
 		EMItem3D.get_transformlayout(grid, 2, attribdict)

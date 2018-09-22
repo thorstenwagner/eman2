@@ -31,19 +31,19 @@ def main():
 	E2end(logid)
 	
 	
-class SptEvalGUI(QtGui.QWidget):
+class SptEvalGUI(QWidget):
 
 	
 	def __init__(self, options):
 		
 		self.path="tomograms/"
-		QtGui.QWidget.__init__(self,None)
+		QWidget.__init__(self,None)
 
 		self.win_size=[1000,680]
 		self.setMinimumSize(self.win_size[0], self.win_size[1])
 		
 		# This object is itself a widget we need to set up
-		self.gbl = QtGui.QGridLayout(self)
+		self.gbl = QGridLayout(self)
 		self.gbl.setMargin(8)
 		self.gbl.setSpacing(6)
 		self.gbl.setColumnStretch(0,4)
@@ -52,7 +52,7 @@ class SptEvalGUI(QtGui.QWidget):
 		self.gbl.setRowStretch(0,1)
 
 		# Micrograph list
-		self.imglst=QtGui.QTableWidget(1, 3, self)
+		self.imglst=QTableWidget(1, 3, self)
 		self.imglst.verticalHeader().hide()
 		
 		self.gbl.addWidget(self.imglst,0,0,10,1)
@@ -63,7 +63,7 @@ class SptEvalGUI(QtGui.QWidget):
 		self.imglst.cellClicked[int, int].connect(self.select_folder)
 		hdr.sectionPressed[int].connect(self.sortlst)
 		
-		self.dp_folder=QtGui.QComboBox()
+		self.dp_folder=QComboBox()
 		self.dp_folder.setToolTip("Folder suffix")
 		self.gbl.addWidget(self.dp_folder, 0,1,1,1)
 		sfxlst=["spt", "sptsgd"]
@@ -82,33 +82,33 @@ class SptEvalGUI(QtGui.QWidget):
 
 		self.wg_thumbnail.newnode=None
 
-		self.bt_showbs=QtGui.QPushButton("ShowBrowser")
+		self.bt_showbs=QPushButton("ShowBrowser")
 		self.bt_showbs.setToolTip("Show Browser")
 		self.gbl.addWidget(self.bt_showbs, 2,1,1,2)
 		self.bt_showbs.clicked[bool].connect(self.show_browser)
 
-		self.bt_plotParms=QtGui.QPushButton("PlotParams")
+		self.bt_plotParms=QPushButton("PlotParams")
 		self.bt_plotParms.setToolTip("Examine particle orientations")
 		self.gbl.addWidget(self.bt_plotParms, 3,1,1,2)
 		self.bt_plotParms.clicked[bool].connect(self.plot_params)
 
 		self.paramplot = EMPlot2DWidget()
 		
-		self.bt_plotFSC=QtGui.QPushButton("PlotFSCs")
+		self.bt_plotFSC=QPushButton("PlotFSCs")
 		self.bt_plotFSC.setToolTip("Examine tightly masked FSCs from this SPT refinement")
 		self.gbl.addWidget(self.bt_plotFSC, 4,1,1,2)
 		self.bt_plotFSC.clicked[bool].connect(self.plot_fscs)
 
 		self.fscplot = EMPlot2DWidget()
 
-		self.setspanel=QtGui.QListWidget(self)
+		self.setspanel=QListWidget(self)
 		self.gbl.addWidget(self.setspanel, 5,1,5,2)
 		self.itemflags=	Qt.ItemFlags(Qt.ItemIsEditable)|Qt.ItemFlags(Qt.ItemIsSelectable)|Qt.ItemFlags(Qt.ItemIsEnabled)|Qt.ItemFlags(Qt.ItemIsUserCheckable)
 		
 		#self.wg_notes=QtGui.QTextEdit(self)
 		#self.gbl.addWidget(self.wg_notes, 10,1,1,2)
 				
-		self.setspanel.itemChanged[QtGui.QListWidgetItem].connect(self.click_set)
+		self.setspanel.itemChanged[QListWidgetItem].connect(self.click_set)
 		#QtCore.QObject.connect(self.wg_notes,QtCore.SIGNAL("textChanged()"),self.noteupdate)
 		
 		#self.wg_plot2d=EMPlot2DWidget()
@@ -177,7 +177,7 @@ class SptEvalGUI(QtGui.QWidget):
 		
 		self.setspanel.clear()
 		for k in sorted(self.paramlst.keys()):
-			item=QtGui.QListWidgetItem(k)
+			item=QListWidgetItem(k)
 			item.setFlags(self.itemflags)
 			self.setspanel.addItem(item)
 			item.setCheckState(Qt.Checked)
@@ -207,7 +207,7 @@ class SptEvalGUI(QtGui.QWidget):
 					v=float(v)
 				except:
 					v=str(v)
-				it=QtGui.QTableWidgetItem()
+				it=QTableWidgetItem()
 				it.setData(Qt.EditRole, v)
 				self.imglst.setItem(i,j,it)
 				

@@ -932,11 +932,11 @@ def sptboxergui(options,args):
 	from eman2_gui.emshape import EMShape
 	from eman2_gui.valslider import ValSlider, ValBox
 
-	class EMAverageViewer(QtGui.QWidget):
+	class EMAverageViewer(QWidget):
 		"""This is a multi-paned view showing a single boxed out particle from a larger tomogram"""
 
 		def __init__(self,parent):
-			QtGui.QWidget.__init__(self)
+			QWidget.__init__(self)
 
 			self.setWindowTitle("Particle Average")
 
@@ -944,7 +944,7 @@ def sptboxergui(options,args):
 
 			self.resize(300,500)
 
-			self.gbl = QtGui.QGridLayout(self)
+			self.gbl = QGridLayout(self)
 			#self.xyview = EMImage2DWidget()
 			#self.gbl.addWidget(self.xyview,0,1)
 
@@ -964,7 +964,7 @@ def sptboxergui(options,args):
 			self.d3view = EMImage2DWidget()
 			self.gbl.addWidget(self.d3view,0,0)
 
-			self.gbl2 = QtGui.QGridLayout()
+			self.gbl2 = QGridLayout()
 			self.gbl.addLayout(self.gbl2,1,0)
 
 			self.wfilt = ValSlider(rng=(0,50),label="Filter:",value=0.0)
@@ -973,17 +973,17 @@ def sptboxergui(options,args):
 			self.wmask = ValSlider(rng=(0,100),label="Mask:",value=0.0)
 			self.gbl2.addWidget(self.wmask,3,0,1,2)
 
-			self.wsymlbl=QtGui.QLabel("Symmetry:")
+			self.wsymlbl=QLabel("Symmetry:")
 			self.gbl2.addWidget(self.wsymlbl,4,0)
 
-			self.wsym=QtGui.QLineEdit("C1")
+			self.wsym=QLineEdit("C1")
 			self.gbl2.addWidget(self.wsym,4,1)
 
-			self.wprog=QtGui.QProgressBar()
+			self.wprog=QProgressBar()
 			self.wprog.setRange(0,100)
 			self.gbl2.addWidget(self.wprog,5,0,1,2)
 
-			self.wrestart=QtGui.QPushButton("Restart")
+			self.wrestart=QPushButton("Restart")
 			self.gbl2.addWidget(self.wrestart,6,1)
 
 			self.needupd=0					# Set by the second thread when a display update is ready, 1 means progress update, 2 means volume update
@@ -1069,16 +1069,16 @@ def sptboxergui(options,args):
 				time.sleep(5)
 
 
-	class EMBoxViewer(QtGui.QWidget):
+	class EMBoxViewer(QWidget):
 		"""This is a multi-paned view showing a single boxed out particle from a larger tomogram"""
 
 		def __init__(self):
-			QtGui.QWidget.__init__(self)
+			QWidget.__init__(self)
 			self.setWindowTitle("Single Particle View")
 
 			self.resize(300,300)
 
-			self.gbl = QtGui.QGridLayout(self)
+			self.gbl = QGridLayout(self)
 			self.xyview = EMImage2DWidget()
 			self.gbl.addWidget(self.xyview,0,1)
 
@@ -1174,12 +1174,12 @@ def sptboxergui(options,args):
 			self.d3view.close()
 
 
-	class EMTomoBoxer(QtGui.QMainWindow):
+	class EMTomoBoxer(QMainWindow):
 		"""This class represents the EMTomoBoxer application instance.  """
 		module_closed = pyqtSignal()
 
 		def __init__(self,application,data=None,datafile=None,yshort=False,apix=0.0,boxsize=32,shrink=1,contrast=None,center=None,mod=False,normalize=False):
-			QtGui.QWidget.__init__(self)
+			QWidget.__init__(self)
 
 			self.app=weakref.ref(application)
 			self.yshort=yshort
@@ -1209,8 +1209,8 @@ def sptboxergui(options,args):
 			self.mwin_average=self.mwin.addAction("Averaging")
 
 
-			self.setCentralWidget(QtGui.QWidget())
-			self.gbl = QtGui.QGridLayout(self.centralWidget())
+			self.setCentralWidget(QWidget())
+			self.gbl = QGridLayout(self.centralWidget())
 
 			# relative stretch factors
 			self.gbl.setColumnStretch(0,1)
@@ -1230,11 +1230,11 @@ def sptboxergui(options,args):
 			self.gbl.addWidget(self.zyview,0,0)
 
 			# Select Z for xy view
-			self.wdepth = QtGui.QSlider()
+			self.wdepth = QSlider()
 			self.gbl.addWidget(self.wdepth,1,2)
 
 			### Control panel area in upper left corner
-			self.gbl2 = QtGui.QGridLayout()
+			self.gbl2 = QGridLayout()
 			self.gbl.addLayout(self.gbl2,1,0)
 
 			# box size
@@ -1243,19 +1243,19 @@ def sptboxergui(options,args):
 			self.oldboxsize=boxsize
 
 			# max or mean
-			self.wmaxmean=QtGui.QPushButton("MaxProj")
+			self.wmaxmean=QPushButton("MaxProj")
 			self.wmaxmean.setCheckable(True)
 			self.gbl2.addWidget(self.wmaxmean,2,0)
 
 			# number slices
-			self.wnlayers=QtGui.QSpinBox()
+			self.wnlayers=QSpinBox()
 			self.wnlayers.setMinimum(1)
 			self.wnlayers.setMaximum(256)
 			self.wnlayers.setValue(1)
 			self.gbl2.addWidget(self.wnlayers,2,1)
 
 			# Local boxes in side view
-			self.wlocalbox=QtGui.QCheckBox("Limit Side Boxes")
+			self.wlocalbox=QCheckBox("Limit Side Boxes")
 			self.gbl2.addWidget(self.wlocalbox,3,0)
 
 			# scale factor
@@ -1274,7 +1274,7 @@ def sptboxergui(options,args):
 			self.firsthbclick = None
 
 			# coordinate display
-			self.wcoords=QtGui.QLabel("X: " + str(self.get_x()) + "\t\t" + "Y: " + str(self.get_y()) + "\t\t" + "Z: " + str(self.get_z()))
+			self.wcoords=QLabel("X: " + str(self.get_x()) + "\t\t" + "Y: " + str(self.get_y()) + "\t\t" + "Z: " + str(self.get_z()))
 			self.gbl2.addWidget(self.wcoords, 0, 0, 1, 2)
 
 			# file menu
@@ -1561,7 +1561,7 @@ def sptboxergui(options,args):
 
 
 		def menu_file_open(self,tog):
-			QtGui.QMessageBox.warning(None,"Error","Sorry, in the current version, you must provide a file to open on the command-line.")
+			QMessageBox.warning(None,"Error","Sorry, in the current version, you must provide a file to open on the command-line.")
 
 		def load_box_yshort(self, boxcoords):
 			if options.yshort:
@@ -1570,7 +1570,7 @@ def sptboxergui(options,args):
 				return boxcoords
 
 		def menu_file_read_boxloc(self):
-			fsp=str(QtGui.QFileDialog.getOpenFileName(self, "Select output text file"))
+			fsp=str(QFileDialog.getOpenFileName(self, "Select output text file"))
 
 			f=open(fsp,"r")
 			if options.helixboxer:
@@ -1592,7 +1592,7 @@ def sptboxergui(options,args):
 		def menu_file_save_boxloc(self):
 			shrinkf=self.shrink 								#jesus
 
-			fsp=str(QtGui.QFileDialog.getSaveFileName(self, "Select output text file"))
+			fsp=str(QFileDialog.getSaveFileName(self, "Select output text file"))
 
 			out=open(fsp,"w")
 			if options.helixboxer:
@@ -1604,14 +1604,14 @@ def sptboxergui(options,args):
 			out.close()
 
 		def menu_file_save_boxes(self):
-			fsp=os.path.basename(str(QtGui.QFileDialog.getSaveFileName(self, "Select output file (numbers added)")))
+			fsp=os.path.basename(str(QFileDialog.getSaveFileName(self, "Select output file (numbers added)")))
 			if ".hdf" not in fsp[-4:]:
 				fsp += '.hdf'
 			
 			fspprjs=fsp.replace('.hdf','_prjs.hdf')
 			prj=EMData() #Dummy
 
-			progress = QtGui.QProgressDialog("Saving", "Abort", 0, len(self.boxes),None)
+			progress = QProgressDialog("Saving", "Abort", 0, len(self.boxes),None)
 			if options.helixboxer:
 				for i,b in enumerate(self.helixboxes):
 					img = self.extract_subtomo_box(self.get_extended_a_vector(b), cshrink=self.shrink)
@@ -1674,7 +1674,7 @@ def sptboxergui(options,args):
 
 		def menu_file_save_boxes_stack(self):
 
-			fsp=os.path.join(options.path,os.path.basename(str(QtGui.QFileDialog.getSaveFileName(self, "Select output file (.hdf supported only)"))))
+			fsp=os.path.join(options.path,os.path.basename(str(QFileDialog.getSaveFileName(self, "Select output file (.hdf supported only)"))))
 			#if fsp[:4].lower()!="bdb:" and fsp[-4:].lower()!=".hdf" :
 
 
@@ -1686,7 +1686,7 @@ def sptboxergui(options,args):
 			fspprjs=fsp.replace('.hdf','_prjs.hdf')
 			prj=EMData() #Dummy
 
-			progress = QtGui.QProgressDialog("Saving", "Abort", 0, len(self.boxes),None)
+			progress = QProgressDialog("Saving", "Abort", 0, len(self.boxes),None)
 			if options.helixboxer:
 				for i,b in enumerate(self.helixboxes):
 					img = self.extract_subtomo_box(self.get_extended_a_vector(b), cshrink=self.shrink)

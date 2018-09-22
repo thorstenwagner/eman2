@@ -53,32 +53,32 @@ class EMTransformPanel(object):
 		self.target = weakref.ref(target)
 		self.parent = weakref.ref(parent)
 		
-		self.label_src = QtGui.QLabel(parent)
+		self.label_src = QLabel(parent)
 		self.label_src.setText('Rotation Convention')
 		
-		self.src = QtGui.QComboBox(parent)
+		self.src = QComboBox(parent)
 		self.load_src_options(self.src)
 		
-		self.x_label = QtGui.QLabel()
+		self.x_label = QLabel()
 		self.x_label.setText('x')
 		
-		self.x_trans = QtGui.QDoubleSpinBox(parent)
+		self.x_trans = QDoubleSpinBox(parent)
 		self.x_trans.setMinimum(-10000)
 		self.x_trans.setMaximum(10000)
 		self.x_trans.setValue(0.0)
 	
-		self.y_label = QtGui.QLabel()
+		self.y_label = QLabel()
 		self.y_label.setText('y')
 		
-		self.y_trans = QtGui.QDoubleSpinBox(parent)
+		self.y_trans = QDoubleSpinBox(parent)
 		self.y_trans.setMinimum(-10000)
 		self.y_trans.setMaximum(10000)
 		self.y_trans.setValue(0.0)
 		
-		self.z_label = QtGui.QLabel()
+		self.z_label = QLabel()
 		self.z_label.setText('z')
 		
-		self.z_trans = QtGui.QDoubleSpinBox(parent)
+		self.z_trans = QDoubleSpinBox(parent)
 		self.z_trans.setMinimum(-10000)
 		self.z_trans.setMaximum(10000)
 		self.z_trans.setValue(0.0)
@@ -157,7 +157,7 @@ class EMTransformPanel(object):
 	def addWidgets(self,target):
 		
 		target.addWidget(self.scale)
-		self.hbl_trans = QtGui.QHBoxLayout()
+		self.hbl_trans = QHBoxLayout()
 		self.hbl_trans.setMargin(0)
 		self.hbl_trans.setSpacing(6)
 		self.hbl_trans.setObjectName("Trans")
@@ -170,7 +170,7 @@ class EMTransformPanel(object):
 		
 		target.addLayout(self.hbl_trans)
 		
-		self.hbl_src = QtGui.QHBoxLayout()
+		self.hbl_src = QHBoxLayout()
 		self.hbl_src.setMargin(0)
 		self.hbl_src.setSpacing(6)
 		self.hbl_src.setObjectName("hbl")
@@ -278,7 +278,7 @@ class EMTransformPanel(object):
 	
 import weakref
 
-class EMParentWin(QtGui.QWidget,Animator):
+class EMParentWin(QWidget,Animator):
 	"""
 	This class adds a status bar with a size grip to QGLWidgets on Mac OS X, 
 	to provide a visual cue that the window can be resized. This is accomplished
@@ -293,16 +293,16 @@ class EMParentWin(QtGui.QWidget,Animator):
 		@param enable_timer: not used... historical purposes???
 		"""
 		#TODO: figure out why the enable_timer parameter isn't being used
-		QtGui.QWidget.__init__(self,None)
+		QWidget.__init__(self,None)
 		Animator.__init__(self)
 
 
 		self.setMaximumSize(8000,8000)
-		self.hbl = QtGui.QVBoxLayout(self)
+		self.hbl = QVBoxLayout(self)
 		
 		self.hbl.setSpacing(0)
 		if get_platform() == "Darwin": # because OpenGL widgets in Qt don't leave room in the bottom right hand corner for the resize tool
-			self.status = QtGui.QStatusBar()
+			self.status = QStatusBar()
 			self.status.setSizeGripEnabled(True)
 			self.hbl.addWidget(self.status,0)
 			self.margin = 0
@@ -331,7 +331,7 @@ class EMParentWin(QtGui.QWidget,Animator):
 			self.child().closeEvent(e)
 			#self.child.inspector.close()
 		except: pass
-		QtGui.QWidget.closeEvent(self,e)
+		QWidget.closeEvent(self,e)
 		
 #	def resizeEvent(self,event):
 #		self.child().resizeEvent(event)
@@ -364,15 +364,15 @@ class EMParentWin(QtGui.QWidget,Animator):
 	def initGL(self):
 		self.child().glInit()
 	
-class ImgHistogram(QtGui.QWidget):
+class ImgHistogram(QWidget):
 	""" A small fixed-size histogram widget"""
 	thresholdChanged = pyqtSignal(float)
 
 	def __init__(self,parent):
-		QtGui.QWidget.__init__(self,parent)
+		QWidget.__init__(self,parent)
 		
-		self.brush=QtGui.QBrush(Qt.black)
-		self.font=QtGui.QFont("Helvetica", 12);
+		self.brush=QBrush(Qt.black)
+		self.font=QFont("Helvetica", 12);
 		self.probe=None
 		self.histdata=None
 		self.setMinimumSize(QSize(258,128))
@@ -433,18 +433,18 @@ class ImgHistogram(QtGui.QWidget):
 	def paintEvent (self, event):
 		
 		if self.histdata is None: return
-		p=QtGui.QPainter()
+		p=QPainter()
 		p.begin(self)
-		p.setBackground(QtGui.QColor(16,16,16))
+		p.setBackground(QColor(16,16,16))
 		p.eraseRect(0,0,self.width(),self.height())
 		p.setPen(Qt.darkGray)
 		for i,j in enumerate(self.histdata):
 			p.drawLine(i,127,i,127-old_div(j*126,self.norm))
 		
 		if self.histdata is None: return
-		p=QtGui.QPainter()
+		p=QPainter()
 		p.begin(self)
-		p.setBackground(QtGui.QColor(16,16,16))
+		p.setBackground(QColor(16,16,16))
 		p.eraseRect(0,0,self.width(),self.height())
 		p.setPen(Qt.darkGray)
 		for i,j in enumerate(self.histdata):
@@ -469,24 +469,24 @@ class ImgHistogram(QtGui.QWidget):
 			#self.uppresent=0 
 			#self.upposition=[[185,121],[185,18],[255,18]] 
 			
-			p.setPen(QtGui.QColor(0,0,0))
-			p.setBrush(QtGui.QBrush(Qt.SolidPattern))
-			p.setBrush(QtGui.QColor(self.upcolor[0][0],self.upcolor[0][1],self.upcolor[0][2]))
+			p.setPen(QColor(0,0,0))
+			p.setBrush(QBrush(Qt.SolidPattern))
+			p.setBrush(QColor(self.upcolor[0][0],self.upcolor[0][1],self.upcolor[0][2]))
 			p.drawRect(self.upposition[0][0]-2.5,self.upposition[0][1]-2.5,5,5)
-			p.setBrush(QtGui.QBrush(Qt.NoBrush))
+			p.setBrush(QBrush(Qt.NoBrush))
 			
-			p.setPen(QtGui.QColor(0,0,0))
-			p.setBrush(QtGui.QBrush(Qt.SolidPattern))
-			p.setBrush(QtGui.QColor(self.upcolor[1][0],self.upcolor[1][1],self.upcolor[1][2]))
+			p.setPen(QColor(0,0,0))
+			p.setBrush(QBrush(Qt.SolidPattern))
+			p.setBrush(QColor(self.upcolor[1][0],self.upcolor[1][1],self.upcolor[1][2]))
 			p.drawRect(self.upposition[1][0]-2.5,self.upposition[1][1]-2.5,5,5)
-			p.setBrush(QtGui.QBrush(Qt.NoBrush))
+			p.setBrush(QBrush(Qt.NoBrush))
 			
-			p.setPen(QtGui.QColor(0,0,0))
-			p.setBrush(QtGui.QBrush(Qt.SolidPattern))
-			p.setBrush(QtGui.QColor(self.upcolor[2][0],self.upcolor[2][1],self.upcolor[2][2]))
+			p.setPen(QColor(0,0,0))
+			p.setBrush(QBrush(Qt.SolidPattern))
+			p.setBrush(QColor(self.upcolor[2][0],self.upcolor[2][1],self.upcolor[2][2]))
 			p.drawRect(self.upposition[2][0]-2.5,self.upposition[2][1]-2.5,5,5)
 			
-			p.setBrush(QtGui.QBrush(Qt.NoBrush))
+			p.setBrush(QBrush(Qt.NoBrush))
 			
 			p.setPen(Qt.yellow)
 			presentx=self.upposition[self.uppresent][0]

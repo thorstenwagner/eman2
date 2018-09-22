@@ -2275,28 +2275,28 @@ except:
 		def __init__(self,parent):
 			print("Qt4 has not been loaded")
 	QtGui=dummy()
-	QtGui.QWidget=QWidget
-	QtGui.QListWidget=QListWidget
+	QWidget=QWidget
+	QListWidget=QListWidget
 
 def notzero(x):
 	if x==0 : return 1.0
 	return x
 
-class MyListWidget(QtGui.QListWidget):
+class MyListWidget(QListWidget):
 	"""Exactly like a normal list widget but intercepts a few keyboard events"""
-	keypress = pyqtSignal(QtGui.QKeyEvent)
+	keypress = pyqtSignal(QKeyEvent)
 
 	def keyPressEvent(self,event):
 
 		if event.key() in (Qt.Key_Up,Qt.Key_Down) :
-			QtGui.QListWidget.keyPressEvent(self,event)
+			QListWidget.keyPressEvent(self,event)
 			return
 
 		self.keypress.emit(event)
 #		event.key()==Qt.Key_I
 
 
-class GUIctf(QtGui.QWidget):
+class GUIctf(QWidget):
 	module_closed = pyqtSignal()
 
 	def __init__(self,application,data,autohp=True,nosmooth=False,highdensity=False):
@@ -2319,8 +2319,8 @@ class GUIctf(QtGui.QWidget):
 		self.nosmooth=nosmooth
 		self.highdensity=highdensity
 
-		QtGui.QWidget.__init__(self,None)
-		self.setWindowIcon(QtGui.QIcon(get_image_directory() + "ctf.png"))
+		QWidget.__init__(self,None)
+		self.setWindowIcon(QIcon(get_image_directory() + "ctf.png"))
 
 		self.data=data
 		self.curset=0
@@ -2343,18 +2343,18 @@ class GUIctf(QtGui.QWidget):
 		self.guiim.mmode="app"
 
 		# This object is itself a widget we need to set up
-		self.hbl = QtGui.QHBoxLayout(self)
+		self.hbl = QHBoxLayout(self)
 		self.hbl.setMargin(0)
 		self.hbl.setSpacing(6)
 		self.hbl.setObjectName("hbl")
 
 		# plot list and plot mode combobox
-		self.vbl2 = QtGui.QVBoxLayout()
+		self.vbl2 = QVBoxLayout()
 		self.setlist=MyListWidget(self)
-		self.setlist.setSizePolicy(QtGui.QSizePolicy.Preferred,QtGui.QSizePolicy.Expanding)
+		self.setlist.setSizePolicy(QSizePolicy.Preferred,QSizePolicy.Expanding)
 		self.vbl2.addWidget(self.setlist)
 
-		self.splotmode=QtGui.QComboBox(self)
+		self.splotmode=QComboBox(self)
 		self.splotmode.addItem("Bgsub & fit")
 		self.splotmode.addItem("Ptcl & BG power")
 		self.splotmode.addItem("SNR")
@@ -2370,7 +2370,7 @@ class GUIctf(QtGui.QWidget):
 		self.hbl.addLayout(self.vbl2)
 
 		# ValSliders for CTF parameters
-		self.vbl = QtGui.QVBoxLayout()
+		self.vbl = QVBoxLayout()
 		self.vbl.setMargin(0)
 		self.vbl.setSpacing(6)
 		self.vbl.setObjectName("vbl")
@@ -2379,7 +2379,7 @@ class GUIctf(QtGui.QWidget):
 		#self.samp = ValSlider(self,(0,5.0),"Amp:",0)
 		#self.vbl.addWidget(self.samp)
 
-		self.imginfo=QtGui.QLabel("Info",self)
+		self.imginfo=QLabel("Info",self)
 		self.vbl.addWidget(self.imginfo)
 
 		self.sdefocus=ValSlider(self,(0,5),"Defocus:",0,90)
@@ -2414,18 +2414,18 @@ class GUIctf(QtGui.QWidget):
 		self.vbl.addWidget(self.squality)
 
 
-		self.hbl_buttons = QtGui.QHBoxLayout()
-		self.saveparms = QtGui.QPushButton("Save parms")
-		self.recallparms = QtGui.QPushButton("Recall")
-		self.refit = QtGui.QPushButton("Refit")
+		self.hbl_buttons = QHBoxLayout()
+		self.saveparms = QPushButton("Save parms")
+		self.recallparms = QPushButton("Recall")
+		self.refit = QPushButton("Refit")
 		self.show2dfit = CheckBox(label="Show 2D Sim:",value=False)
 		self.showzerorings = CheckBox(label="Show Zeroes:",value=False)
 		self.usephaseplate = CheckBox(label="Phaseplate:",value=False)
-		self.output = QtGui.QPushButton("Output")
+		self.output = QPushButton("Output")
 		self.hbl_buttons.addWidget(self.refit)
 		self.hbl_buttons.addWidget(self.saveparms)
 		self.hbl_buttons.addWidget(self.recallparms)
-		self.hbl_buttons2 = QtGui.QHBoxLayout()
+		self.hbl_buttons2 = QHBoxLayout()
 		self.hbl_buttons2.addWidget(self.show2dfit)
 		self.hbl_buttons2.addWidget(self.showzerorings)
 		self.hbl_buttons2.addWidget(self.usephaseplate)

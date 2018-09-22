@@ -984,24 +984,24 @@ class EMPDBModel(EM3DModel):
 		self.get_inspector().text.setText(self.text)
 		self.updateGL()
 		
-class EMPDBInspector(QtGui.QWidget):
+class EMPDBInspector(QWidget):
 	def __init__(self,target,enable_advanced=False):
-		QtGui.QWidget.__init__(self)
+		QWidget.__init__(self)
 		self.target = weakref.ref(target)
 
 		self.rotation_sliders = EMTransformPanel(target,self)
 		
-		self.text = QtGui.QLineEdit()
+		self.text = QLineEdit()
 		text_value = self.target().current_text()
 		if text_value:
 			self.text.setText(text_value)
-		self.browse = QtGui.QPushButton("Browse")
+		self.browse = QPushButton("Browse")
 
-		hbl1 = QtGui.QHBoxLayout()
+		hbl1 = QHBoxLayout()
 		hbl1.addWidget(self.text)
 		hbl1.addWidget(self.browse)
 
-		vbl = QtGui.QVBoxLayout()
+		vbl = QVBoxLayout()
 		vbl.setMargin(0)
 		vbl.setSpacing(6)
 		vbl.addLayout(hbl1)
@@ -1018,7 +1018,7 @@ class EMPDBInspector(QtGui.QWidget):
 
 	def on_browse(self):
 		import os
-		self.fileName = QtGui.QFileDialog.getOpenFileName(self, "open file", os.getcwd(), "Text files (*.pdb)")
+		self.fileName = QFileDialog.getOpenFileName(self, "open file", os.getcwd(), "Text files (*.pdb)")
 		if (self.fileName == ""): return
 		self.target().set_current_text(str(self.fileName)) #self.target().text and self.text are what the user sees. 
 		self.text.setText(self.fileName) #if self.text changes, then self.fName becomes self.text and the image regenerates	

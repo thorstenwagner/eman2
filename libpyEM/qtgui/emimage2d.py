@@ -73,13 +73,13 @@ class EMImage2DWidget(EMGLWidget):
 	"""
 	origin_update = pyqtSignal(tuple)
 	signal_set_scale = pyqtSignal(float)
-	mousedown = pyqtSignal(QtGui.QMouseEvent,tuple)
-	mousedrag = pyqtSignal(QtGui.QMouseEvent,tuple)
-	mousemove = pyqtSignal(QtGui.QMouseEvent,tuple)
-	mouseup = pyqtSignal(QtGui.QMouseEvent,tuple)
-	mousewheel = pyqtSignal(QtGui.QWheelEvent)
+	mousedown = pyqtSignal(QMouseEvent,tuple)
+	mousedrag = pyqtSignal(QMouseEvent,tuple)
+	mousemove = pyqtSignal(QMouseEvent,tuple)
+	mouseup = pyqtSignal(QMouseEvent,tuple)
+	mousewheel = pyqtSignal(QWheelEvent)
 	signal_increment_list_data = pyqtSignal(float)
-	keypress = pyqtSignal(QtGui.QKeyEvent)
+	keypress = pyqtSignal(QKeyEvent)
 
 	allim=WeakKeyDictionary()
 
@@ -191,7 +191,7 @@ class EMImage2DWidget(EMGLWidget):
 		self.circle_dl = None # used for a circle list, for displaying circled particles, for example
 
 		self.setAcceptDrops(True) #TODO: figure out the purpose of this (moved) line of code
-		self.setWindowIcon(QtGui.QIcon(get_image_directory() +"single_image.png")) #TODO: figure out why this icon doesn't work
+		self.setWindowIcon(QIcon(get_image_directory() +"single_image.png")) #TODO: figure out why this icon doesn't work
 
 		if image : self.set_data(image)
 #		else:self.__load_display_settings_from_db()
@@ -477,7 +477,7 @@ class EMImage2DWidget(EMGLWidget):
 			if needresize:
 				x=self.data["nx"]
 				y=self.data["ny"]
-				xys=QtGui.QApplication.desktop().availableGeometry()
+				xys=QApplication.desktop().availableGeometry()
 				mx=old_div(xys.width()*2,3)
 				my=old_div(xys.height()*2,3)
 
@@ -1913,36 +1913,36 @@ class EMImage2DWidget(EMGLWidget):
 		glDisable(GL_TEXTURE_2D)
 
 
-class EMImageInspector2D(QtGui.QWidget):
+class EMImageInspector2D(QWidget):
 	def __init__(self,target) :
-		QtGui.QWidget.__init__(self,None)
+		QWidget.__init__(self,None)
 		self.target=weakref.ref(target)
 
-		self.vbl = QtGui.QVBoxLayout(self)
+		self.vbl = QVBoxLayout(self)
 		self.vbl.setMargin(2)
 		self.vbl.setSpacing(6)
 		self.vbl.setObjectName("vbl")
 
 		# This is the tab-bar for mouse mode selection
-		self.mmtab = QtGui.QTabWidget()
+		self.mmtab = QTabWidget()
 
 		# App tab
-		self.apptab = QtGui.QWidget()
-		self.apptablab = QtGui.QLabel("Application specific mouse functions",self.apptab)
+		self.apptab = QWidget()
+		self.apptablab = QLabel("Application specific mouse functions",self.apptab)
 		self.mmtab.addTab(self.apptab,"App")
 
 		# Save tab
-		self.savetab = QtGui.QWidget()
-		self.stlay = QtGui.QGridLayout(self.savetab)
+		self.savetab = QWidget()
+		self.stlay = QGridLayout(self.savetab)
 
-		self.stsnapbut = QtGui.QPushButton("Snapshot")
+		self.stsnapbut = QPushButton("Snapshot")
 		self.stsnapbut.setToolTip(".pgm, .ppm, .jpeg, .png, or .tiff format only")
-		self.stwholebut = QtGui.QPushButton("Save Img")
+		self.stwholebut = QPushButton("Save Img")
 		self.stwholebut.setToolTip("save EMData in any EMAN2 format")
-		self.ststackbut = QtGui.QPushButton("Save Stack")
+		self.ststackbut = QPushButton("Save Stack")
 		self.ststackbut.setToolTip("save EMData objects as stack in any EMAN2 format")
-		self.stmoviebut = QtGui.QPushButton("Movie")
-		self.stanimgif = QtGui.QPushButton("GIF Anim")
+		self.stmoviebut = QPushButton("Movie")
+		self.stanimgif = QPushButton("GIF Anim")
 
 		self.stlay.addWidget(self.stsnapbut,0,0)
 		self.stlay.addWidget(self.stwholebut,1,0)
@@ -1952,13 +1952,13 @@ class EMImageInspector2D(QtGui.QWidget):
 		self.stmoviebut.setEnabled(False)
 		self.stanimgif.setEnabled(False)
 
-		self.rngbl = QtGui.QHBoxLayout()
+		self.rngbl = QHBoxLayout()
 		self.stlay.addLayout(self.rngbl,2,0,1,3)
-		self.stmmlbl = QtGui.QLabel("Img Range :")
-		self.stminsb = QtGui.QSpinBox()
+		self.stmmlbl = QLabel("Img Range :")
+		self.stminsb = QSpinBox()
 		self.stminsb.setRange(0,0)
 		self.stminsb.setValue(0)
-		self.stmaxsb = QtGui.QSpinBox()
+		self.stmaxsb = QSpinBox()
 		self.stmaxsb.setRange(0,0)
 		self.stmaxsb.setValue(0)
 
@@ -1975,8 +1975,8 @@ class EMImageInspector2D(QtGui.QWidget):
 		self.stanimgif.clicked[bool].connect(self.do_makegifanim)
 
 		# Filter tab
-		self.filttab = QtGui.QWidget()
-		self.ftlay=QtGui.QGridLayout(self.filttab)
+		self.filttab = QWidget()
+		self.ftlay=QGridLayout(self.filttab)
 
 		self.procbox1=StringBox(label="Process1:",value="filter.lowpass.gauss:cutoff_abs=0.125",showenable=0)
 		self.ftlay.addWidget(self.procbox1,2,0)
@@ -1987,7 +1987,7 @@ class EMImageInspector2D(QtGui.QWidget):
 		self.procbox3=StringBox(label="Process3:",value="math.linear:scale=5:shift=0",showenable=0)
 		self.ftlay.addWidget(self.procbox3,10,0)
 
-		self.proclbl1=QtGui.QLabel("Image unchanged, display only!")
+		self.proclbl1=QLabel("Image unchanged, display only!")
 		self.ftlay.addWidget(self.proclbl1,12,0)
 
 		self.mmtab.addTab(self.filttab,"Filt")
@@ -2000,38 +2000,38 @@ class EMImageInspector2D(QtGui.QWidget):
 		self.procbox3.textChanged.connect(self.do_filters)
 
 		# Probe tab
-		self.probetab = QtGui.QWidget()
-		self.ptlay=QtGui.QGridLayout(self.probetab)
+		self.probetab = QWidget()
+		self.ptlay=QGridLayout(self.probetab)
 
 		self.ptareasize= ValBox(label="Probe Size:",value=32)
 		self.ptareasize.setIntonly(True)
 		self.ptlay.addWidget(self.ptareasize,0,0,1,2)
 
-		self.ptpointval= QtGui.QLabel("Point Value (ctr pix): ")
+		self.ptpointval= QLabel("Point Value (ctr pix): ")
 		self.ptlay.addWidget(self.ptpointval,1,0,1,2,Qt.AlignLeft)
 
-		self.ptareaavg= QtGui.QLabel("Area Avg: ")
+		self.ptareaavg= QLabel("Area Avg: ")
 		self.ptlay.addWidget(self.ptareaavg,2,0,Qt.AlignLeft)
 
-		self.ptareaavgnz= QtGui.QLabel("Area Avg (!=0): ")
+		self.ptareaavgnz= QLabel("Area Avg (!=0): ")
 		self.ptlay.addWidget(self.ptareaavgnz,2,1,Qt.AlignLeft)
 
-		self.ptareasig= QtGui.QLabel("Area Sig: ")
+		self.ptareasig= QLabel("Area Sig: ")
 		self.ptlay.addWidget(self.ptareasig,3,0,Qt.AlignLeft)
 
-		self.ptareasignz= QtGui.QLabel("Area Sig (!=0): ")
+		self.ptareasignz= QLabel("Area Sig (!=0): ")
 		self.ptlay.addWidget(self.ptareasignz,3,1,Qt.AlignLeft)
 
-		self.ptareaskew= QtGui.QLabel("Skewness: ")
+		self.ptareaskew= QLabel("Skewness: ")
 		self.ptlay.addWidget(self.ptareaskew,4,0,Qt.AlignLeft)
 
-		self.ptcoord= QtGui.QLabel("Center Coord: ")
+		self.ptcoord= QLabel("Center Coord: ")
 		self.ptlay.addWidget(self.ptcoord,4,1,Qt.AlignLeft)
 
-		self.ptareakurt= QtGui.QLabel("Kurtosis: ")
+		self.ptareakurt= QLabel("Kurtosis: ")
 		self.ptlay.addWidget(self.ptareakurt,5,0,Qt.AlignLeft)
 
-		self.ptcoord2= QtGui.QLabel("( ) ")
+		self.ptcoord2= QLabel("( ) ")
 		self.ptlay.addWidget(self.ptcoord2,5,1,Qt.AlignLeft)
 
 		# not really necessary since the pointbox accurately labels the pixel when zoomed in
@@ -2041,8 +2041,8 @@ class EMImageInspector2D(QtGui.QWidget):
 		self.mmtab.addTab(self.probetab,"Probe")
 
 		# Measure tab
-		self.meastab = QtGui.QWidget()
-		self.mtlay = QtGui.QGridLayout(self.meastab)
+		self.meastab = QWidget()
+		self.mtlay = QGridLayout(self.meastab)
 
 		#self.mtl1= QtGui.QLabel("A/Pix")
 		#self.mtl1.setAlignment(Qt.AlignRight)
@@ -2057,82 +2057,82 @@ class EMImageInspector2D(QtGui.QWidget):
 #		print self.mtapix.sizeHint().width(),self.mtapix.sizeHint().height()
 
 
-		self.mtshoworigin= QtGui.QLabel("Origin: 0,0")
+		self.mtshoworigin= QLabel("Origin: 0,0")
 		self.mtlay.addWidget(self.mtshoworigin,1,0,Qt.AlignLeft)
 
-		self.mtshowend= QtGui.QLabel("End: 0,0")
+		self.mtshowend= QLabel("End: 0,0")
 		self.mtlay.addWidget(self.mtshowend,1,1,Qt.AlignLeft)
 
-		self.mtshowlen= QtGui.QLabel("dx,dy: 0")
+		self.mtshowlen= QLabel("dx,dy: 0")
 		self.mtlay.addWidget(self.mtshowlen,2,0,Qt.AlignLeft)
 
-		self.mtshowlen2= QtGui.QLabel("Length: 0")
+		self.mtshowlen2= QLabel("Length: 0")
 		self.mtlay.addWidget(self.mtshowlen2,2,1,Qt.AlignLeft)
 
-		self.mtshowval= QtGui.QLabel("Value: ?")
+		self.mtshowval= QLabel("Value: ?")
 		self.mtlay.addWidget(self.mtshowval,3,0,1,2,Qt.AlignLeft)
 
-		self.mtshowval2= QtGui.QLabel(" ")
+		self.mtshowval2= QLabel(" ")
 		self.mtlay.addWidget(self.mtshowval2,4,0,1,2,Qt.AlignLeft)
 
 
 		self.mmtab.addTab(self.meastab,"Meas")
 
 		# Draw tab
-		self.drawtab = QtGui.QWidget()
-		self.drawlay = QtGui.QGridLayout(self.drawtab)
+		self.drawtab = QWidget()
+		self.drawlay = QGridLayout(self.drawtab)
 
-		self.dtl1 = QtGui.QLabel("Pen Size:")
+		self.dtl1 = QLabel("Pen Size:")
 		self.dtl1.setAlignment(Qt.AlignRight)
 		self.drawlay.addWidget(self.dtl1,0,0)
 
-		self.dtpen = QtGui.QLineEdit("5")
+		self.dtpen = QLineEdit("5")
 		self.drawlay.addWidget(self.dtpen,0,1)
 
-		self.dtl2 = QtGui.QLabel("Pen Val:")
+		self.dtl2 = QLabel("Pen Val:")
 		self.dtl2.setAlignment(Qt.AlignRight)
 		self.drawlay.addWidget(self.dtl2,1,0)
 
-		self.dtpenv = QtGui.QLineEdit("1.0")
+		self.dtpenv = QLineEdit("1.0")
 		self.drawlay.addWidget(self.dtpenv,1,1)
 
-		self.dtl3 = QtGui.QLabel("Pen Size2:")
+		self.dtl3 = QLabel("Pen Size2:")
 		self.dtl3.setAlignment(Qt.AlignRight)
 		self.drawlay.addWidget(self.dtl3,0,2)
 
-		self.dtpen2 = QtGui.QLineEdit("5")
+		self.dtpen2 = QLineEdit("5")
 		self.drawlay.addWidget(self.dtpen2,0,3)
 
-		self.dtl4 = QtGui.QLabel("Pen Val2:")
+		self.dtl4 = QLabel("Pen Val2:")
 		self.dtl4.setAlignment(Qt.AlignRight)
 		self.drawlay.addWidget(self.dtl4,1,2)
 
-		self.dtpenv2 = QtGui.QLineEdit("0")
+		self.dtpenv2 = QLineEdit("0")
 		self.drawlay.addWidget(self.dtpenv2,1,3)
 
 		self.mmtab.addTab(self.drawtab,"Draw")
 
 		# PSpec tab
-		self.pstab = QtGui.QWidget()
-		self.pstlay = QtGui.QGridLayout(self.pstab)
+		self.pstab = QWidget()
+		self.pstlay = QGridLayout(self.pstab)
 
-		self.psbsing = QtGui.QPushButton("Single")
+		self.psbsing = QPushButton("Single")
 		self.pstlay.addWidget(self.psbsing,0,0)
 
-		self.psbstack = QtGui.QPushButton("Stack")
+		self.psbstack = QPushButton("Stack")
 		self.pstlay.addWidget(self.psbstack,0,1)
 
 		self.mmtab.addTab(self.pstab,"PSpec")
 		self.pspecwins=[]
 
 		# Python tab
-		self.pytab = QtGui.QWidget()
-		self.pytlay = QtGui.QGridLayout(self.pytab)
+		self.pytab = QWidget()
+		self.pytlay = QGridLayout(self.pytab)
 
-		self.pyinp = QtGui.QLineEdit()
+		self.pyinp = QLineEdit()
 		self.pytlay.addWidget(self.pyinp,0,0)
 
-		self.pyout = QtGui.QTextEdit()
+		self.pyout = QTextEdit()
 		self.pyout.setText("The displayed image is 'img'.\nEnter an expression above, like img['sigma']")
 		self.pyout.setReadOnly(True)
 		self.pytlay.addWidget(self.pyout,1,0,4,1)
@@ -2153,7 +2153,7 @@ class EMImageInspector2D(QtGui.QWidget):
 		self.vbl.addWidget(self.mmtab)
 
 		# histogram level horiz layout
-		self.hbl = QtGui.QHBoxLayout()
+		self.hbl = QHBoxLayout()
 		self.hbl.setMargin(0)
 		self.hbl.setSpacing(6)
 		self.hbl.setObjectName("hbl")
@@ -2164,47 +2164,47 @@ class EMImageInspector2D(QtGui.QWidget):
 		self.hbl.addWidget(self.hist)
 
 		# Buttons next to the histogram
-		self.vbl2 = QtGui.QGridLayout()
+		self.vbl2 = QGridLayout()
 		self.vbl2.setMargin(0)
 		self.vbl2.setSpacing(6)
 		self.vbl2.setObjectName("vbl2")
 		self.hbl.addLayout(self.vbl2)
 
-		self.invtog = QtGui.QPushButton("Invert")
+		self.invtog = QPushButton("Invert")
 		self.invtog.setCheckable(1)
 		self.vbl2.addWidget(self.invtog,0,0,1,1)#0012
 
 
-		self.histoequal = QtGui.QComboBox(self)
+		self.histoequal = QComboBox(self)
 		self.histoequal.addItem("Normal")
 		self.histoequal.addItem("Hist Flat")
 		self.histoequal.addItem("Hist Gauss")
 		self.vbl2.addWidget(self.histoequal,0,1,1,1)
 
-		self.auto_contrast_button = QtGui.QPushButton("Auto contrast")
+		self.auto_contrast_button = QPushButton("Auto contrast")
 		self.vbl2.addWidget(self.auto_contrast_button,1,0,1,2)
 
 		# FFT Buttons
-		self.fftg=QtGui.QButtonGroup()
+		self.fftg=QButtonGroup()
 		self.fftg.setExclusive(1)
 
-		self.ffttog0 = QtGui.QPushButton("Real")
+		self.ffttog0 = QPushButton("Real")
 		self.ffttog0.setCheckable(1)
 		self.ffttog0.setChecked(1)
 		self.vbl2.addWidget(self.ffttog0,2,0)
 		self.fftg.addButton(self.ffttog0,0)
 
-		self.ffttog1 = QtGui.QPushButton("FFT")
+		self.ffttog1 = QPushButton("FFT")
 		self.ffttog1.setCheckable(1)
 		self.vbl2.addWidget(self.ffttog1,2,1)
 		self.fftg.addButton(self.ffttog1,1)
 
-		self.ffttog2 = QtGui.QPushButton("Amp")
+		self.ffttog2 = QPushButton("Amp")
 		self.ffttog2.setCheckable(1)
 		self.vbl2.addWidget(self.ffttog2,3,0)
 		self.fftg.addButton(self.ffttog2,2)
 
-		self.ffttog3 = QtGui.QPushButton("Pha")
+		self.ffttog3 = QPushButton("Pha")
 		self.ffttog3.setCheckable(1)
 		self.vbl2.addWidget(self.ffttog3,3,1)
 		self.fftg.addButton(self.ffttog3,3)
@@ -2240,7 +2240,7 @@ class EMImageInspector2D(QtGui.QWidget):
 		#self.gammas.setValue(1.0)
 		self.vbl.addWidget(self.gammas)
 
-		self.setWindowIcon(QtGui.QIcon(get_image_directory() +"eman.png"))
+		self.setWindowIcon(QIcon(get_image_directory() +"eman.png"))
 
 		self.lowlim=0
 		self.highlim=1.0
@@ -2332,7 +2332,7 @@ class EMImageInspector2D(QtGui.QWidget):
 
 	def do_snapshot(self,du) :
 		if self.target().data==None or self.target() == None: return
-		fsp=QtGui.QFileDialog.getSaveFileName(self, "Select output file, .pgm, .ppm, .jpeg, .png or .tiff only")
+		fsp=QFileDialog.getSaveFileName(self, "Select output file, .pgm, .ppm, .jpeg, .png or .tiff only")
 		fsp=str(fsp)
 		# Just grab the framebuffer, as a QTImage, and save as tiff
 		self.target().update()
@@ -2360,13 +2360,13 @@ class EMImageInspector2D(QtGui.QWidget):
 
 	def do_saveimg(self,du) :
 		if self.target().data==None : return
-		fsp=QtGui.QFileDialog.getSaveFileName(self, "Select output file, format extrapolated from file extenstion")
+		fsp=QFileDialog.getSaveFileName(self, "Select output file, format extrapolated from file extenstion")
 		fsp=str(fsp)
 		self.target().data.write_image(fsp,-1)
 
 	def do_savestack(self,du) :
 		if self.target().list_data==None : return
-		fsp=str(QtGui.QFileDialog.getSaveFileName(self, "Select root output file, format extrapolated from file extenstion"))
+		fsp=str(QFileDialog.getSaveFileName(self, "Select root output file, format extrapolated from file extenstion"))
 		#fsp=str(fsp).split(".")
 		#if len(fsp)==1 :
 			#fsp1=fsp[0]
@@ -2380,7 +2380,7 @@ class EMImageInspector2D(QtGui.QWidget):
 			im.write_image(fsp,-1)
 
 	def do_makemovie(self,du) :
-		fsp=QtGui.QFileDialog.getSaveFileName(self, "Select output file, format extrapolated from file extenstion. ffmpeg must be installed")
+		fsp=QFileDialog.getSaveFileName(self, "Select output file, format extrapolated from file extenstion. ffmpeg must be installed")
 		if self.target().list_data==None : return
 
 		for i in range(self.stminsb.value()-1,self.stmaxsb.value()):
@@ -2392,7 +2392,7 @@ class EMImageInspector2D(QtGui.QWidget):
 		# vcodec and pix_fmt are for quicktime compatibility. r 2 is 2 FPS
 		ret= os.system("ffmpeg -r 5 -i tmp.%%03d.png -vcodec libx264 -pix_fmt yuv420p  %s"%fsp)
 		if ret!=0 :
-			QtGui.QMessageBox.warning(None,"Error","Movie conversion (ffmpeg) failed. Please make sure ffmpeg is in your path. Frames not deleted.")
+			QMessageBox.warning(None,"Error","Movie conversion (ffmpeg) failed. Please make sure ffmpeg is in your path. Frames not deleted.")
 			return
 
 		for i in range(self.stminsb.value()-1,self.stmaxsb.value()):
@@ -2400,7 +2400,7 @@ class EMImageInspector2D(QtGui.QWidget):
 
 
 	def do_makegifanim(self,du) :
-		fsp=QtGui.QFileDialog.getSaveFileName(self, "Select output gif file")
+		fsp=QFileDialog.getSaveFileName(self, "Select output gif file")
 		if self.target().list_data==None : return
 
 		for i in range(self.stminsb.value()-1,self.stmaxsb.value()):
@@ -2409,7 +2409,7 @@ class EMImageInspector2D(QtGui.QWidget):
 
 		ret= os.system("convert tmp.???.png %s"%fsp)
 		if ret!=0 :
-			QtGui.QMessageBox.warning(None,"Error","GIF conversion failed. Please make sure ImageMagick (convert program) is installed and in your path. Frames not deleted.")
+			QMessageBox.warning(None,"Error","GIF conversion failed. Please make sure ImageMagick (convert program) is installed and in your path. Frames not deleted.")
 			return
 
 		for i in range(self.stminsb.value()-1,self.stmaxsb.value()):

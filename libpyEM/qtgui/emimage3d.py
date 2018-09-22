@@ -138,7 +138,7 @@ class EMImage3DWidget(EMGLWidget, EMLightsDrawer, EMGLProjectionViewMatrices):
 		if isinstance(self.data,EMData):
 			self.set_cam_z_from_fov_image(self.get_fov(),self.data)
 		
-		self.qt_parent.setWindowIcon(QtGui.QIcon(get_image_directory() +"single_image_3d.png"))
+		self.qt_parent.setWindowIcon(QIcon(get_image_directory() +"single_image_3d.png"))
 		#End from get_qt_widget
 		
 		self.updateGL() #Solves "error, OpenGL seems not to be initialized" message
@@ -599,7 +599,7 @@ class EMImage3DWidget(EMGLWidget, EMLightsDrawer, EMGLProjectionViewMatrices):
 				pass
 		self.updateGL()
 
-class EMImageInspector3D(QtGui.QWidget):
+class EMImageInspector3D(QWidget):
 	def set_directional_light_dir(self,d):
 		self.advanced_tab.set_directional_light_dir(d)
 	
@@ -610,16 +610,16 @@ class EMImageInspector3D(QtGui.QWidget):
 		self.advanced_tab.set_positional_light_dir(d)
 	
 	def __init__(self,target) :
-		QtGui.QWidget.__init__(self,None)
+		QWidget.__init__(self,None)
 		self.target=weakref.ref(target)
-		self.setWindowIcon(QtGui.QIcon(get_image_directory() +"desktop.png"))
+		self.setWindowIcon(QIcon(get_image_directory() +"desktop.png"))
 		
-		self.vbl = QtGui.QVBoxLayout(self)
+		self.vbl = QVBoxLayout(self)
 		self.vbl.setMargin(0)
 		self.vbl.setSpacing(6)
 		self.vbl.setObjectName("vbl")
 		
-		self.hbl = QtGui.QHBoxLayout()
+		self.hbl = QHBoxLayout()
 		self.hbl.setMargin(2)
 		self.hbl.setSpacing(6)
 		self.hbl.setObjectName("hbl")
@@ -627,9 +627,9 @@ class EMImageInspector3D(QtGui.QWidget):
 		#self.listwidget = QtGui.QListWidget(self)
 		#self.vbl.addWidget(self.listwidget)
 		
-		self.tabwidget = QtGui.QTabWidget()
+		self.tabwidget = QTabWidget()
 		
-		self.hbl_check = QtGui.QHBoxLayout()
+		self.hbl_check = QHBoxLayout()
 		self.hbl_check.setMargin(0)
 		self.hbl_check.setSpacing(6)
 		self.hbl_check.setObjectName("hbl_check")
@@ -637,36 +637,36 @@ class EMImageInspector3D(QtGui.QWidget):
 		#self.advancedcheck = QtGui.QCheckBox("Advanced",self)
 		#self.hbl_check.addWidget(self.advancedcheck)
 		
-		self.hbl_buttons = QtGui.QHBoxLayout()
+		self.hbl_buttons = QHBoxLayout()
 		self.hbl_buttons.setMargin(0)
 		self.hbl_buttons.setSpacing(6)
 		self.hbl_buttons.setObjectName("hbl_buttons")
 		
-		self.hbl_buttons2 = QtGui.QHBoxLayout()
+		self.hbl_buttons2 = QHBoxLayout()
 		self.hbl_buttons2.setMargin(0)
 		self.hbl_buttons2.setSpacing(6)
 		self.hbl_buttons2.setObjectName("hbl_buttons2")
 		
-		self.addIso = QtGui.QPushButton("Isosurface")
+		self.addIso = QPushButton("Isosurface")
 		self.hbl_buttons.addWidget(self.addIso)
 		
-		self.addVol = QtGui.QPushButton("Volume")
+		self.addVol = QPushButton("Volume")
 		self.hbl_buttons.addWidget(self.addVol)
 		
 		glflags = EMOpenGLFlagsAndTools()
 		if glflags.npt_textures_unsupported(): self.addVol.setEnabled(False)
 		
-		self.addSli = QtGui.QPushButton("Slices")
+		self.addSli = QPushButton("Slices")
 		self.hbl_buttons2.addWidget(self.addSli)
 		
-		self.add_sym = QtGui.QPushButton("Sym")
+		self.add_sym = QPushButton("Sym")
 		self.hbl_buttons2.addWidget(self.add_sym)
 
 		self.vbl.addLayout(self.hbl_buttons)
 		self.vbl.addLayout(self.hbl_buttons2)
 		
-		self.hbl_buttons3 = QtGui.QHBoxLayout()
-		self.delete = QtGui.QPushButton("Delete")
+		self.hbl_buttons3 = QHBoxLayout()
+		self.delete = QPushButton("Delete")
 		self.hbl_buttons3.addWidget(self.delete)
 		self.vbl.addLayout(self.hbl_buttons3)
 		
@@ -760,21 +760,21 @@ class EMImageInspector3D(QtGui.QWidget):
 	
 
 
-class EM3DAdvancedInspector(QtGui.QWidget,EMLightsInspectorBase):
+class EM3DAdvancedInspector(QWidget,EMLightsInspectorBase):
 	
 	
 	def __init__(self,target,parent=None):
-		QtGui.QWidget.__init__(self,None)
+		QWidget.__init__(self,None)
 		EMLightsInspectorBase.__init__(self)
 		self.target=weakref.ref(target)
 		self.parent=weakref.ref(parent)
 
-		self.vbl = QtGui.QVBoxLayout(self)
+		self.vbl = QVBoxLayout(self)
 		self.vbl.setMargin(0)
 		self.vbl.setSpacing(6)
 		self.vbl.setObjectName("vbl")
 
-		self.tabwidget = QtGui.QTabWidget()
+		self.tabwidget = QTabWidget()
 		self.tabwidget.addTab(self.get_main_tab(), "Transform")
 		self.tabwidget.addTab(self.get_light_tab(), "Lights")
 		
@@ -788,26 +788,26 @@ class EM3DAdvancedInspector(QtGui.QWidget,EMLightsInspectorBase):
 	
 	
 	def get_main_tab(self):
-		self.maintab = QtGui.QWidget()
+		self.maintab = QWidget()
 		maintab = self.maintab
-		maintab.vbl = QtGui.QVBoxLayout(self.maintab)
+		maintab.vbl = QVBoxLayout(self.maintab)
 		
-		self.hbl = QtGui.QHBoxLayout()
+		self.hbl = QHBoxLayout()
 		self.hbl.setMargin(2)
 		self.hbl.setSpacing(6)
 		self.hbl.setObjectName("hbl")
 		
-		self.persbut = QtGui.QRadioButton("Perspective")
+		self.persbut = QRadioButton("Perspective")
 		self.persbut.setChecked(self.target().perspective==True)
 		
-		self.orthbut = QtGui.QRadioButton("Orthographic")
+		self.orthbut = QRadioButton("Orthographic")
 		self.orthbut.setChecked(self.target().perspective==False)
 		
-		self.groupbox = QtGui.QVBoxLayout()
+		self.groupbox = QVBoxLayout()
 		self.groupbox.addWidget(self.persbut)
 		self.groupbox.addWidget(self.orthbut)
 		
-		self.viewingvol = QtGui.QGroupBox("Viewing Volume")
+		self.viewingvol = QGroupBox("Viewing Volume")
 		self.viewingvol.setLayout(self.groupbox)
 		
 		self.hbl.addWidget(self.viewingvol)

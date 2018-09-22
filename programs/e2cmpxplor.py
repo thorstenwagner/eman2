@@ -246,7 +246,7 @@ class EMCmpExplorer(EM3DSymModel):
 		if self.current_particle<0 : return
 		ptcl=self.ptcl_data[self.current_particle]
 		
-		progress = QtGui.QProgressDialog("Computing alignments", "Abort", 0, len(self.proj_data),None)
+		progress = QProgressDialog("Computing alignments", "Abort", 0, len(self.proj_data),None)
 		progress.show()
 		# redetermines particle alignments
 		# then we can quickly compute a series of different similarity values
@@ -262,7 +262,7 @@ class EMCmpExplorer(EM3DSymModel):
 					ali=p.align(ropt[0],ptcl,ropt[1],rcmp[0],rcmp[1])
 			except:
 				print(traceback.print_exc())
-				QtGui.QMessageBox.warning(None,"Error","Problem with alignment parameters")
+				QMessageBox.warning(None,"Error","Problem with alignment parameters")
 				progress.close()
 				return
 			p["ptcl.align2d"]=ali["xform.align2d"]
@@ -281,7 +281,7 @@ class EMCmpExplorer(EM3DSymModel):
 	def update_cmp(self):
 		cmpopt=parsemodopt(self.simcmp)
 		
-		progress = QtGui.QProgressDialog("Computing similarities", "Abort", 0, len(self.proj_data),None)
+		progress = QProgressDialog("Computing similarities", "Abort", 0, len(self.proj_data),None)
 		progress.show()
 		ptcl=self.ptcl_data[self.current_particle]
 		for i,p in enumerate(self.proj_data):
@@ -290,11 +290,11 @@ class EMCmpExplorer(EM3DSymModel):
 			try : p["cmp"]=-ptcl.cmp(cmpopt[0],ali,cmpopt[1])
 			except:
 				print(traceback.print_exc())
-				QtGui.QMessageBox.warning(None,"Error","Invalid similarity metric string, or other comparison error")
+				QMessageBox.warning(None,"Error","Invalid similarity metric string, or other comparison error")
 				progress.close()
 				return
 			progress.setValue(i)
-			QtGui.qApp.processEvents()
+			qApp.processEvents()
 			
 		progress.close()
 		self.set_emdata_list_as_data(self.proj_data,"cmp")
@@ -310,33 +310,33 @@ class EMSimmxXplorInspector(EMSymInspector):
 #		print "simmx xplor died"
 		
 	def add_cmp_options(self):
-		self.cmp_tab= QtGui.QWidget()
-		gridl = QtGui.QGridLayout(self.cmp_tab)
+		self.cmp_tab= QWidget()
+		gridl = QGridLayout(self.cmp_tab)
 		
-		self.cmp_shrinkl=QtGui.QLabel("Shrink:")
+		self.cmp_shrinkl=QLabel("Shrink:")
 		gridl.addWidget(self.cmp_shrinkl,0,1)
 		
-		self.cmp_shrink=QtGui.QSpinBox()
+		self.cmp_shrink=QSpinBox()
 		self.cmp_shrink.setRange(1,5)
 		self.cmp_shrink.setValue(1)
 		gridl.addWidget(self.cmp_shrink,0,2)
 		
-		self.cmp_ali=QtGui.QLineEdit("rotate_translate_flip")
+		self.cmp_ali=QLineEdit("rotate_translate_flip")
 		gridl.addWidget(self.cmp_ali,1,0,1,2)
 		
-		self.cmp_alicmp=QtGui.QLineEdit("dot")
+		self.cmp_alicmp=QLineEdit("dot")
 		gridl.addWidget(self.cmp_alicmp,1,2,1,2)
 		
-		self.cmp_refine=QtGui.QLineEdit("refine")
+		self.cmp_refine=QLineEdit("refine")
 		gridl.addWidget(self.cmp_refine,2,0,1,2)
 		
-		self.cmp_refinecmp=QtGui.QLineEdit("dot:normalize=1")
+		self.cmp_refinecmp=QLineEdit("dot:normalize=1")
 		gridl.addWidget(self.cmp_refinecmp,2,2,1,2)
 		
-		self.cmp_realignb=QtGui.QPushButton("Set Alignment")
+		self.cmp_realignb=QPushButton("Set Alignment")
 		gridl.addWidget(self.cmp_realignb,3,2)
 		
-		self.cmp_combo=QtGui.QComboBox()
+		self.cmp_combo=QComboBox()
 		self.cmp_combo.setEditable(True)
 		self.cmp_combo.setInsertPolicy(self.cmp_combo.InsertAlphabetically)
 		self.cmp_combo.addItem("dot:normalize=1")
