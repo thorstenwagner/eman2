@@ -87,7 +87,7 @@ class Animator(object):
 	
 	def __enable_timer(self):
 		if self.timer_enabled == False:
-			self.timer = QtCore.QTimer()
+			self.timer = QTimer()
 			self.timer.timeout.connect(self.time_out)
 			
 			self.timer.start(self.timer_interval)

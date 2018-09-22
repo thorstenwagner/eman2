@@ -63,7 +63,7 @@ try:
 	def ipy_on_timer():
 		image_update()
 
-	ipytimer = QtCore.QTimer()
+	ipytimer = QTimer()
 	ipytimer.timeout.connect(ipy_on_timer)
 	ipytimer.start(200)
 	

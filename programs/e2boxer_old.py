@@ -1145,7 +1145,7 @@ class SwarmBoxer(object):
 			self.__remove_proximal_particles()
 		else:
 			from eman2_gui.PyQt import QtCore
-			get_application().setOverrideCursor(QtCore.Qt.BusyCursor)
+			get_application().setOverrideCursor(Qt.BusyCursor)
 			self.proximity_threshold = val
 			if len(self.proximal_boxes) == 0: return
 
@@ -1160,7 +1160,7 @@ class SwarmBoxer(object):
 					boxes.append(self.proximal_boxes.pop(idx))
 
 				self.target().add_boxes(boxes)
-			get_application().setOverrideCursor(QtCore.Qt.ArrowCursor)
+			get_application().setOverrideCursor(Qt.ArrowCursor)
 
 		cache = get_idd_image_entry(self.target().current_file(),SwarmBoxer.SWARM_BOXERS,dfl=[])
 		if len(cache) > 0:
@@ -1186,7 +1186,7 @@ class SwarmBoxer(object):
 	def __remove_proximal_particles(self):
 		if self.gui_mode:
 			from eman2_gui.PyQt import QtCore
-			get_application().setOverrideCursor(QtCore.Qt.BusyCursor)
+			get_application().setOverrideCursor(Qt.BusyCursor)
 		boxes = self.target().get_boxes()
 		proximal_boxes_idxs = self.get_proximal_boxes(boxes)
 		proximal_boxes_idxs.sort()
@@ -1198,7 +1198,7 @@ class SwarmBoxer(object):
 		self.target().remove_boxes(proximal_boxes_idxs)
 		if self.gui_mode:
 			from eman2_gui.PyQt import QtCore
-			get_application().setOverrideCursor(QtCore.Qt.ArrowCursor)
+			get_application().setOverrideCursor(Qt.ArrowCursor)
 
 	def check_proximity_add_boxes(self,boxes):
 		'''
@@ -1480,7 +1480,7 @@ class SwarmBoxer(object):
 		self.proximal_boxes = [] # this is always res
 		if self.gui_mode:
 			from eman2_gui.PyQt import QtCore
-			get_application().setOverrideCursor(QtCore.Qt.BusyCursor)
+			get_application().setOverrideCursor(Qt.BusyCursor)
 
 		if self.signal_template_update or force_remove_auto_boxes:
 			self.target().clear_boxes([SwarmBoxer.AUTO_NAME])
@@ -1540,7 +1540,7 @@ class SwarmBoxer(object):
 			if not self.update_opt_picking_data():
 				if self.gui_mode:
 					from eman2_gui.PyQt import QtCore
-					get_application().setOverrideCursor(QtCore.Qt.ArrowCursor)
+					get_application().setOverrideCursor(Qt.ArrowCursor)
 				print("funny error")
 				return
 
@@ -1625,7 +1625,7 @@ class SwarmBoxer(object):
 		if self.gui_mode:
 			from eman2_gui.PyQt import QtCore
 			self.panel_object.enable_auto_box(False)
-			get_application().setOverrideCursor(QtCore.Qt.ArrowCursor)
+			get_application().setOverrideCursor(Qt.ArrowCursor)
 			self.target().set_status_message("Autoboxed %d Particles" %len(boxes), 10000)
 		else:
 			print("Autoboxed %d Particles" %len(boxes))
@@ -2038,7 +2038,7 @@ class GaussPanel(object):
 			vbl.addLayout(hbl_invcont)
 
 			hbl_gwidth = QtGui.QHBoxLayout()
-			self.gauss_width_slider = QtGui.QSlider(QtCore.Qt.Horizontal)
+			self.gauss_width_slider = QtGui.QSlider(Qt.Horizontal)
 			self.gauss_width_slider.setRange( -100, 100 )
 			self.gauss_width_slider.setValue( self.SLVAL )
 			hbl_gwidth.addWidget( self.gauss_width_slider)
@@ -2728,7 +2728,7 @@ class GaussBoxer(object):
 		print("Gauss method............start auto boxing")
 		if self.gui_mode:
 			from eman2_gui.PyQt import QtCore
-			get_application().setOverrideCursor(QtCore.Qt.BusyCursor)
+			get_application().setOverrideCursor(Qt.BusyCursor)
 
 		# user pawelautoboxer (gauss method) to compute soln
 		# downsample input image.
@@ -2798,7 +2798,7 @@ class GaussBoxer(object):
 
 		if self.gui_mode:
 			from eman2_gui.PyQt import QtCore
-			get_application().setOverrideCursor(QtCore.Qt.ArrowCursor)
+			get_application().setOverrideCursor(Qt.ArrowCursor)
 			self.target().set_status_message("Autoboxed %d Particles" %len(boxes), 10000)
 		else:
 			print("Autoboxed %d Particles" %len(boxes))

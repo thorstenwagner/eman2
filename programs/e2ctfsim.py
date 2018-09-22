@@ -90,7 +90,7 @@ except:
 
 class MyListWidget(QtGui.QListWidget):
 	"""Exactly like a normal list widget but intercepts a few keyboard events"""
-	keypress = QtCore.pyqtSignal(QtGui.QKeyEvent)
+	keypress = pyqtSignal(QtGui.QKeyEvent)
 
 	def keyPressEvent(self,event):
 
@@ -103,7 +103,7 @@ class MyListWidget(QtGui.QListWidget):
 
 
 class GUIctfsim(QtGui.QWidget):
-	module_closed = QtCore.pyqtSignal()
+	module_closed = pyqtSignal()
 
 	def __init__(self,application,apix=1.0,voltage=300.0,cs=4.1,ac=10.0,samples=256,apply=None):
 		"""CTF simulation dialog

@@ -216,7 +216,7 @@ class EMDataItem3DInspector(EMItem3DInspector):
 		gridbox.addWidget(dataframe, 2, 0)
 
 		self.file_path_label = QtGui.QLabel()
-		self.file_path_label.setAlignment(QtCore.Qt.AlignCenter)
+		self.file_path_label.setAlignment(Qt.AlignCenter)
 		self.file_path_label.setFont(lfont)
 		gridbox.addWidget(self.file_path_label, 3, 0)
 
@@ -901,7 +901,7 @@ class EMVolumeInspector(EMInspectorControlShape):
 		probeframe = QtGui.QFrame()
 		probeframe.setFrameShape(QtGui.QFrame.StyledPanel)
 		probelayout = QtGui.QGridLayout()
-		probelayout.setAlignment(QtCore.Qt.AlignTop)
+		probelayout.setAlignment(Qt.AlignTop)
 		self.range = QtGui.QLabel("Range: %1.3f, %1.3f"%(self.item3d().minden,self.item3d().maxden))
 		self.level = QtGui.QLabel("Level: %1.3f"%self.item3d().isothr)
 		self.level.setFixedSize(100,40)
@@ -923,7 +923,7 @@ class EMVolumeInspector(EMInspectorControlShape):
 		vol_grid_layout.addWidget(self.brightness_slider, 2, 0, 1, 1)
 		vol_grid_layout.addWidget(self.contrast_slider, 3, 0, 1, 1)
 
-		self.level.setAlignment(QtCore.Qt.AlignCenter)
+		self.level.setAlignment(Qt.AlignCenter)
 		vol_grid_layout.setRowStretch(4,1)
 		vol_grid_layout.setColumnStretch(1,10)
 		vol_grid_layout.setColumnStretch(2,10)
@@ -951,7 +951,7 @@ class EMVolumeInspector(EMInspectorControlShape):
 
 		self.histogram_widget.setDynamicProbe(self.probeposition, self.probecolor, self.probepresent,levelvalue) # The needs to be node AFTER the data is set
 
-		self.cappingcolor.newcolor[QtCore.QColor].connect(self._on_cap_color)
+		self.cappingcolor.newcolor[QColor].connect(self._on_cap_color)
 
 	def _on_cap_color(self, color):
 		rgb = color.getRgb()
@@ -1075,7 +1075,7 @@ class EMIsosurfaceInspector(EMInspectorControlShape):
 		cbrframe = QtGui.QFrame()
 		cbrframe.setFrameShape(QtGui.QFrame.StyledPanel)
 		cbrlayout = QtGui.QGridLayout()
-		cbrlayout.setAlignment(QtCore.Qt.AlignTop)
+		cbrlayout.setAlignment(Qt.AlignTop)
 		self.colorbyradius = QtGui.QCheckBox("Color By Radius")
 		self.colorbyradius.setChecked(False)
 		self.innercolorscaling = EMSpinWidget(0.0, 1.0, rounding=0)
@@ -1084,9 +1084,9 @@ class EMIsosurfaceInspector(EMInspectorControlShape):
 		self.outercolorscaling.setMinimumWidth(120)
 		cbrlayout.addWidget(self.colorbyradius, 0, 0, 1, 2)
 		cbrlabelinner = QtGui.QLabel("Inner Shell")
-		cbrlabelinner.setAlignment(QtCore.Qt.AlignCenter)
+		cbrlabelinner.setAlignment(Qt.AlignCenter)
 		cbrlabelouter = QtGui.QLabel("Outer Shell")
-		cbrlabelouter.setAlignment(QtCore.Qt.AlignCenter)
+		cbrlabelouter.setAlignment(Qt.AlignCenter)
 		cbrlayout.addWidget(cbrlabelinner, 1, 0, 1, 1)
 		cbrlayout.addWidget(cbrlabelouter, 1, 1, 1, 1)
 		cbrlayout.addWidget(self.innercolorscaling, 2, 0, 1, 1)
@@ -1097,7 +1097,7 @@ class EMIsosurfaceInspector(EMInspectorControlShape):
 		cbmframe = QtGui.QFrame()
 		cbmframe.setFrameShape(QtGui.QFrame.StyledPanel)
 		cbmlayout = QtGui.QGridLayout()
-		cbmlayout.setAlignment(QtCore.Qt.AlignTop)
+		cbmlayout.setAlignment(Qt.AlignTop)
 		self.colorbymap = QtGui.QCheckBox("Color By Map")
 		self.colorbymap.setEnabled(False)
 		self.colormap = QtGui.QLineEdit("")

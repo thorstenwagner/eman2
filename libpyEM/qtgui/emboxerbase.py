@@ -1125,7 +1125,7 @@ class ParticlesWindowEventHandler(BoxEventsHandler):
 	def box_released(self,event,lc):
 		if lc == None or lc[0] == None: return
 
-		if event.modifiers()&PyQt4.QtCore.Qt.ShiftModifier:
+		if event.modifiers()&PyQt4.Qt.ShiftModifier:
 			self.particle_window.remove_particle_image(lc[0],event,True)
 			self.particle_window.force_display_update()
 			return
@@ -1741,7 +1741,7 @@ class EMBoxerModuleVitals(object):
 		self.full_box_update()
 
 from .PyQt import QtCore
-class EMBoxerModule(EMBoxerModuleVitals, QtCore.QObject):
+class EMBoxerModule(EMBoxerModuleVitals, QObject):
 	'''
 	The EMBoxerModule is like a coordinator. It has 4 widgets: 1 inspector, 1 2D window viewer, and 2 particle
 	stack viewers (one for viewing boxed particles, one for viewing thumbnails).
@@ -1749,7 +1749,7 @@ class EMBoxerModule(EMBoxerModuleVitals, QtCore.QObject):
 	that would otherwise not necessary interact. Overall the interactions can be complicated and this class is an
 	attempt to correctly granulate the overall design and the complexity of the classes involved.
 	'''
-	module_closed = QtCore.pyqtSignal()
+	module_closed = pyqtSignal()
 
 	def __init__(self,file_names=[],box_size=128):
 		'''
@@ -1757,7 +1757,7 @@ class EMBoxerModule(EMBoxerModuleVitals, QtCore.QObject):
 		@exception RuntimeError raised if the file does not exist
 		'''
 		EMBoxerModuleVitals.__init__(self, file_names=file_names, box_size=box_size)
-		QtCore.QObject.__init__(self)
+		QObject.__init__(self)
 
 		self.signal_slot_handlers = {} # this is a dictionary, keys are (somewhat random) names, values are event handlers such as Main2DWindowEventHandler. This dict has the only reference to the event handlers
 		self.tools = {} # this is just to keep track of all the tools that have been added
@@ -1959,7 +1959,7 @@ class EMBoxerModule(EMBoxerModuleVitals, QtCore.QObject):
 
 		if self.thumbs_window == None:
 			from .PyQt import QtCore
-			get_application().setOverrideCursor(QtCore.Qt.BusyCursor)
+			get_application().setOverrideCursor(Qt.BusyCursor)
 
 
 			if self.image_thumbs == None or redo_thumbs:
@@ -1977,7 +1977,7 @@ class EMBoxerModule(EMBoxerModuleVitals, QtCore.QObject):
 			for tool in list(self.tools.values()):
 				self.signal_slot_handlers["thumbs_window"].add_mouse_handler(tool)
 
-			get_application().setOverrideCursor(QtCore.Qt.ArrowCursor)
+			get_application().setOverrideCursor(Qt.ArrowCursor)
 
 	def thumbs_window_closed(self):
 		self.thumbs_window = None
@@ -2100,7 +2100,7 @@ class EMBoxerModule(EMBoxerModuleVitals, QtCore.QObject):
 
 	def set_current_file(self,file_name):
 		from .PyQt import QtCore
-		get_application().setOverrideCursor(QtCore.Qt.BusyCursor)
+		get_application().setOverrideCursor(Qt.BusyCursor)
 
 		if not file_exists(file_name): raise RuntimeError("The file %s does not exist" %file_name)
 
@@ -2127,7 +2127,7 @@ class EMBoxerModule(EMBoxerModuleVitals, QtCore.QObject):
 		for name, mouse_handler in list(self.tools.items()):
 			mouse_handler.set_current_file(file_name,name==self.current_tool)
 
-		get_application().setOverrideCursor(QtCore.Qt.ArrowCursor)
+		get_application().setOverrideCursor(Qt.ArrowCursor)
 
 	def __init_main_2d_window(self):
 		from .emimage2d import EMImage2DWidget
@@ -2169,7 +2169,7 @@ from .emsprworkflow import WorkFlowTask
 from .emapplication import error
 class EMBoxerWriteOutputTask(WorkFlowTask):
 	"""Use this form for writing boxed particles and/or coordinate files to disk."""
-	task_idle = QtCore.pyqtSignal()
+	task_idle = pyqtSignal()
 
 	def __init__(self,file_names=[],output_formats=["hdf","spi","img","bdb"],dfl_boxsize=128, current_tool=None):
 		WorkFlowTask.__init__(self)
@@ -2646,7 +2646,7 @@ class EMBoxerInspector(QtGui.QWidget):
 
 	def keyPressEvent(self,event):
 		from .PyQt import QtCore
-		if event.key() == QtCore.Qt.Key_F1:
+		if event.key() == Qt.Key_F1:
 			try:
 				import webbrowser
 				webbrowser.open("http://blake.bcm.edu/emanwiki/e2boxer")
@@ -2660,7 +2660,7 @@ class EMBoxerInspector(QtGui.QWidget):
 					test = self.browser
 				except:
 					self.browser = QtWebKit.QWebView()
-					self.browser.load(QtCore.QUrl("http://blake.bcm.edu/emanwiki/e2boxer"))
+					self.browser.load(QUrl("http://blake.bcm.edu/emanwiki/e2boxer"))
 					self.browser.resize(800,800)
 
 				if not self.browser.isVisible(): self.browser.show()

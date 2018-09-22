@@ -267,7 +267,7 @@ class EMCmpExplorer(EM3DSymModel):
 				return
 			p["ptcl.align2d"]=ali["xform.align2d"]
 			progress.setValue(i)
-			QtCore.QCoreApplication.instance().processEvents()
+			QCoreApplication.instance().processEvents()
 		
 		progress.close()
 		self.update_cmp()

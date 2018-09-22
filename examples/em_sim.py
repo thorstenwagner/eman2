@@ -817,7 +817,7 @@ class Microscope(QtOpenGL.QGLWidget):
 		p=self.scr_to_img(QMouseEvent.pos())
 		self.startpy=p[1]
 		modifiers = QtGui.QApplication.keyboardModifiers()
-		if modifiers == QtCore.Qt.ShiftModifier:
+		if modifiers == Qt.ShiftModifier:
 			self.hold_shift=True
 		else:
 			self.hold_shift=False

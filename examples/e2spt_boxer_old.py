@@ -1004,7 +1004,7 @@ def sptboxergui(options,args):
 
 
 			# The timer event handles displaying the results processed by the other thread
-			self.timer=QtCore.QTimer(self)
+			self.timer=QTimer(self)
 			self.timer.timeout.connect(self.event_timer)
 			self.timer.start(500)
 
@@ -1176,7 +1176,7 @@ def sptboxergui(options,args):
 
 	class EMTomoBoxer(QtGui.QMainWindow):
 		"""This class represents the EMTomoBoxer application instance.  """
-		module_closed = QtCore.pyqtSignal()
+		module_closed = pyqtSignal()
 
 		def __init__(self,application,data=None,datafile=None,yshort=False,apix=0.0,boxsize=32,shrink=1,contrast=None,center=None,mod=False,normalize=False):
 			QtGui.QWidget.__init__(self)

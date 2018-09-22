@@ -17,21 +17,21 @@ class MouseAndKeyModifiers(QtGui.QWidget):
 	def mousePressEvent(self, event):
 		self.text_browser.clear()
 		self.text_browser.append("Mouse press info...")
-		if event.buttons()&QtCore.Qt.LeftButton:
+		if event.buttons()&Qt.LeftButton:
 			self.text_browser.append("Left Button")
-		if event.buttons()&QtCore.Qt.MidButton:
+		if event.buttons()&Qt.MidButton:
 			self.text_browser.append("Middle Button")
-		if event.buttons()&QtCore.Qt.RightButton:
+		if event.buttons()&Qt.RightButton:
 			self.text_browser.append("Right Button")
-		if event.modifiers()&QtCore.Qt.ShiftModifier:
+		if event.modifiers()&Qt.ShiftModifier:
 			self.text_browser.append("Shift Modifier")
-		if event.modifiers()&QtCore.Qt.ControlModifier:
+		if event.modifiers()&Qt.ControlModifier:
 			#Apple/Command key on a Mac... NOT CONTROL KEY ON A MAC!
 			self.text_browser.append("Control Modifier")
-		if event.modifiers()&QtCore.Qt.AltModifier:
+		if event.modifiers()&Qt.AltModifier:
 			#Alt/Option key on a Mac. An EMAN convention is that Alt+Left click works like a middle click.
 			self.text_browser.append("Alt Modifier")
-		if event.modifiers()&QtCore.Qt.MetaModifier:
+		if event.modifiers()&Qt.MetaModifier:
 			#Control Key on a Mac. A Mac convention is that Ctrl+Left Click works like a right click.
 			self.text_browser.append("Meta Modifier")
 

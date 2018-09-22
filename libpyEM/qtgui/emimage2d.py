@@ -71,15 +71,15 @@ from .emglobjects import EMOpenGLFlagsAndTools
 class EMImage2DWidget(EMGLWidget):
 	"""
 	"""
-	origin_update = QtCore.pyqtSignal(tuple)
-	signal_set_scale = QtCore.pyqtSignal(float)
-	mousedown = QtCore.pyqtSignal(QtGui.QMouseEvent,tuple)
-	mousedrag = QtCore.pyqtSignal(QtGui.QMouseEvent,tuple)
-	mousemove = QtCore.pyqtSignal(QtGui.QMouseEvent,tuple)
-	mouseup = QtCore.pyqtSignal(QtGui.QMouseEvent,tuple)
-	mousewheel = QtCore.pyqtSignal(QtGui.QWheelEvent)
-	signal_increment_list_data = QtCore.pyqtSignal(float)
-	keypress = QtCore.pyqtSignal(QtGui.QKeyEvent)
+	origin_update = pyqtSignal(tuple)
+	signal_set_scale = pyqtSignal(float)
+	mousedown = pyqtSignal(QtGui.QMouseEvent,tuple)
+	mousedrag = pyqtSignal(QtGui.QMouseEvent,tuple)
+	mousemove = pyqtSignal(QtGui.QMouseEvent,tuple)
+	mouseup = pyqtSignal(QtGui.QMouseEvent,tuple)
+	mousewheel = pyqtSignal(QtGui.QWheelEvent)
+	signal_increment_list_data = pyqtSignal(float)
+	keypress = pyqtSignal(QtGui.QKeyEvent)
 
 	allim=WeakKeyDictionary()
 
@@ -263,8 +263,8 @@ class EMImage2DWidget(EMGLWidget):
 
 	def sizeHint(self):
 #		print self.get_parent_suggested_size()
-		if self.data==None : return QtCore.QSize(512,512)
-		return QtCore.QSize(*self.get_parent_suggested_size())
+		if self.data==None : return QSize(512,512)
+		return QSize(*self.get_parent_suggested_size())
 
 	def set_disp_proc(self,procs):
 		self.disp_proc=procs

@@ -366,7 +366,7 @@ class EMParentWin(QtGui.QWidget,Animator):
 	
 class ImgHistogram(QtGui.QWidget):
 	""" A small fixed-size histogram widget"""
-	thresholdChanged = QtCore.pyqtSignal(float)
+	thresholdChanged = pyqtSignal(float)
 
 	def __init__(self,parent):
 		QtGui.QWidget.__init__(self,parent)
@@ -375,7 +375,7 @@ class ImgHistogram(QtGui.QWidget):
 		self.font=QtGui.QFont("Helvetica", 12);
 		self.probe=None
 		self.histdata=None
-		self.setMinimumSize(QtCore.QSize(258,128))
+		self.setMinimumSize(QSize(258,128))
 		self.volume = False
 		
 		self.upposition = 0

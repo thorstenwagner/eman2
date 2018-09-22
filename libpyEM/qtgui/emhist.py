@@ -190,7 +190,7 @@ class EMHistogramWidget(EMGLWidget):
 				try: test = self.browser
 				except:
 					self.browser = QtWebKit.QWebView()
-					self.browser.load(QtCore.QUrl("http://blake.bcm.edu/emanwiki/e2display"))
+					self.browser.load(QUrl("http://blake.bcm.edu/emanwiki/e2display"))
 					self.browser.resize(800,800)
 				if not self.browser.isVisible(): self.browser.show()
 			except: pass
@@ -1414,7 +1414,7 @@ class DragListWidget(QtGui.QListWidget):
 			sdata.write("\n")
 		# start the drag operation
 		drag = QtGui.QDrag(self)
-		mimeData = QtCore.QMimeData()
+		mimeData = QMimeData()
 		mimeData.setText(sdata.getvalue())
 		drag.setMimeData(mimeData)
 		dropact = drag.exec_(Qt.CopyAction)

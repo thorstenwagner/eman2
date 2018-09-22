@@ -62,7 +62,7 @@ class PMComboBox(QtGui.QComboBox):
 
 class PMBaseWidget(QtGui.QWidget):
 	""" A base widget upon which all the other PM widgets are derived """
-	pmmessage = QtCore.pyqtSignal(str)
+	pmmessage = pyqtSignal(str)
 
 	def __init__(self, name, mode="",returnNone=False):
 		QtGui.QWidget.__init__(self)
@@ -385,7 +385,7 @@ class PMBoolWidget(PMBaseWidget):
 
 class PMFileNameWidget(PMBaseWidget):
 	""" A Widget for geting filenames. Type is checked """
-	pmfilename = QtCore.pyqtSignal(str)
+	pmfilename = pyqtSignal(str)
 	@staticmethod
 	def copyWidget(widget):
 		""" Basically a copy constructor to get around QT and python limitations """
@@ -432,7 +432,7 @@ class PMFileNameWidget(PMBaseWidget):
 		self.window = eval(self.browser)
 		self.window.ok.connect(self._on_ok)
 		self.window.cancel.connect(self._on_cancel)
-		self.window.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+		self.window.setAttribute(Qt.WA_DeleteOnClose)
 		self.window.show()
 
 	def getValue(self):
@@ -677,7 +677,7 @@ class PMSymWidget(PMBaseWidget):
 
 		gridbox = QtGui.QGridLayout()
 		label = QtGui.QLabel(name)
-		label.setAlignment(QtCore.Qt.AlignVCenter | QtCore.Qt.AlignRight)
+		label.setAlignment(Qt.AlignVCenter | Qt.AlignRight)
 		self.combobox = PMComboBox()
 		self.symnumbox = PMIntEntryWidget("Symmetry Number", 0, mode, lrange=0)
 		gridbox.addWidget(label, 0, 0)
@@ -828,7 +828,7 @@ class PMTableBase(PMBaseWidget):
 
 class PMFSCTableWidget(PMTableBase):
 	""" A widget for generating FSC tables"""
-	pmmessage = QtCore.pyqtSignal(str)
+	pmmessage = pyqtSignal(str)
 
 	@staticmethod
 	def copyWidget(widget):
@@ -865,7 +865,7 @@ class PMFSCTableWidget(PMTableBase):
 	def setValue(self, value, quiet=False):
 		self.updateTable()
 		str(value)
-		wlist = self.tablewidget.findItems(str(value), QtCore.Qt.MatchExactly)
+		wlist = self.tablewidget.findItems(str(value), Qt.MatchExactly)
 		# Only set if something was found
 		if wlist:
 			self.tablewidget.setCurrentItem(wlist[0])

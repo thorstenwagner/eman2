@@ -67,7 +67,7 @@ ipythr.run()
 app = EMApp()
 EMAN2.GUIMode=True
 EMAN2.app=app
-mytimer = QtCore.QTimer()
+mytimer = QTimer()
 mytimer.timeout.connect(on_timer)
 mytimer.start(500)
 

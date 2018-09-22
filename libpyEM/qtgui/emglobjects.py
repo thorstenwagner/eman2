@@ -1166,9 +1166,9 @@ class Camera2(object):
 	Then call 'position' in your main OpenGL draw function before drawing anything.
 	
 	"""
-	scale_delta = QtCore.pyqtSignal(float)
-	apply_rotation = QtCore.pyqtSignal(float)
-	apply_translation = QtCore.pyqtSignal(float)
+	scale_delta = pyqtSignal(float)
+	apply_rotation = pyqtSignal(float)
+	apply_translation = pyqtSignal(float)
 
 	def __init__(self,parent):
 		self.emit_events = False
@@ -2026,12 +2026,12 @@ def get_default_gl_colors():
 	
 	return colors
 
-class EM3DModel(QtCore.QObject):
-	inspector_shown = QtCore.pyqtSignal()
+class EM3DModel(QObject):
+	inspector_shown = pyqtSignal()
 	FTGL = "ftgl"
 	GLUT = "glut"
 	def __init__(self, gl_widget):
-		QtCore.QObject.__init__(self)
+		QObject.__init__(self)
 		self.gl_widget = weakref.ref(gl_widget)	#A GL context must exist before OpenGL statements are used, so the constructor requires this.
 		
 		#TODO: Figure out which of these is needed

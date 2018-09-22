@@ -283,9 +283,9 @@ def EMSelectorBaseTemplate(Type):
 	Types currently in use are the QtGui.QWidget and the QtGui.QDialog
 	'''
 	class EMSelectorBase(Type):
-		ok = QtCore.pyqtSignal(list)
-		oky = QtCore.pyqtSignal()
-		cancel = QtCore.pyqtSignal(list)
+		ok = pyqtSignal(list)
+		oky = pyqtSignal()
+		cancel = pyqtSignal(list)
 
 		def __init__(self, single_selection=False):
 			'''
@@ -337,7 +337,7 @@ def EMSelectorBaseTemplate(Type):
 			self.paint_events = 0
 			
 			self.timer_interval = 500 # half a second
-			self.timer = QtCore.QTimer()
+			self.timer = QTimer()
 			self.timer.timeout.connect(self.time_out) # for auto refresh
 			
 			self.timer.start(self.timer_interval)

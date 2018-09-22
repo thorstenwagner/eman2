@@ -1399,7 +1399,7 @@ if ENABLE_GUI:
 
 			if self.main_image.get_shapes(): #helix boxes already exist
 				box_key = self.main_image.get_shapes().closest_collision(click_loc[0], click_loc[1], fuzzy=True)
-				if event.modifiers()&QtCore.Qt.ShiftModifier:
+				if event.modifiers()&Qt.ShiftModifier:
 					if not box_key:
 						self.edit_mode = None #Nothing to delete
 					else:
@@ -1429,7 +1429,7 @@ if ENABLE_GUI:
 							self.edit_mode = "error"
 
 			else: #no boxes exist
-				if event.modifiers()&QtCore.Qt.ShiftModifier: #nothing to delete
+				if event.modifiers()&Qt.ShiftModifier: #nothing to delete
 					self.edit_mode = None
 				else:
 					self.edit_mode = "new" #create new box

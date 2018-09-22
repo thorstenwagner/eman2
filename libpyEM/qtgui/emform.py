@@ -236,12 +236,12 @@ class EMParamTable(list):
 							selected_items.append(item)
 				else:
 					item.setFlags(flag3)
-				item.setTextAlignment(QtCore.Qt.AlignHCenter)
+				item.setTextAlignment(Qt.AlignHCenter)
 				
 				table_widget.setItem(j, i, item)
 				
 			item = QtGui.QTableWidgetItem(param.desc_short)
-			item.setTextAlignment(QtCore.Qt.AlignHCenter)
+			item.setTextAlignment(Qt.AlignHCenter)
 			item.setToolTip(param.desc_long)
 			table_widget.setHorizontalHeaderItem(i,item)
 			
@@ -249,7 +249,7 @@ class EMParamTable(list):
 			item.setSelected(True)
 
 class EMFileTable(QtGui.QTableWidget):
-	updateform = QtCore.pyqtSignal()
+	updateform = pyqtSignal()
 
 	def __init__(self,listed_names=[],name="filenames",desc_short="File Names",desc_long="A list of file names",single_selection=False,enable_save=True):
 		'''
@@ -293,7 +293,7 @@ class EMFileTable(QtGui.QTableWidget):
 		
 	def register_animated_column(self,column_title):
 		if self.timer == None:
-			self.timer = QtCore.QTimer()
+			self.timer = QTimer()
 			self.timer.timeout.connect(self.time_out)
 			self.timer.start(self.timer_interval)
 			
@@ -473,12 +473,12 @@ class EMFileTable(QtGui.QTableWidget):
 			if name in self.default_selections:
 				selected_items.append(item)
 	
-			item.setTextAlignment(QtCore.Qt.AlignHCenter)
+			item.setTextAlignment(Qt.AlignHCenter)
 				
 			self.setItem(i, 0, item)
 				
 		item = QtGui.QTableWidgetItem(self.desc_short)
-		item.setTextAlignment(QtCore.Qt.AlignHCenter)
+		item.setTextAlignment(Qt.AlignHCenter)
 		item.setToolTip(self.desc_long)
 		self.setHorizontalHeaderItem(0,item)
 		
@@ -486,14 +486,14 @@ class EMFileTable(QtGui.QTableWidget):
 		col = 1
 		for cd in self.column_data:
 			item = QtGui.QTableWidgetItem(cd.name)
-			item.setTextAlignment(QtCore.Qt.AlignHCenter)
+			item.setTextAlignment(Qt.AlignHCenter)
 			item.setToolTip(cd.tooltip)
 			
 			self.setHorizontalHeaderItem(col,item)
 			for i in range(0,len(self.listed_names)):
 				try : item = QtGui.QTableWidgetItem(cd.function(self.listed_names[i]))
 				except : item = QtGui.QTableWidgetItem("-")
-				item.setTextAlignment(QtCore.Qt.AlignHCenter)
+				item.setTextAlignment(Qt.AlignHCenter)
 				item.setFlags(flag3)
 				if cd.lt_function: # This is how sort gets customized
 					import new
@@ -523,7 +523,7 @@ class EMFileTable(QtGui.QTableWidget):
 			if self.icon != None: item = QtGui.QTableWidgetItem(self.icon,self.display_name(list_of_names[i]))
 			else: item = QtGui.QTableWidgetItem(self.display_name(list_of_names[i]))
 			item.setFlags(flag2|flag3)
-			item.setTextAlignment(QtCore.Qt.AlignHCenter)
+			item.setTextAlignment(Qt.AlignHCenter)
 			self.setItem(r+i, 0, item)
 			new_items.append(item)
 			if self.single_selection and i == (len(list_of_names)-1):
@@ -531,7 +531,7 @@ class EMFileTable(QtGui.QTableWidget):
 			
 			for j, cd in enumerate(self.column_data):
 				item = QtGui.QTableWidgetItem(cd.function(list_of_names[i]))
-				item.setTextAlignment(QtCore.Qt.AlignHCenter)
+				item.setTextAlignment(Qt.AlignHCenter)
 				item.setFlags(flag3)
 				if cd.lt_function: # This is how sort gets customized
 					import new
@@ -1091,10 +1091,10 @@ class EMFormWidget(QtGui.QWidget):
 	If ok is clicked the "emform_ok" signal is emitted along with a dictionary containing all of the form entries
 	If cancel is clicked the "emform_cancel" signal is emmitted. No extra information is sent in this case
 	'''
-	emform_close = QtCore.pyqtSignal()
-	emform_ok = QtCore.pyqtSignal(dict)
-	emform_cancel = QtCore.pyqtSignal()
-	display_file = QtCore.pyqtSignal(str)
+	emform_close = pyqtSignal()
+	emform_ok = pyqtSignal(dict)
+	emform_cancel = pyqtSignal()
+	display_file = pyqtSignal(str)
 
 	def __init__(self,params=None,disable_ok_cancel=False):
 		QtGui.QWidget.__init__(self,None)

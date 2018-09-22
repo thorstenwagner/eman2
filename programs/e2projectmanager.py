@@ -73,7 +73,7 @@ class EMProjectManager(QtGui.QMainWindow):
 		font = QtGui.QFont()
 		font.setBold(True)
 		centralwidget = QtGui.QWidget()
-		vsplitter = QtGui.QSplitter(QtCore.Qt.Vertical)
+		vsplitter = QtGui.QSplitter(Qt.Vertical)
 
 		# Make the tiltebars
 		grid = QtGui.QGridLayout()
@@ -259,18 +259,18 @@ class EMProjectManager(QtGui.QMainWindow):
 		tbwidget.setFrameShape(QtGui.QFrame.StyledPanel)
 		grid = QtGui.QGridLayout()
 		self.PMIcon = PMIcon(self.pm_icon, tbwidget)
-		self.PMIcon.setAlignment(QtCore.Qt.AlignLeft)
+		self.PMIcon.setAlignment(Qt.AlignLeft)
 		grid.addWidget(self.PMIcon,0 , 0, 2, 1)
 		self.PMTitle = QtGui.QLabel("EMAN2 Project Manager ")
-		self.PMTitle.setAlignment(QtCore.Qt.AlignCenter)
+		self.PMTitle.setAlignment(Qt.AlignCenter)
 		self.PMProjectNameBanner = QtGui.QLabel("Project Name: "+self.pn_project_name)
-		self.PMProjectNameBanner.setAlignment(QtCore.Qt.AlignCenter)
+		self.PMProjectNameBanner.setAlignment(Qt.AlignCenter)
 		titlefont = QtGui.QFont()
 		titlefont.setPointSize(30)
 		titlefont.setBold(True)
 		titlefont.setItalic(True)
 		self.PMTitle.setFont(titlefont)
-		self.PMTitle.setAlignment(QtCore.Qt.AlignBottom)
+		self.PMTitle.setAlignment(Qt.AlignBottom)
 		pmnamefont = QtGui.QFont()
 		pmnamefont.setBold(True)
 		self.PMProjectNameBanner.setFont(pmnamefont)
@@ -335,7 +335,7 @@ class EMProjectManager(QtGui.QMainWindow):
 		tbox.addWidget(self.taskmanagerbutton)
 		self.makeProgramToolButtons(tbox)
 		tbox.setContentsMargins(0,0,0,0)
-		tbox.setAlignment(QtCore.Qt.AlignTop)
+		tbox.setAlignment(Qt.AlignTop)
 		toolwidget.setLayout(tbox)
 
 		self.browsebutton.clicked.connect(self._on_browse)
@@ -351,7 +351,7 @@ class EMProjectManager(QtGui.QMainWindow):
 		"""
 		win=EMBrowserWidget(withmodal=False,multiselect=False)
 		win.show()
-		win.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+		win.setAttribute(Qt.WA_DeleteOnClose)
 	#self.window = EMBrowserWidget(withmodal=False,multiselect=False)
 	#self.window.show()
 
@@ -938,8 +938,8 @@ class EMAN2StatusBar(QtGui.QTextEdit):
 		self.setFrameShape(QtGui.QFrame.Panel | QtGui.QFrame.Sunken)
 		self.setLineWidth(2)
 		#self.setMargin(4)
-		self.setTextInteractionFlags(QtCore.Qt.NoTextInteraction)
-		self.viewport().setCursor(QtCore.Qt.ArrowCursor)
+		self.setTextInteractionFlags(Qt.NoTextInteraction)
+		self.viewport().setCursor(Qt.ArrowCursor)
 		self.setMessage(text, style)
 		self.setToolTip("This is the Status Bar")
 
@@ -1058,7 +1058,7 @@ class TheHelp(QtGui.QWidget):
 		font.setBold(True)
 		helplabel = QtGui.QLabel("EMAN2 topic:")
 		helplabel.setFont(font)
-		helplabel.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+		helplabel.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
 
 		hbox = QtGui.QHBoxLayout()
 		hbox.addWidget(PMIcon(get_image_directory() + "SirEMAN2.png"))
@@ -1400,7 +1400,7 @@ class TaskManager(QtGui.QWidget):
 		self.update_tasks()
 
 		# A timer for updates
-		self.timer = QtCore.QTimer(self);
+		self.timer = QTimer(self);
 		self.timer.timeout.connect(self.update_tasks)
 		self.timer.start(2000)
 
@@ -1549,7 +1549,7 @@ class TaskManager(QtGui.QWidget):
 	def _on_kill(self):
 		killsig=signal.SIGTERM
 		modifiers = QtGui.QApplication.keyboardModifiers()
-		if modifiers == QtCore.Qt.ShiftModifier:
+		if modifiers == Qt.ShiftModifier:
 			print("Shift held. Will force kill processes")
 			killsig=signal.SIGKILL
 
@@ -1659,7 +1659,7 @@ class PMProgramWidget(QtGui.QTabWidget):
 		self.helptexteditbox = QtGui.QTextEdit("")
 		self.helptexteditbox.setWordWrapMode(QtGui.QTextOption.WordWrap)
 		self.helptexteditbox.setReadOnly(True)
-		self.helptexteditbox.viewport().setCursor(QtCore.Qt.ArrowCursor)
+		self.helptexteditbox.viewport().setCursor(Qt.ArrowCursor)
 		self.helptexteditbox.setText(self.pm().loadUsage(self.pm().getProgram()))
 		self.addTab(self.helptexteditbox, "Help")
 
@@ -1763,8 +1763,8 @@ class PMGUIWidget(QtGui.QScrollArea):
 		self.scwidget.setMinimumWidth(self.width()-1.5*self.verticalScrollBar().width())
 		self.scwidget.setMaximumWidth(self.width()-1.5*self.verticalScrollBar().width())
 		self.setWidget(self.scwidget)
-		self.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-		self.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
+		self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+		self.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
 		self.setSizePolicy(QtGui.QSizePolicy.Fixed,QtGui.QSizePolicy.Fixed)
 
 	def getRowSpan(self, option):
@@ -2011,7 +2011,7 @@ class PMQTreeWidgetItem(QtGui.QTreeWidgetItem):
 
 class PMToolButton(QtGui.QToolButton):
 	""" Create a toogle button """
-	stateChanged = QtCore.pyqtSignal(bool)
+	stateChanged = pyqtSignal(bool)
 
 	def __init__(self):
 		QtGui.QToolButton.__init__(self)
@@ -2046,7 +2046,7 @@ class ProjectDialog(QtGui.QDialog):
 		textbox.setHtml("Welcome to the EMAN2 project manager. Please add project specific paramters below. For Questions email: <a href='mailto:sludtke@bcm.edu'>sludtke@bcm.edu<\a>")
 		textbox.setMaximumHeight(66)
 		textbox.setReadOnly(True)
-		textbox.viewport().setCursor(QtCore.Qt.ArrowCursor)
+		textbox.viewport().setCursor(Qt.ArrowCursor)
 
 		grid.addWidget(textbox, 0, 0, 1, 2)
 		# add pm name and icon

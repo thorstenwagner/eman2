@@ -62,7 +62,7 @@ try:
 except:
 	QtGui=nothing()
 	QtCore=nothing()
-	QtCore.QObject=nothing()
+	QObject=nothing()
 	QtGui.QWidget=nothing()
 
 
@@ -383,7 +383,7 @@ def write_particles(files,boxsize,verbose):
 # to add a new autoboxer module, create a class here, then add it to the GUIBoxer.aboxmodes list below
 ##########
 
-class boxerByRef(QtCore.QObject):
+class boxerByRef(QObject):
 	"""Simple reference-based cross-corrlation picker with exhaustive rotational search"""
 	@staticmethod
 	def setup_gui(gridlay,boxerwindow=None):
@@ -551,7 +551,7 @@ class boxerByRef(QtCore.QObject):
 			jsd.put(ccf)
 		sys.stdout.write("*")
 		
-class boxerLocal(QtCore.QObject):
+class boxerLocal(QObject):
 	"""Reference based search by downsampling and 2-D alignment to references"""
 	@staticmethod
 	def setup_gui(gridlay,boxerwindow=None):
@@ -720,7 +720,7 @@ class boxerLocal(QtCore.QObject):
 #####################
 ## Convolutional Neural Network boxer
 ##########
-class boxerConvNet(QtCore.QObject):
+class boxerConvNet(QObject):
 	
 	@staticmethod
 	def setup_gui(gridlay, boxerwindow=None):
@@ -1127,7 +1127,7 @@ class boxerConvNet(QtCore.QObject):
 		return
 
 
-class boxerGauss(QtCore.QObject):
+class boxerGauss(QObject):
 	@staticmethod
 	def setup_gui(gridlay,boxerwindow=None):
 		return

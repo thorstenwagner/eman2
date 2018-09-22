@@ -96,11 +96,11 @@ def filtchange(name,value):
 
 class EMProcessorWidget(QtGui.QWidget):
 	"""A single processor with parameters"""
-	upPress = QtCore.pyqtSignal(int)
-	downPress = QtCore.pyqtSignal(int)
-	plusPress = QtCore.pyqtSignal(int)
-	minusPress = QtCore.pyqtSignal(int)
-	processorChanged = QtCore.pyqtSignal(int)
+	upPress = pyqtSignal(int)
+	downPress = pyqtSignal(int)
+	plusPress = pyqtSignal(int)
+	minusPress = pyqtSignal(int)
+	processorChanged = pyqtSignal(int)
 
 	plist=dump_processors_list()
 
@@ -159,20 +159,20 @@ class EMProcessorWidget(QtGui.QWidget):
 
 #		self.wup = QtGui.QPushButton(app.style().standardIcon(QtGui.QStyle.SP_ArrowUp),"")
 		self.wup = QtGui.QPushButton(pix_up,"",self)
-		self.wup.setMaximumSize(QtCore.QSize(17, 17))
+		self.wup.setMaximumSize(QSize(17, 17))
 #		self.wup.setSizePolicy(QtGui.QSizePolicy.Fixed,QtGui.QSizePolicy.Fixed)
 		self.gbl2.addWidget(self.wup,0,0)
 
 		self.wdown = QtGui.QPushButton(pix_down,"",self)
-		self.wdown.setMaximumSize(QtCore.QSize(17, 17))
+		self.wdown.setMaximumSize(QSize(17, 17))
 		self.gbl2.addWidget(self.wdown,1,0)
 
 		self.wplus = QtGui.QPushButton(pix_plus,"",self)
-		self.wplus.setMaximumSize(QtCore.QSize(17, 17))
+		self.wplus.setMaximumSize(QSize(17, 17))
 		self.gbl2.addWidget(self.wplus,1,1)
 
 		self.wminus= QtGui.QPushButton(pix_minus,"",self)
-		self.wminus.setMaximumSize(QtCore.QSize(17, 17))
+		self.wminus.setMaximumSize(QSize(17, 17))
 		self.gbl2.addWidget(self.wminus,0,1)
 
 
@@ -418,7 +418,7 @@ class EMProcessorWidget(QtGui.QWidget):
 
 class EMFilterTool(QtGui.QMainWindow):
 	"""This class represents the EMFilterTool application instance.  """
-	module_closed = QtCore.pyqtSignal()
+	module_closed = pyqtSignal()
 
 	def __init__(self,datafile=None,apix=0.0,force2d=False,verbose=0, safemode=False):
 		QtGui.QMainWindow.__init__(self)

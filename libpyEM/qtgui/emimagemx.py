@@ -208,15 +208,15 @@ class EMMatrixPanel(object):
 
 class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 
-	setsChanged = QtCore.pyqtSignal()
-	mx_boxdeleted = QtCore.pyqtSignal(QtGui.QMouseEvent, list, bool)
-	signal_set_scale = QtCore.pyqtSignal(float, float, bool)
-	origin_update = QtCore.pyqtSignal(float, float)
-	mx_image_selected = QtCore.pyqtSignal(QtGui.QMouseEvent, tuple)
-	mx_image_double = QtCore.pyqtSignal(QtGui.QMouseEvent, tuple)
-	mx_mousedrag = QtCore.pyqtSignal(QtGui.QMouseEvent, float)
-	mx_mouseup = QtCore.pyqtSignal(QtGui.QMouseEvent, tuple)
-	set_origin = QtCore.pyqtSignal(float, float, bool)
+	setsChanged = pyqtSignal()
+	mx_boxdeleted = pyqtSignal(QtGui.QMouseEvent, list, bool)
+	signal_set_scale = pyqtSignal(float, float, bool)
+	origin_update = pyqtSignal(float, float)
+	mx_image_selected = pyqtSignal(QtGui.QMouseEvent, tuple)
+	mx_image_double = pyqtSignal(QtGui.QMouseEvent, tuple)
+	mx_mousedrag = pyqtSignal(QtGui.QMouseEvent, float)
+	mx_mouseup = pyqtSignal(QtGui.QMouseEvent, tuple)
+	set_origin = pyqtSignal(float, float, bool)
 
 	def __init__(self, data=None,application=None,winid=None, parent=None, title=""):
 		self.emit_events = False
@@ -1766,14 +1766,14 @@ class EMImageMXWidget(EMGLWidget, EMGLProjectionViewMatrices):
 			xs=int(box_image.get_xsize())
 			ys=int(box_image.get_ysize())
 			drag = QtGui.QDrag(self.parent())
-			mime_data = QtCore.QMimeData()
+			mime_data = QMimeData()
 
 			mime_data.setData("application/x-eman", dumps(box_image))
 
 			EMAN2.GUIbeingdragged= box_image	# This deals with within-application dragging between windows
 			mime_data.setText( str(lc[0])+"\n")
 			di=QImage(GLUtil.render_amp8(box_image, 0,0,xs,ys,xs*4,1.0,0,255,self.get_density_min(),self.get_density_max(),1.0,14),xs,ys,QImage.Format_RGB32)
-			mime_data.setImageData(QtCore.QVariant(di))
+			mime_data.setImageData(QVariant(di))
 			drag.setMimeData(mime_data)
 
 			# This (mini image drag) looks cool, but seems to cause crashing sometimes in the pixmap creation process  :^(

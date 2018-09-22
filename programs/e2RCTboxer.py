@@ -444,12 +444,12 @@ class MainWin(object):
 		m = self.window.scr_to_img((event.x(),event.y()))
 		box_num = self.boxes.detect_collision(m[0],m[1],self.rctwidget.boxsize)
 		if(box_num == -1):
-			if event.modifiers()&QtCore.Qt.ShiftModifier: return 	# the user tried to delete nothing	
+			if event.modifiers()&Qt.ShiftModifier: return 	# the user tried to delete nothing	
 			if not self.rctwidget.handle_pick_event(self, m[0], m[1]): return
 			box_num = self.boxes.append_box(m[0],m[1])
 			self.moving=[m,box_num]
 		else:
-			if event.modifiers()&QtCore.Qt.ShiftModifier:
+			if event.modifiers()&Qt.ShiftModifier:
 				if not self.rctwidget.handle_unpick_event(self, box_num): return	# The unpick failed
 				self.boxes.remove_box(box_num, self.rctwidget.boxsize)
 				self.moving=[m,box_num]	# This is just to say that we have changes something

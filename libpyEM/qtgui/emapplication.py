@@ -104,8 +104,8 @@ class EMGLWidget(QtOpenGL.QGLWidget):
 	a self.busy attribute to prevent updateGL() from redrawing before all changes to display parameters are in place. 
 	"""
 	
-	module_closed = QtCore.pyqtSignal()
-	inspector_shown = QtCore.pyqtSignal()
+	module_closed = pyqtSignal()
+	inspector_shown = pyqtSignal()
 
 	def hide(self):
 		if self.qt_parent:
@@ -178,7 +178,7 @@ class EMGLWidget(QtOpenGL.QGLWidget):
 					test = self.browser
 				except: 
 					self.browser = QtWebKit.QWebView()
-					self.browser.load(QtCore.QUrl())
+					self.browser.load(QUrl())
 					self.browser.resize(800,800)
 				
 				if not self.browser.isVisible(): self.browser.show(url)
@@ -349,7 +349,7 @@ class EMApp(QtGui.QApplication):
 			#FIXME, add support for mutliple timers
 			return
 	
-		self.tmr=QtCore.QTimer()
+		self.tmr=QTimer()
 		self.tmr.setInterval(interval)
 		self.tmr.timeout.connect(function)
 		self.tmr.start()

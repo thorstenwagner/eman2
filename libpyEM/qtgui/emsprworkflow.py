@@ -104,16 +104,16 @@ class EmptyObject(object):
 		pass
 
 class WorkFlowTask(object):
-	display_file = QtCore.pyqtSignal()
-	task_idle = QtCore.pyqtSignal()
-	process_started = QtCore.pyqtSignal()
+	display_file = pyqtSignal()
+	task_idle = pyqtSignal()
+	process_started = pyqtSignal()
 
 	def __init__(self):
 		self.window_title = "Set me please" # inheriting classes should set this
 		self.preferred_size = (480,640) # inheriting classes can change this if they choose
 		self.form_db_name = None # specify this to make use of automated parameter storage (see write_db_entries(self,...) ) - don't forget the "bdb:"
 		self.project_db_entries = ["global.num_cpus","global.apix","global.microscope_voltage","global.microscope_cs","global.memory_available","global.particle_mass"] # used to write entries to a specific db
-		self.core_object = QtCore.QObject()
+		self.core_object = QObject()
 	
 	def emitter(self):
 		return self.core_object
@@ -918,7 +918,7 @@ Note that the data cannot be filtered unless it is imported."
 				data_dict.add_names(list_of_names)
 		
 		class AddFilesToProjectViaContext(object):
-			task_idle = QtCore.pyqtSignal()
+			task_idle = pyqtSignal()
 
 			def __init__(self,project_list):
 				self.project_list = project_list
@@ -1019,7 +1019,7 @@ class AddFilesToProjectValidator(object):
 		return 1
 
 class EMFilterRawDataTask(WorkFlowTask):	
-	task_idle = QtCore.pyqtSignal()
+	task_idle = pyqtSignal()
 	documentation_string = """This tool allows you to import micrographs/ccd frames into the project. This copies the files into the internal \
 project database, and gives an opportunity to apply a number of common filters to the data before importing:
 - Invert - EMAN2 expects particle data to be positive, ie - particles should appear white. If particles are dark, select this.
@@ -1517,7 +1517,7 @@ def ptable_convert_2(text):
 
 class EMParticleReportTask(ParticleWorkFlowTask):
 	'''This tool is for displaying the particles that are currently associated with this project.'''
-	task_idle = QtCore.pyqtSignal()
+	task_idle = pyqtSignal()
 
 	def __init__(self):
 		ParticleWorkFlowTask.__init__(self)
@@ -1584,7 +1584,7 @@ class EMParticleReportTask(ParticleWorkFlowTask):
 	
 class EMParticleImportTask(ParticleWorkFlowTask):
 	'''This task is for importing particle into the project. The data will be copied into the particles directory. This is essential if you wish to use the data to generating sets'''
-	task_idle = QtCore.pyqtSignal()
+	task_idle = pyqtSignal()
 
 	def __init__(self):
 		ParticleWorkFlowTask.__init__(self)
@@ -1809,7 +1809,7 @@ class EMParticleImportTask(ParticleWorkFlowTask):
 
 class EMParticleCoordImportTask(WorkFlowTask):
 	"""Use this task for importing coordinate files directly into the project database. Generally you do this after you have associated raw data with the project. Coordinate files are matched with input (raw data) files according to name. For example, if your micrograph is called "321a.mrc" then your coordinate file should be called "321a.box" or "321a.data" (both will work). After you import the coordinates you can run the "Generate Output - e2boxer" task to write particle image data."""
-	task_idle = QtCore.pyqtSignal()
+	task_idle = pyqtSignal()
 
 	def __init__(self):
 		WorkFlowTask.__init__(self)
@@ -1894,7 +1894,7 @@ class E2BoxerTask(ParticleWorkFlowTask):
 #	get_particle_dims_project = staticmethod(get_particle_dims_project)
 	
 	class ParticleColumns(object):
-		task_idle = QtCore.pyqtSignal()
+		task_idle = pyqtSignal()
 
 		def __init__(self,project_dict=spr_ptcls_dict):
 			self.header_cache = {}
@@ -2079,8 +2079,8 @@ class E2BoxerTask(ParticleWorkFlowTask):
 
 
 class E2BoxerGenericTask(ParticleWorkFlowTask):
-	replace_task = QtCore.pyqtSignal()
-	task_idle = QtCore.pyqtSignal()
+	replace_task = pyqtSignal()
+	task_idle = pyqtSignal()
 	documentation_string = "Fill me in"
 	def __init__(self):
 		ParticleWorkFlowTask.__init__(self)
@@ -2125,7 +2125,7 @@ class E2BoxerAutoTask(E2BoxerTask):
 	DO NOT USE THIS !
 	'''
 	
-	task_idle = QtCore.pyqtSignal()
+	task_idle = pyqtSignal()
 
 	def __init__(self):
 		E2BoxerTask.__init__(self)
@@ -2388,9 +2388,9 @@ def recover_old_boxer_database():
 			
 
 class E2BoxerGuiTask(E2BoxerTask):	
-	gui_running = QtCore.pyqtSignal()
-	task_idle = QtCore.pyqtSignal()
-	gui_exit = QtCore.pyqtSignal()
+	gui_running = pyqtSignal()
+	task_idle = pyqtSignal()
+	gui_exit = pyqtSignal()
 	documentation_string = """Select the frames you want to select boxes from, enter your boxsize, and hit OK.
 NOTE - SELECTING A GOOD BOX SIZE IS CRITICAL. See the wiki for a list of good sizes. Make sure the box is ~2x the size of your particle. \
 Changing box size later can be very painful, and CTF correction relies on a sufficiently large box (larger than used with EMAN1.
@@ -2487,7 +2487,7 @@ class E2BoxerOutputTask(E2BoxerTask):
 	"""This task will write the selected particles to output files. The default format is 'BDB', which should be used if you plan to continue processing using the workflow interface. HDF is the only other format which will preserve full metadata. img (IMAGIC) and spi (SPIDER) will lose metadata if used.
 	
 	Select the images you wish to generate output for, enter the box size and normalization etc, and then hit OK."""
-	task_idle = QtCore.pyqtSignal()
+	task_idle = pyqtSignal()
 
 	def __init__(self):
 		E2BoxerTask.__init__(self)
@@ -2638,7 +2638,7 @@ class E2BoxerProgramOutputTask(E2BoxerOutputTask):
 	'''
 	This task is called from e2boxer itself. Not from the workflow
 	'''
-	task_idle = QtCore.pyqtSignal()
+	task_idle = pyqtSignal()
 	documentation_string = "Use this form to write output file from within the e2boxer interface.\nYou can choose to write image files in a number of formats. The bdb file format is most useful if you are using EMAN2. If you plan to use your data with other programs, including EMAN1, you must choose either the hdf or img output formats.\nYou can also choose to write EMAN1 style .box files"
 	def __init__(self,application,filenames,target,exclusions=[]):
 		E2BoxerOutputTask.__init__(self)
@@ -2835,8 +2835,8 @@ status report on current processing."
 		pass		
 
 class E2CTFGenericTask(ParticleWorkFlowTask):
-	replace_task = QtCore.pyqtSignal()
-	task_idle = QtCore.pyqtSignal()
+	replace_task = pyqtSignal()
+	task_idle = pyqtSignal()
 	documentation_string = "Fill me in"
 	def __init__(self):
 		ParticleWorkFlowTask.__init__(self)
@@ -2875,7 +2875,7 @@ class E2CTFGenericTask(ParticleWorkFlowTask):
 		self.write_db_entries(params)
 			
 class E2CTFAutoFitTask(E2CTFWorkFlowTask):	
-	task_idle = QtCore.pyqtSignal()
+	task_idle = pyqtSignal()
 	documentation_string = """Select the particles you wish to generate CTF parameters for, enter the appropriate parameters such as microscope voltage etc, and hit OK.\nThis will cause the \
 workflow to spawn processes based on the available CPUs. Once finished the automatically determined CTF parameters will be stored in the EMAN2 database. It is often worthwhile to follow \
 the following pattern:
@@ -3089,7 +3089,7 @@ class E2CTFAutoFitTaskGeneral(E2CTFAutoFitTask):
 
 class E2CTFOutputTask(E2CTFWorkFlowTask):	
 	"""Select the particle data for which you wish to generate phase flipped and/or Wiener filtered output and hit OK.\nThis will cause the workflow to spawn processes based on the available CPUs that write the output into a predefined location in the EMAN2 database.\nNote that the Wiener filtered output images are also phase flipped."""
-	task_idle = QtCore.pyqtSignal()
+	task_idle = pyqtSignal()
 
 	def __init__(self):
 		E2CTFWorkFlowTask.__init__(self)
@@ -3174,7 +3174,7 @@ class E2CTFOutputTask(E2CTFWorkFlowTask):
 		
 class E2CTFSFOutputTask(E2CTFWorkFlowTask):	
 	"""This task is for generating a structure factor file using e2ctf.py. Select the files you wish to use as the basis of the the structure factor approximation and hit OK. This will spawn e2ctf as a process, the output of which will be a file called 'strucfac.txt' """
-	task_idle = QtCore.pyqtSignal()
+	task_idle = pyqtSignal()
 
 	def __init__(self):
 		E2CTFWorkFlowTask.__init__(self)
@@ -3217,7 +3217,7 @@ class E2CTFSFOutputTask(E2CTFWorkFlowTask):
 class E2CTFOutputTaskGeneral(E2CTFOutputTask):
 	''' Use this form for generating CTF-related output. 
 	'''
-	task_idle = QtCore.pyqtSignal()
+	task_idle = pyqtSignal()
 	warning_string = "\n\n\nNOTE: There are no CTF parameters currently stored for any images in the local database. You can change this by running automated fitting with e2ctf."
 	
 	def __init__(self):
@@ -3319,9 +3319,9 @@ class E2CTFOutputTaskGeneral(E2CTFOutputTask):
 		self.task_idle.emit()
 	
 class E2CTFGuiTask(E2CTFWorkFlowTask):	
-	gui_running = QtCore.pyqtSignal()
-	gui_exit = QtCore.pyqtSignal()
-	task_idle = QtCore.pyqtSignal()
+	gui_running = pyqtSignal()
+	gui_exit = pyqtSignal()
+	task_idle = pyqtSignal()
 	documentation_string = "Autofitting tends to either work very well or get the defocus completely wrong. It is wise to at least quickly go through the data and insure that \
 defocus values are reasonable. If not, roughly adjust the defocus and press the refit button. If you manually vary parameters, press save for each set, or your changes will \
 be lost. B-factors are not as important as in EMAN1, and use the X-ray convention (4x the EMAN1 values). Try to get them in a reasonable range, at least. This is particularly \
@@ -3501,7 +3501,7 @@ class EMParticleOptions(EMPartSetOptions):
  		 	
 class E2ParticleExamineChooseDataTask(ParticleWorkFlowTask):
 	"""Choose the particle data you wish to examine. This will pop a second form listing the particles stacks along with other relevant information"""
-	replace_task = QtCore.pyqtSignal()
+	replace_task = pyqtSignal()
 	documentation_string = "On the next screen you will have the opportunity to eliminate 'bad' particles. This page selects which type of particles you \
 want to look at for doing this. Normally Wiener filtered particles are used for this purpose. The selection here has no impact on the output generated from \
 this stage. It is used for display purposes only !" 
@@ -3572,7 +3572,7 @@ class E2ParticleExamineTask(E2CTFWorkFlowTask):
 		return params
 	
 	class BadParticlesColumn(object):
-		task_idle = QtCore.pyqtSignal()
+		task_idle = pyqtSignal()
 
 		def __init__(self,name_map):
 			self.name_map = name_map
@@ -3609,7 +3609,7 @@ class E2ParticleExamineTask(E2CTFWorkFlowTask):
  		 	
 class E2MakeSetChooseDataTask(E2ParticleExamineChooseDataTask):
 	"""Choose the particle data you wish to examine. This will pop a second form listing the particles stacks along with other relevant information"""
-	replace_task = QtCore.pyqtSignal()
+	replace_task = pyqtSignal()
 	documentation_string = "Choose the data for particle examination" 
 	def __init__(self):
 		E2ParticleExamineChooseDataTask.__init__(self)
@@ -3640,7 +3640,7 @@ class E2MakeSetChooseDataTask(E2ParticleExamineChooseDataTask):
 		
 class E2MakeSetTask(E2ParticleExamineTask):
 	'''This task is for making agglomerated particle sets which function as input for the 2D and 3D refinement tasks. Sets for any linked particle sets (such as phase flipped or Wiener filtered data) are automatically generated. You can choose to exclude any bad particles that you have defined.'''
-	task_idle = QtCore.pyqtSignal()
+	task_idle = pyqtSignal()
 
 	def __init__(self,particle_stacks=[],name_map={},data_name_map={}):
 		E2ParticleExamineTask.__init__(self,particle_stacks,data_name_map)
@@ -3877,7 +3877,7 @@ class EMSetReportTask(ParticleWorkFlowTask):
 		return table
 	
 	class FilteredSetInfo(object):
-		task_idle = QtCore.pyqtSignal()
+		task_idle = pyqtSignal()
 
 		def __init__(self,filt):
 			self.filt = filt
@@ -3920,7 +3920,7 @@ class EMSetReportTask(ParticleWorkFlowTask):
 class E2Refine2DReportTask(ParticleWorkFlowTask):
 	"""This form displays reference free class averages that are associated with the project."""
 	
-	task_idle = QtCore.pyqtSignal()
+	task_idle = pyqtSignal()
 
 	def __init__(self):
 		ParticleWorkFlowTask.__init__(self)
@@ -4371,7 +4371,7 @@ class EMSetsOptions(EMPartSetOptions):
 		self.image_count = False
 
 class E2Refine2DChooseParticlesTask(ParticleWorkFlowTask):
-	replace_task = QtCore.pyqtSignal()
+	replace_task = pyqtSignal()
 	documentation_string = "Select the type of particles you wish to run e2refine2d on. Typically the phase_flipped_hp particles will give the \
  best results, followed by the phase_flipped particles. Wiener filtered particles have strong contrast, but tend to produce blurry class-averages, \
  since it is the particles that are filtered, not the averages. After you hit OK, you will be prompted for specific refinement options." 
@@ -4413,7 +4413,7 @@ class E2Refine2DChooseParticlesTask(ParticleWorkFlowTask):
 
 		 	
 class E2Refine2DChooseSetsTask(ParticleWorkFlowTask):
-	replace_task = QtCore.pyqtSignal()
+	replace_task = pyqtSignal()
 	documentation_string = "Choose the data you wish to use for use for running e2refine2d from the list of options below and hit OK. This will pop up a second form asking you to fill in more details.\n\nNote that usually you should have 4 options to choose from below. If you are not seeing all 4 options it means you should go back in the work flow, import particles, and generate phase flipped and Wiener filtered output." 
 	def __init__(self):
 		ParticleWorkFlowTask.__init__(self)
@@ -4481,7 +4481,7 @@ class E2RefFreeClassAveTool(object):
 		
 
 class E2Refine2DRunTask(E2Refine2DTask):
-	task_idle = QtCore.pyqtSignal()
+	task_idle = pyqtSignal()
 	documentation_string = "Select a particle set to use for 2-D refinement.  Select how many classes you want to generate. The other options on this page will generally produce \
 reasonably good results with default settings. Normalize projection vectors can make a dramatic improvement on some data sets, but is bad for others. See the e2refine2d.py \
 documentation for other details. Don't forget the other tabs !\
@@ -4628,7 +4628,7 @@ class E2InitialModelsTool(object):
 	
 class EMInitialModelReportTask(ParticleWorkFlowTask):
 	"""This form displays the initial models currently associated with the project. You can associate initial models with the project using e2makeinitialmodel or by importing them directly, see the options below."""
-	task_idle = QtCore.pyqtSignal()
+	task_idle = pyqtSignal()
 	warning_string = "\n\n\nNOTE: There are no initial models currently associated with the project."
 	def __init__(self):
 		ParticleWorkFlowTask.__init__(self)
@@ -4655,7 +4655,7 @@ class EMInitialModelReportTask(ParticleWorkFlowTask):
 
 class E2InitialModel(ParticleWorkFlowTask):
 	"""Use this form for creating initial model with e2initialmodel."""
-	task_idle = QtCore.pyqtSignal()
+	task_idle = pyqtSignal()
 
 	def __init__(self):
 		ParticleWorkFlowTask.__init__(self)
@@ -4997,7 +4997,7 @@ class E2RefineParticlesTaskBase(EMClassificationTools, E2Make3DTools):
 		self.single_selection = False
 
 	class UsefiltColumn(object):
-		task_idle = QtCore.pyqtSignal()
+		task_idle = pyqtSignal()
 
 		def __init__(self,ptcls,usefilt_ptcls):
 			if len(ptcls) != len(usefilt_ptcls):
@@ -5603,7 +5603,7 @@ set SF - This will force the reconstruction to be filtered to match the structur
 post-process - This is an optional filter to apply to the model as a final step, filter.lowpass.gauss with 'cutoff_freq=<1/resolution>' is good with set SF. If set SF is not used, note that the model will already \
  be somewhat filtered even without this."""
  
-	task_idle = QtCore.pyqtSignal()
+	task_idle = pyqtSignal()
 
 	def __init__(self,ptcls_list,usefilt_ptcls_list):
 		E2RefineParticlesTaskBase.__init__(self,ptcls_list,usefilt_ptcls_list) 
@@ -5986,7 +5986,7 @@ thresh: Phase residual cutoff. Any particles with a higher phase residual will n
 		
 class EMChooseTask(ParticleWorkFlowTask):
 	'''Fill me in'''
-	replace_task = QtCore.pyqtSignal()
+	replace_task = pyqtSignal()
 	documentation_string = "This selects the type of data to use for the refinement. Normally phase_flipped or phase_flipped_hp will be selected in the top \
 section. Usefilt permits you to use one set of data for alignment and classification, and the set above when actually building a model. This can provide significant \
 benefits in some cases. Normally the wiener_filtered set or None will be selected here. If you are using the 'prefilt' option in the refinement parameters, you \
@@ -6437,7 +6437,7 @@ those used during refinement."
 		plowmem = ParamDef(name="lowmem",vartype="boolean",desc_short="Low mem",desc_long="Causes various programs to restrict memory usage but results in increased CPU time.",property=None,defaultunits=db.get("lowmem",dfl=False),choices=None)
 		pusefilt = ParamDef(name="usefilt",vartype="boolean",desc_short="Usefilt",desc_long="Will use the 'usefilt' data for class alignment if it exists in the refinement directory",property=None,defaultunits=db.get("usefilt",dfl=False),choices=None)
 		
-		task_idle = QtCore.pyqtSignal()
+		task_idle = pyqtSignal()
 		syms = ["icos","oct","tet","d","c","h"]
 		
 		psym =  ParamDef(name="symname",vartype="string",desc_short="Symmetry",desc_long="Symmetry to be imposed during refinement",property=None,defaultunits=db.get("symname",dfl="c"),choices=syms)
@@ -6531,7 +6531,7 @@ class E2ResolutionTask(WorkFlowTask):
 
 	'''
 	 
-	task_idle = QtCore.pyqtSignal()
+	task_idle = pyqtSignal()
 	general_documentation = "These are parameters required to run an e2resolution.py."
 	warning_string = "\n\n\nThere are no refinement results available to use as the basis of running e2resolution"
 	def __init__(self):

@@ -251,7 +251,7 @@ except:
 	QtGui.QWidget=dummy
 	QtGui.QMainWindow=dummy
 	QtCore=dummy(True)
-	QtCore.QAbstractTableModel=dummy
+	QAbstractTableModel=dummy
 	
 def runservmon():
 	import EMAN2db
@@ -331,9 +331,9 @@ class GUIservmon(QtGui.QMainWindow):
 		
 #		self.vbl.addWidget(self.tabs)
 
-class TaskData(QtCore.QAbstractTableModel):
+class TaskData(QAbstractTableModel):
 	def __init__(self,target):
-		QtCore.QAbstractTableModel.__init__(self)
+		QAbstractTableModel.__init__(self)
 		self.target=target
 		self.nrows=0
 		self.rows=[]
@@ -354,7 +354,7 @@ class TaskData(QtCore.QAbstractTableModel):
 		if not isinstance(task,EMTask) : 
 			print(loc.row(),keys[loc.row()])
 			print(self.target[keys[loc.row()]])
-			return QtCore.QVariant("???")
+			return QVariant("???")
 			
 		if n==0 : ret=task.taskid
 		elif n==1: 
@@ -382,12 +382,12 @@ class TaskData(QtCore.QAbstractTableModel):
 				else : ret = task.command
 			except : ret = str(task)
 			
-		return QtCore.QVariant(str(ret))
+		return QVariant(str(ret))
 
 	def data(self,loc,role):
-		if not loc.isValid() or role != QtCore.Qt.DisplayRole : return QtCore.QVariant()
+		if not loc.isValid() or role != Qt.DisplayRole : return QVariant()
 		try : return self.rows[loc.row()][loc.column()]
-		except : return QtCore.QVariant("---")
+		except : return QVariant("---")
 		
 	def rowCount(self,parent):
 		if parent.isValid() : return 0

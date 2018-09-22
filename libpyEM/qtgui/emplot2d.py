@@ -113,8 +113,8 @@ qt_color_map["gray"] = QtGui.QColor(127,127,127)
 class EMPlot2DWidget(EMGLWidget):
 	"""A QT widget for drawing 2-D plots using matplotlib
 	"""
-	selected_sg = QtCore.pyqtSignal()
-	mousedown = QtCore.pyqtSignal(QtGui.QMouseEvent,tuple)
+	selected_sg = pyqtSignal()
+	mousedown = pyqtSignal(QtGui.QMouseEvent,tuple)
 
 	def __init__(self,application=None,winid=None,parent=None):
 
@@ -199,7 +199,7 @@ class EMPlot2DWidget(EMGLWidget):
 					test = self.browser
 				except:
 					self.browser = QtWebKit.QWebView()
-					self.browser.load(QtCore.QUrl("http://blake.bcm.edu/emanwiki/e2display"))
+					self.browser.load(QUrl("http://blake.bcm.edu/emanwiki/e2display"))
 					self.browser.resize(800,800)
 
 				if not self.browser.isVisible(): self.browser.show()
@@ -948,7 +948,7 @@ class EMPolarPlot2DWidget(EMGLWidget):
 	"""
 	A QT widget for plotting ploar plots:
 	"""
-	clusterStats = QtCore.pyqtSignal(list)
+	clusterStats = pyqtSignal(list)
 
 	def __init__(self,application=None,winid=None):
 		fmt=QtOpenGL.QGLFormat()
@@ -1035,7 +1035,7 @@ class EMPolarPlot2DWidget(EMGLWidget):
 					test = self.browser
 				except:
 					self.browser = QtWebKit.QWebView()
-					self.browser.load(QtCore.QUrl("http://blake.bcm.edu/emanwiki/e2display"))
+					self.browser.load(QUrl("http://blake.bcm.edu/emanwiki/e2display"))
 					self.browser.resize(800,800)
 
 				if not self.browser.isVisible(): self.browser.show()
@@ -2186,7 +2186,7 @@ class DragListWidget(QtGui.QListWidget):
 
 		# start the drag operation
 		drag = QtGui.QDrag(self)
-		mimeData = QtCore.QMimeData()
+		mimeData = QMimeData()
 
 		mimeData.setText(sdata.getvalue())
 		drag.setMimeData(mimeData)

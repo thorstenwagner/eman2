@@ -456,7 +456,7 @@ class EMStackSaveDialog(EMFileSaver):
 			
 			
 			# this is necessary to cause the progress bar to update on Mac, not sure about windows
-			QtCore.QCoreApplication.instance().processEvents()
+			QCoreApplication.instance().processEvents()
 			
 			try:
 				d.write_image(out_file,-1)
@@ -472,7 +472,7 @@ class EMStackSaveDialog(EMFileSaver):
 			progress.setValue(tally)
 			tally += 1
 			# this is necessary to cause the progress bar to update on Mac, not sure about windows
-			QtCore.QCoreApplication.instance().processEvents()
+			QCoreApplication.instance().processEvents()
 			if progress.wasCanceled():
 				tmp_file_object.remove_tmp_file()
 				progress.close()

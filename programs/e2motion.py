@@ -448,7 +448,7 @@ class EMMotion(QtGui.QMainWindow):
 		
 
 		self.path=path
-		QtCore.QTimer.singleShot(500,self.afterStart)
+		QTimer.singleShot(500,self.afterStart)
 
 	def afterStart(self):
 		"""This gets called once the event loop is running"""

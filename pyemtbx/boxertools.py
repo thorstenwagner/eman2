@@ -2248,7 +2248,7 @@ class Boxable(object):
 		tmpimage = "tmpparticles.img"
 		self.parent.writeBoxesTo(tmpimage)
 		
-		self.process = QtCore.QProcess()
+		self.process = QProcess()
 
 		program = str("e2refine2d.py")
 		args = list()

@@ -220,7 +220,7 @@ class EMPlot3DWidget(EMGLWidget):
 					test = self.browser
 				except:
 					self.browser = QtWebKit.QWebView()
-					self.browser.load(QtCore.QUrl("http://blake.bcm.edu/emanwiki/e2display"))
+					self.browser.load(QUrl("http://blake.bcm.edu/emanwiki/e2display"))
 					self.browser.resize(800,800)
 
 				if not self.browser.isVisible(): self.browser.show()
@@ -1723,7 +1723,7 @@ class DragListWidget(QtGui.QListWidget):
 
 		# start the drag operation
 		drag = QtGui.QDrag(self)
-		mimeData = QtCore.QMimeData()
+		mimeData = QMimeData()
 
 		mimeData.setText(sdata.getvalue())
 		drag.setMimeData(mimeData)

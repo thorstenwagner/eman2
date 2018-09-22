@@ -87,7 +87,7 @@ class TomoSegVolumeViewer(EMScene3D):
 		self.setWindowTitle("TomoSeg Subvolume Viewer")
 
 class TomoSegSliceViewer(QtGui.QMainWindow):
-	module_closed = QtCore.pyqtSignal()
+	module_closed = pyqtSignal()
 
 	def __init__(self,data=None,datafile=None,yshort=False,apix=0.0,boxsize=32,shrink=1,contrast=None,center=None,mod=False,normalize=False):
 		QtGui.QWidget.__init__(self)
@@ -1479,7 +1479,7 @@ class TomoSegInspector(QtGui.QWidget):
 		grid.addWidget(self.texttool,13,0)
 		grid.addWidget(self.datatool,14,0)
 		grid.addWidget(self.apptool,15,0)
-		grid.setAlignment(QtCore.Qt.AlignLeft)
+		grid.setAlignment(Qt.AlignLeft)
 		# labels
 		#grid.addWidget(toollabel,0,0)
 		grid.addWidget(self.selectiontool_label,1,1)
@@ -1497,7 +1497,7 @@ class TomoSegInspector(QtGui.QWidget):
 		grid.addWidget(self.texttool_label,13,1)
 		grid.addWidget(self.datatool_label,14,1)
 		grid.addWidget(self.apptool_label,15,1)
-		grid.setAlignment(QtCore.Qt.AlignLeft)	
+		grid.setAlignment(Qt.AlignLeft)	
 		
 		frame.setLayout(grid)
 		hbox.addWidget(frame)
@@ -1609,7 +1609,7 @@ class TomoSegInspector(QtGui.QWidget):
 		grid.addWidget(self.texttool,13,0)
 		grid.addWidget(self.datatool,14,0)
 		grid.addWidget(self.apptool,15,0)
-		grid.setAlignment(QtCore.Qt.AlignLeft)
+		grid.setAlignment(Qt.AlignLeft)
 		# labels
 		#grid.addWidget(toollabel,0,0)
 		grid.addWidget(self.selectiontool_label,1,1)
@@ -1627,7 +1627,7 @@ class TomoSegInspector(QtGui.QWidget):
 		grid.addWidget(self.texttool_label,13,1)
 		grid.addWidget(self.datatool_label,14,1)
 		grid.addWidget(self.apptool_label,15,1)
-		grid.setAlignment(QtCore.Qt.AlignLeft)	
+		grid.setAlignment(Qt.AlignLeft)	
 		
 		frame.setLayout(grid)
 		hbox.addWidget(frame)
@@ -1740,7 +1740,7 @@ class TomoSegInspector(QtGui.QWidget):
 		grid.addWidget(self.texttool,13,0)
 		grid.addWidget(self.datatool,14,0)
 		grid.addWidget(self.apptool,15,0)
-		grid.setAlignment(QtCore.Qt.AlignLeft)
+		grid.setAlignment(Qt.AlignLeft)
 		# labels
 		#grid.addWidget(toollabel,0,0)
 		grid.addWidget(self.selectiontool_label,1,1)
@@ -1758,7 +1758,7 @@ class TomoSegInspector(QtGui.QWidget):
 		grid.addWidget(self.texttool_label,13,1)
 		grid.addWidget(self.datatool_label,14,1)
 		grid.addWidget(self.apptool_label,15,1)
-		grid.setAlignment(QtCore.Qt.AlignLeft)	
+		grid.setAlignment(Qt.AlignLeft)	
 		
 		frame.setLayout(grid)
 		hbox.addWidget(frame)
@@ -1927,7 +1927,7 @@ class TomoSegInspector(QtGui.QWidget):
 		self.stacked_widget.setCurrentWidget(item.item3d().getItemInspector())
 		item.setSelectionState(item.checkState(0))
 		# This code is to prevent both decendents and childer from being selected....
-		if item.checkState(0) == QtCore.Qt.Checked: self.ensureUniqueTreeLevelSelection(item.item3d())
+		if item.checkState(0) == Qt.Checked: self.ensureUniqueTreeLevelSelection(item.item3d())
 		if not item.item3d().isSelectedItem(): item.item3d().getItemInspector().updateItemControls() # This is too update a widget, translation and rotation may change in parent nodes change
 		#self.scenegraph().setCurrentSelection(item.item3d())
 		#if not quiet: self.updateSceneGraph()

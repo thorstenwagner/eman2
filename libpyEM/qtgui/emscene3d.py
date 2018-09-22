@@ -733,9 +733,9 @@ class EMScene3D(EMItem3D, EMGLWidget):
 	"""
 	Widget for rendering 3D objects. Uses a scne graph for rendering
 	"""
-	sgmousepress = QtCore.pyqtSignal(float, float)
-	sgmousemove = QtCore.pyqtSignal(float, float)
-	sgmouserelease = QtCore.pyqtSignal(float, float)
+	sgmousepress = pyqtSignal(float, float)
+	sgmousemove = pyqtSignal(float, float)
+	sgmouserelease = pyqtSignal(float, float)
 	name = "SG"
 	def __init__(self, parentwidget=None, SGactivenodeset=set(), scalestep=0.5):
 		"""
@@ -1201,72 +1201,72 @@ class EMScene3D(EMItem3D, EMGLWidget):
 	def keyPressEvent(self,event):
 		"""Process keyboard stuff"""
 		# Delete nodes
-		if event.key() == QtCore.Qt.Key_Delete:
+		if event.key() == Qt.Key_Delete:
 			for node in self.getAllSelectedNodes():
 				self.deleteNode(node)
 			self.setCurrentSelection(self)
 			self.updateSG()
 		# Hide selections
-		if event.key() == QtCore.Qt.Key_H:
+		if event.key() == Qt.Key_H:
 			for node in self.getAllNodes():
 				node.setHiddenSelected(not node.isSelectionHidded())
 			
 			self.updateSG()
 		# Now toolbar hot keys
-		if event.key() == QtCore.Qt.Key_Escape:
+		if event.key() == Qt.Key_Escape:
 			self.setMouseMode("selection")
 			self.updateInspector()
-		if event.key() == QtCore.Qt.Key_M:
+		if event.key() == Qt.Key_M:
 			self.setMouseMode("multiselection")
 			self.updateInspector()
-		if event.key() == QtCore.Qt.Key_T:
+		if event.key() == Qt.Key_T:
 			self.setMouseMode("xytranslate")
 			self.updateInspector()
-		if event.key() == QtCore.Qt.Key_Z:
+		if event.key() == Qt.Key_Z:
 			self.setMouseMode("ztranslate")
 			self.updateInspector()
-		if event.key() == QtCore.Qt.Key_R:
+		if event.key() == Qt.Key_R:
 			self.setMouseMode("rotate")
 			self.updateInspector()
-		if event.key() == QtCore.Qt.Key_S:
+		if event.key() == Qt.Key_S:
 			self.setMouseMode("scale")
 			self.updateInspector()
-		if event.key() == QtCore.Qt.Key_L:
+		if event.key() == Qt.Key_L:
 			self.setMouseMode("line")
 			self.updateInspector()
-		if event.key() == QtCore.Qt.Key_U and not event.modifiers()&Qt.ControlModifier:
+		if event.key() == Qt.Key_U and not event.modifiers()&Qt.ControlModifier:
 			self.setMouseMode("ruler")
 			self.updateInspector()
-		if event.key() == QtCore.Qt.Key_C and not event.modifiers()&Qt.ControlModifier:
+		if event.key() == Qt.Key_C and not event.modifiers()&Qt.ControlModifier:
 			self.setMouseMode("cube")
 			self.updateInspector()
-		if event.key() == QtCore.Qt.Key_P:
+		if event.key() == Qt.Key_P:
 			self.setMouseMode("sphere")
 			self.updateInspector()
-		if event.key() == QtCore.Qt.Key_Y:
+		if event.key() == Qt.Key_Y:
 			self.setMouseMode("cylinder")
 			self.updateInspector()
-		if event.key() == QtCore.Qt.Key_O:
+		if event.key() == Qt.Key_O:
 			self.setMouseMode("cone")
 			self.updateInspector()
-		if event.key() == QtCore.Qt.Key_X:
+		if event.key() == Qt.Key_X:
 			self.setMouseMode("text")
 			self.updateInspector()
-		if event.key() == QtCore.Qt.Key_E:
+		if event.key() == Qt.Key_E:
 			self.setMouseMode("data")
 			self.updateInspector()
-		if event.key() == QtCore.Qt.Key_A:
+		if event.key() == Qt.Key_A:
 			self.setMouseMode("app")
 			self.updateInspector()
-		if event.key() == QtCore.Qt.Key_C and event.modifiers()&Qt.ControlModifier:
+		if event.key() == Qt.Key_C and event.modifiers()&Qt.ControlModifier:
 			nodes = self.getAllSelectedNodes()
 			if not nodes: return
 			self.copyNodes(nodes)
-		if event.key() == QtCore.Qt.Key_G and event.modifiers()&Qt.ControlModifier:
+		if event.key() == Qt.Key_G and event.modifiers()&Qt.ControlModifier:
 			nodes = self.getAllSelectedNodes()
 			if not nodes: return
 			self.groupNodes(nodes)
-		if event.key() == QtCore.Qt.Key_U and event.modifiers()&Qt.ControlModifier:
+		if event.key() == Qt.Key_U and event.modifiers()&Qt.ControlModifier:
 			nodes = self.getAllSelectedNodes()
 			if not nodes: return
 			self.unGroupNodes(nodes)
@@ -2291,7 +2291,7 @@ class EMInspector3D(QtGui.QWidget):
 		self.stacked_widget.setCurrentWidget(item.item3d().getItemInspector())
 		item.setSelectionState(item.checkState(0))
 		# This code is to prevent both decendents and childer from being selected....
-		if item.checkState(0) == QtCore.Qt.Checked: self.ensureUniqueTreeLevelSelection(item.item3d())
+		if item.checkState(0) == Qt.Checked: self.ensureUniqueTreeLevelSelection(item.item3d())
 		if not item.item3d().isSelectedItem(): item.item3d().getItemInspector().updateItemControls() # This is too update a widget, translation and rotation may change in parent nodes change
 		self.scenegraph().setCurrentSelection(item.item3d())
 		if not quiet: self.updateSceneGraph()
@@ -2398,7 +2398,7 @@ class EMInspector3D(QtGui.QWidget):
 		tvbox.addWidget(self.texttool)
 		tvbox.addWidget(self.datatool)
 		tvbox.addWidget(self.apptool)
-		tvbox.setAlignment(QtCore.Qt.AlignLeft)
+		tvbox.setAlignment(Qt.AlignLeft)
 		
 		self.rotatetool.clicked[int].connect(self._rotatetool_clicked)
 		self.translatetool.clicked[int].connect(self._transtool_clicked)
@@ -2471,7 +2471,7 @@ class EMInspector3D(QtGui.QWidget):
 		lwidget = QtGui.QWidget()
 		lvbox = QtGui.QVBoxLayout()
 		lightslabel = QtGui.QLabel("Lights", lwidget)
-		lightslabel.setAlignment(QtCore.Qt.AlignCenter)
+		lightslabel.setAlignment(Qt.AlignCenter)
 		lightslabel.setMaximumHeight(30.0)
 		font = QtGui.QFont()
 		font.setBold(True)
@@ -2480,7 +2480,7 @@ class EMInspector3D(QtGui.QWidget):
 		self.lightwidget = EMLightControls(GL_LIGHT1)
 		positionlabel = QtGui.QLabel("Position", lwidget)
 		positionlabel.setMaximumHeight(20.0)
-		positionlabel.setAlignment(QtCore.Qt.AlignCenter)
+		positionlabel.setAlignment(Qt.AlignCenter)
 		valslidersplitter = QtGui.QFrame()
 		valslidersplitter.setFrameShape(QtGui.QFrame.StyledPanel)
 		valslidersplitter.setMaximumHeight(80)
@@ -2532,7 +2532,7 @@ class EMInspector3D(QtGui.QWidget):
 		grid.addWidget(self.camerawidget, 0, 0, 1, 3)
 		nlabel = QtGui.QLabel("Near clipping plane", cwidget)
 		nlabel.setMaximumHeight(30.0)
-		nlabel.setAlignment(QtCore.Qt.AlignCenter)
+		nlabel.setAlignment(Qt.AlignCenter)
 		self.near = EMSpinWidget(self.scenegraph().camera.getClipNear(), 1.0)
 		self.near.setToolTip("In the Window above:\nClick 'n' drag, near the near clipping, to move near clipping plane")
 		self.near.setMaximumHeight(40.0)
@@ -2540,7 +2540,7 @@ class EMInspector3D(QtGui.QWidget):
 		grid.addWidget(self.near ,1, 1)
 		flabel = QtGui.QLabel("Far clipping plane", cwidget)
 		flabel.setMaximumHeight(30.0)
-		flabel.setAlignment(QtCore.Qt.AlignCenter)
+		flabel.setAlignment(Qt.AlignCenter)
 		self.far = EMSpinWidget(self.scenegraph().camera.getClipFar(), 1.0)
 		self.far.setToolTip("In the Window above:\nClick 'n' drag, near the far clipping, to move far clipping plane")
 		self.far.setMaximumHeight(40.0)
@@ -2561,7 +2561,7 @@ class EMInspector3D(QtGui.QWidget):
 		cframegrid.addWidget(capcolorlabel, 2, 0, 1, 1)
 		self.cappingcolor = EMQTColorWidget(parent=self)
 		cframegrid.addWidget(self.cappingcolor, 2, 1, 1, 1)
-		cframegrid.setAlignment(QtCore.Qt.AlignCenter)
+		cframegrid.setAlignment(Qt.AlignCenter)
 		cframe.setLayout(cframegrid)
 		grid.addWidget(cframe, 1, 2, 3, 1)
 		
@@ -2691,7 +2691,7 @@ class EMInspector3D(QtGui.QWidget):
 		gridbox.addWidget(backgroundcolor_label, 0, 0)
 		gridbox.addWidget(self.backgroundcolor, 0, 1)
 		gridbox.addWidget(self.hideselectionbutton, 1, 0, 1, 2)
-		gridbox.setAlignment(QtCore.Qt.AlignCenter)
+		gridbox.setAlignment(Qt.AlignCenter)
 		gridbox.setSpacing(10)
 		frame.setLayout(gridbox)
 		# Buttons frame
@@ -2991,8 +2991,8 @@ class EMQTreeWidget(QtGui.QTreeWidget):
 	"""
 	Subclassing the QTreeWidget to enable is_visible toggling
 	"""
-	visibleItem = QtCore.pyqtSignal(QTreeWidgetItem)
-	editItem = QtCore.pyqtSignal(QTreeWidgetItem)
+	visibleItem = pyqtSignal(QTreeWidgetItem)
+	editItem = pyqtSignal(QTreeWidgetItem)
 
 	def __init__(self, parent=None):
 		QtGui.QTreeWidget.__init__(self, parent)
@@ -3016,7 +3016,7 @@ class EMQTreeWidgetItem(QtGui.QTreeWidgetItem):
 		self.item3d = weakref.ref(item3d)
 		if parentnode: self.parent = weakref.ref(parentnode)
 		else: self.parent = None
-		self.setCheckState(0, QtCore.Qt.Unchecked)
+		self.setCheckState(0, Qt.Unchecked)
 		self.visible = QtGui.QIcon(QtGui.QPixmap(visibleicon))
 		self.invisible = QtGui.QIcon(QtGui.QPixmap(invisibleicon))
 		self.getVisibleState()
@@ -3026,7 +3026,7 @@ class EMQTreeWidgetItem(QtGui.QTreeWidgetItem):
 		""" 
 		Toogle selection state on and off
 		"""
-		if state == QtCore.Qt.Checked:
+		if state == Qt.Checked:
 			self.item3d().setSelectedItem(True)
 		else:
 			self.item3d().setSelectedItem(False)
@@ -3053,9 +3053,9 @@ class EMQTreeWidgetItem(QtGui.QTreeWidgetItem):
 		Set the selection state icon
 		"""
 		if self.item3d().isSelectedItem():
-			self.setCheckState(0, QtCore.Qt.Checked)
+			self.setCheckState(0, Qt.Checked)
 		else:
-			self.setCheckState(0, QtCore.Qt.Unchecked)
+			self.setCheckState(0, Qt.Unchecked)
 	
 	def removeAllChildren(self, inspector):
 		"""

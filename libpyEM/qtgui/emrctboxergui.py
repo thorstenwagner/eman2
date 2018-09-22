@@ -87,7 +87,7 @@ class ControlPannel(QtGui.QWidget):
 		# Make the main tools layout
 		mlayout = QtGui.QVBoxLayout()
 		self.get_main(mlayout)			# add the widgets const for all tools
-		msplitter = QtGui.QSplitter(QtCore.Qt.Vertical)
+		msplitter = QtGui.QSplitter(Qt.Vertical)
 		msplitter.setFrameShape(QtGui.QFrame.StyledPanel)
 		msplitter.setLayout(mlayout)
 		vbox.addWidget(msplitter)
@@ -163,7 +163,7 @@ class ControlPannel(QtGui.QWidget):
 		self.params_listbox = QtGui.QLineEdit(str(self.db.getdefault("processorparams",dfl="")), self)
 		hbl2.addWidget(self.params_listbox)
 		vbox1.addLayout(hbl2)
-		vbox1.setAlignment(QtCore.Qt.AlignTop)
+		vbox1.setAlignment(Qt.AlignTop)
 		vboxa.addLayout(vbox1)
 		
 		vbox2 = QtGui.QVBoxLayout()
@@ -275,7 +275,7 @@ class ControlPannel(QtGui.QWidget):
 				kernelwidgetidx.append(kw)
 				grid3.addWidget(kw, i, j)
 		
-		grid3.setAlignment(QtCore.Qt.AlignCenter)
+		grid3.setAlignment(Qt.AlignCenter)
 		self.kernelwidget.setLayout(grid3)
 		self.kernel_stacked_widget.addWidget(self.kernelwidget)
 		
@@ -406,13 +406,13 @@ class ManualPicker(QtGui.QWidget):
 		boldfont = QtGui.QFont()
 		boldfont.setBold(True)
 		label.setFont(boldfont)
-		label.setAlignment(QtCore.Qt.AlignTop)
+		label.setAlignment(Qt.AlignTop)
 		self.clr_but = QtGui.QPushButton("Clear", self)
 		vbl.addWidget(label)
 		vbl.addWidget(self.clr_but)
 		self.setLayout(vbl)
 		
-		self.mpsplitter = QtGui.QSplitter(QtCore.Qt.Vertical)
+		self.mpsplitter = QtGui.QSplitter(Qt.Vertical)
 		self.mpsplitter.setFrameShape(QtGui.QFrame.StyledPanel)
 		self.mpsplitter.addWidget(self)
 		self.clr_but.clicked[bool].connect(self.on_clear)
@@ -510,7 +510,7 @@ class PairPickerTool(QtGui.QWidget):
 		vbl.addWidget(self.clr_but)
 		self.setLayout(vbl)
 		
-		self.ppsplitter = QtGui.QSplitter(QtCore.Qt.Vertical)
+		self.ppsplitter = QtGui.QSplitter(Qt.Vertical)
 		self.ppsplitter.setFrameShape(QtGui.QFrame.StyledPanel)
 		self.ppsplitter.addWidget(self)
 		

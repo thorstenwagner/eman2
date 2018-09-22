@@ -488,7 +488,7 @@ class EMFileType(object) :
 		"""Open in e2filtertool.py"""
 		
 		modifiers = QtGui.QApplication.keyboardModifiers()
-		if modifiers == QtCore.Qt.ShiftModifier:
+		if modifiers == Qt.ShiftModifier:
 			print("Running filter tool in safe mode...")
 			os.system("e2filtertool.py %s --safemode&"%self.path)
 		else:
@@ -1015,7 +1015,7 @@ class EMBdbFileType(EMFileType) :
 
 class EMImageFileType(EMFileType) :
 	"""FileType for files containing a single 2-D image"""
-	module_closed = QtCore.pyqtSignal()
+	module_closed = pyqtSignal()
 
 	def __init__(self, path) :
 		if path[:2] == "./" : path = path[2:]
@@ -1741,14 +1741,14 @@ def humansize(val) :
 
 #---------------------------------------------------------------------------
 
-class EMFileItemModel(QtCore.QAbstractItemModel) :
+class EMFileItemModel(QAbstractItemModel) :
 	"""This ItemModel represents the local filesystem. We don't use the normal filesystem item model because we want
 	to provide more info on images, and we need to merge BDB: files into the file view."""
 
 	headers = ("Row", "Name", "Type", "Size", "Dim", "N", "Date")
 
 	def __init__(self, startpath = None, direntryclass = EMDirEntry, dirregex = None) :
-		QtCore.QAbstractItemModel.__init__(self)
+		QAbstractItemModel.__init__(self)
 		if startpath[:2] == "./" : startpath = startpath[2:]
 		self.root = direntryclass(startpath, "", 0, dirregex = dirregex)				# EMDirEntry as a parent for the root path
 		self.rootpath = startpath							# root path for current browser
@@ -1872,7 +1872,7 @@ class EMFileItemModel(QtCore.QAbstractItemModel) :
 		except :
 			traceback.print_exc()
 #			print "None"
-			return QtCore.QModelIndex()			# No data, return invalid
+			return QModelIndex()			# No data, return invalid
 
 #		if column == 0 : print data
 
@@ -1887,9 +1887,9 @@ class EMFileItemModel(QtCore.QAbstractItemModel) :
 			try : data = index.internalPointer().parent()
 			except :
 				print("Parent index error:", str(index.__dict__))
-		else : return QtCore.QModelIndex()
+		else : return QModelIndex()
 
-		if data == None : return QtCore.QModelIndex()			# No data, return invalid
+		if data == None : return QModelIndex()			# No data, return invalid
 
 		return self.createIndex(index.row(), 0, data)		# parent is always column 0
 
@@ -2688,7 +2688,7 @@ class EMImageInfoPane(EMInfoPane) :
 #---------------------------------------------------------------------------
 
 class EMStackInfoPane(EMInfoPane) :
-	module_closed = QtCore.pyqtSignal()
+	module_closed = pyqtSignal()
 	maxim = 500
 
 	def __init__(self, parent = None) :
@@ -2915,7 +2915,7 @@ class EMStackInfoPane(EMInfoPane) :
 
 class EMInfoWin(QtGui.QWidget) :
 	"""The info window"""
-	winclosed = QtCore.pyqtSignal()
+	winclosed = pyqtSignal()
 
 	def __init__(self, parent = None) :
 		QtGui.QWidget.__init__(self, parent)
@@ -3024,9 +3024,9 @@ class EMBrowserWidget(QtGui.QWidget) :
 	- embedding BDB: databases into the observed filesystem
 	- remote database access (EMEN2)*
 	"""
-	ok = QtCore.pyqtSignal()
-	cancel = QtCore.pyqtSignal()
-	module_closed = QtCore.pyqtSignal()
+	ok = pyqtSignal()
+	cancel = pyqtSignal()
+	module_closed = pyqtSignal()
 
 	def __init__(self, parent = None, withmodal = False, multiselect = False, startpath = ".", setsmode = None) :
 		"""withmodal - if specified will have ok/cancel buttons, and provide a mechanism for a return value (not truly modal)
@@ -3219,10 +3219,10 @@ class EMBrowserWidget(QtGui.QWidget) :
 		self.wbutrefresh.clicked[bool].connect(self.buttonRefresh)
 		self.wbutinfo.clicked[bool].connect(self.buttonInfo)
 		self.selectall.clicked[bool].connect(self.selectAll)
-		self.wtree.clicked[QtCore.QModelIndex].connect(self.itemSel)
-		self.wtree.activated[QtCore.QModelIndex].connect(self.itemActivate)
-		self.wtree.doubleClicked[QtCore.QModelIndex].connect(self.itemDoubleClick)
-		self.wtree.expanded[QtCore.QModelIndex].connect(self.itemExpand)
+		self.wtree.clicked[QModelIndex].connect(self.itemSel)
+		self.wtree.activated[QModelIndex].connect(self.itemActivate)
+		self.wtree.doubleClicked[QModelIndex].connect(self.itemDoubleClick)
+		self.wtree.expanded[QModelIndex].connect(self.itemExpand)
 		self.wpath.returnPressed.connect(self.editPath)
 		self.wbookmarks.actionTriggered[QAction].connect(self.bookmarkPress)
 		self.wfilter.currentIndexChanged[int].connect(self.editFilter)

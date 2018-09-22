@@ -201,7 +201,7 @@ class EMPDBItem3DInspector(EMItem3DInspector):
 		dataframe.setLayout(datagridbox)
 		gridbox.addWidget(dataframe, 2, 0)
 		self.file_path_label = QtGui.QLabel()
-		self.file_path_label.setAlignment(QtCore.Qt.AlignCenter)
+		self.file_path_label.setAlignment(Qt.AlignCenter)
 		self.file_path_label.setFont(lfont)
 		gridbox.addWidget(self.file_path_label, 3, 0)
 		self.file_browse_button.clicked.connect(self.onFileBrowse)

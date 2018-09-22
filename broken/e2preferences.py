@@ -42,7 +42,7 @@ global HOMEDB
 HOMEDB=EMAN2db.EMAN2DB.open_db()
 
 class EMPreferencesTask(WorkFlowTask):
-	task_idle = QtCore.pyqtSignal()
+	task_idle = pyqtSignal()
 
 	def __init__(self,application=None):
 		WorkFlowTask.__init__(self)

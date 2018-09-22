@@ -585,7 +585,7 @@ class EMLine(EMShapeBase):
 		grid.addWidget(attribdict["lineyf"], 3, 1, 1, 1)
 		grid.addWidget(attribdict["linezf"], 3, 2, 1, 1)
 		line_width = QtGui.QLabel("Line Width")
-		line_width.setAlignment(QtCore.Qt.AlignCenter)
+		line_width.setAlignment(Qt.AlignCenter)
 		attribdict["linewidth"] = QtGui.QLineEdit("10.0")
 		grid.addWidget(line_width, 4, 0, 1, 2)
 		grid.addWidget(attribdict["linewidth"], 4, 2, 1, 1)
@@ -994,33 +994,33 @@ class EMInspectorControlShape(EMItem3DInspector):
 		lfont.setBold(True)
 		colorlabel = QtGui.QLabel("Color",colorframe)
 		colorlabel.setFont(lfont)
-		colorlabel.setAlignment(QtCore.Qt.AlignCenter)
+		colorlabel.setAlignment(Qt.AlignCenter)
 
 		# These boxes are a pain maybe I should use a Grid?
 		cdialoghbox = QtGui.QHBoxLayout()
 		cabox = QtGui.QHBoxLayout()
 		self.ambcolorbox = EMQTColorWidget(parent=colorframe)
 		cabox.addWidget(self.ambcolorbox)
-		cabox.setAlignment(QtCore.Qt.AlignCenter)
+		cabox.setAlignment(Qt.AlignCenter)
 		cdbox = QtGui.QHBoxLayout()
 		self.diffusecolorbox = EMQTColorWidget(parent=colorframe)
 		cdbox.addWidget(self.diffusecolorbox)
-		cdbox.setAlignment(QtCore.Qt.AlignCenter)
+		cdbox.setAlignment(Qt.AlignCenter)
 		csbox = QtGui.QHBoxLayout()
 		self.specularcolorbox = EMQTColorWidget(parent=colorframe)
 		csbox.addWidget(self.specularcolorbox)
-		csbox.setAlignment(QtCore.Qt.AlignCenter)
+		csbox.setAlignment(Qt.AlignCenter)
 		cdialoghbox.addLayout(cabox)
 		cdialoghbox.addLayout(cdbox)
 		cdialoghbox.addLayout(csbox)
 		
 		colorhbox = QtGui.QHBoxLayout()
 		self.ambient = QtGui.QLabel("Ambient", colorframe)
-		self.ambient.setAlignment(QtCore.Qt.AlignCenter)
+		self.ambient.setAlignment(Qt.AlignCenter)
 		self.diffuse = QtGui.QLabel("Diffuse", colorframe)
-		self.diffuse.setAlignment(QtCore.Qt.AlignCenter)
+		self.diffuse.setAlignment(Qt.AlignCenter)
 		self.specular = QtGui.QLabel("Specular", colorframe)
-		self.specular.setAlignment(QtCore.Qt.AlignCenter)
+		self.specular.setAlignment(Qt.AlignCenter)
 		colorhbox.addWidget(self.ambient)
 		colorhbox.addWidget(self.diffuse)
 		colorhbox.addWidget(self.specular)
@@ -1098,12 +1098,12 @@ class EMInspectorControlScatterPlot(EMInspectorControlShape):
 		lfont = QtGui.QFont()
 		lfont.setBold(True)
 		scattergridbox = QtGui.QGridLayout()
-		scattergridbox.setAlignment(QtCore.Qt.AlignTop)
+		scattergridbox.setAlignment(Qt.AlignTop)
 		
 		# Add widgets to frame
 		pslabel = QtGui.QLabel("Point Size")
 		pslabel.setFont(lfont)
-		pslabel.setAlignment(QtCore.Qt.AlignCenter)
+		pslabel.setAlignment(Qt.AlignCenter)
 		scattergridbox.addWidget(pslabel, 0, 0, 1, 1)
 		
 		self.pointsize = EMSpinWidget(int(self.item3d().getPointSize()), 1.0, rounding=0)
@@ -1171,7 +1171,7 @@ class EMInspectorControl3DText(EMInspectorControlShape):
 		# Add widgets to textframe
 		textlabel = QtGui.QLabel("3D Font Mode")
 		textlabel.setFont(lfont)
-		textlabel.setAlignment(QtCore.Qt.AlignCenter)
+		textlabel.setAlignment(Qt.AlignCenter)
 		textgridbox.addWidget(textlabel, 0, 0, 1, 1)
 		
 		self.textModeBox = QtGui.QComboBox()
@@ -1180,7 +1180,7 @@ class EMInspectorControl3DText(EMInspectorControlShape):
 			
 		textlabel2 = QtGui.QLabel("3D Font Depth")
 		textlabel2.setFont(lfont)
-		textlabel2.setAlignment(QtCore.Qt.AlignCenter)
+		textlabel2.setAlignment(Qt.AlignCenter)
 		textgridbox.addWidget(textlabel2, 1, 0, 1, 1)
 		
 		self.fontDepth = EMSpinWidget(int(self.item3d().getFontDepth()), 1.0, rounding=0)
@@ -1189,7 +1189,7 @@ class EMInspectorControl3DText(EMInspectorControlShape):
 		
 		textlabel2 = QtGui.QLabel("3D Font Size")
 		textlabel2.setFont(lfont)
-		textlabel2.setAlignment(QtCore.Qt.AlignCenter)
+		textlabel2.setAlignment(Qt.AlignCenter)
 		textgridbox.addWidget(textlabel2, 2, 0, 1, 1)
 		
 		self.fontSize = EMSpinWidget(int(self.item3d().getFontSize()), 1.0, rounding=0)
@@ -1292,17 +1292,17 @@ class EMInspectorControlLine(EMInspectorControlShape):
 		
 		leftlabel = QtGui.QLabel("Left arrow")
 		leftlabel.setFont(lfont)
-		leftlabel.setAlignment(QtCore.Qt.AlignCenter)
+		leftlabel.setAlignment(Qt.AlignCenter)
 		linegridbox.addWidget(leftlabel, 0, 1, 1, 1)
 		
 		sidelabel1 = QtGui.QLabel("Size")
 		sidelabel1.setFont(lfont)
-		sidelabel1.setAlignment(QtCore.Qt.AlignVCenter)
+		sidelabel1.setAlignment(Qt.AlignVCenter)
 		linegridbox.addWidget(sidelabel1, 2, 0, 1, 1)
 		
 		sidelabel2 = QtGui.QLabel("Length")
 		sidelabel2.setFont(lfont)
-		sidelabel2.setAlignment(QtCore.Qt.AlignVCenter)
+		sidelabel2.setAlignment(Qt.AlignVCenter)
 		linegridbox.addWidget(sidelabel2, 3, 0, 1, 1)
 		
 		self.leftShowArrow = QtGui.QCheckBox("Show")
@@ -1319,7 +1319,7 @@ class EMInspectorControlLine(EMInspectorControlShape):
 		
 		rightlabel = QtGui.QLabel("Right arrow")
 		rightlabel.setFont(lfont)
-		rightlabel.setAlignment(QtCore.Qt.AlignCenter)
+		rightlabel.setAlignment(Qt.AlignCenter)
 		linegridbox.addWidget(rightlabel, 0, 2, 1, 1)
 		
 		self.rightShowArrow = QtGui.QCheckBox("Show")
@@ -1336,7 +1336,7 @@ class EMInspectorControlLine(EMInspectorControlShape):
 		
 		linelengthlabel = QtGui.QLabel("Line Length")
 		linelengthlabel.setFont(lfont)
-		linelengthlabel.setAlignment(QtCore.Qt.AlignCenter)
+		linelengthlabel.setAlignment(Qt.AlignCenter)
 		linegridbox.addWidget(linelengthlabel, 4, 0, 2, 2)
 		
 		self.linelength = EMSpinWidget(int(self.item3d().length), 1.0, rounding=0)
@@ -1344,7 +1344,7 @@ class EMInspectorControlLine(EMInspectorControlShape):
 		
 		linewidthlabel = QtGui.QLabel("Line Width")
 		linewidthlabel.setFont(lfont)
-		linewidthlabel.setAlignment(QtCore.Qt.AlignCenter)
+		linewidthlabel.setAlignment(Qt.AlignCenter)
 		linegridbox.addWidget(linewidthlabel, 5, 0, 1, 2)
 		
 		self.linewidth = EMSpinWidget(int(self.item3d().width), 1.0, rounding=0)

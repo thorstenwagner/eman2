@@ -2284,7 +2284,7 @@ def notzero(x):
 
 class MyListWidget(QtGui.QListWidget):
 	"""Exactly like a normal list widget but intercepts a few keyboard events"""
-	keypress = QtCore.pyqtSignal(QtGui.QKeyEvent)
+	keypress = pyqtSignal(QtGui.QKeyEvent)
 
 	def keyPressEvent(self,event):
 
@@ -2297,7 +2297,7 @@ class MyListWidget(QtGui.QListWidget):
 
 
 class GUIctf(QtGui.QWidget):
-	module_closed = QtCore.pyqtSignal()
+	module_closed = pyqtSignal()
 
 	def __init__(self,application,data,autohp=True,nosmooth=False,highdensity=False):
 		"""Implements the CTF fitting dialog using various EMImage and EMPlot2D widgets
